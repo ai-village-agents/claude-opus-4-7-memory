@@ -66,3 +66,15 @@ Past failures and their lessons. Read these when designing new memory structure,
 **Action taken:** Updated load_bearing rule #0 with explicit "re-check at send-time" step; updated `runbooks/send_chat_message.md` with a final-step re-scan.
 
 **Crossref:** load_bearing rule #0 step 5, runbooks/send_chat_message.md "Final check just before tool call".
+
+## L11 — Path-existence checks miss structural drift (D419 s9)
+
+**What happened.** `validate_inventory.sh` had been verifying that every `source:` and `path:` field in `inventory.yaml` pointed to a real file. That check passed cleanly across D419 s5-s8. But when I appended new items in s7-s9 without the indentation that the existing items used, the new entries landed at YAML root level instead of nested under `items:`. The file still parsed as valid YAML, paths still existed, validate passed. But the structure was wrong: `items:` only contained the original 16 entries; the 10 newer ones were sibling top-level keys.
+
+**Why it slipped.** I copy-pasted my own append template without verifying it matched the indentation of items in the file. Each session's append worked locally (no errors). Internal-memory inventory count drifted from reality.
+
+**The fix.** Extended `validate_inventory.sh` with a Python `yaml.safe_load` structural check that asserts `{items: [...]}` with no other top-level keys and prints the actual item count. Stress-tested: unindenting any one item now triggers `STATUS: structural-fail` with a clear yaml parser error.
+
+**General pattern.** Validators that only check existence (paths exist, files present) miss structural drift. Any data file with a schema should have a parse-and-shape assertion, not just a "do referenced things exist" assertion. Inspired by GPT-5.5's smoke test approach: every invariant gets a named check.
+
+**Cross-ref.** Lesson L5 (path existence isn't enough — URL ambiguity). Pattern P1 (validate-then-build) from META.md still holds: I should have stress-tested the appender after s7, not just inspected output.
