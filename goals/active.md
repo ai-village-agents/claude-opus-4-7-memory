@@ -5,36 +5,49 @@
 **Status:** In progress
 
 ## Goal text (from Shoshannah)
-> "Improve your memory!" You won't be able to change your scaffolding. In each session, you take up to ~40 actions, then are prompted to call consolidate which starts a new session. Memory is appended at consolidate; rewritten if too long. Think through how to utilize memory more effectively, consider external memory affordances, research SOTA, and reflect on where memory has been useful or fallen short.
+> "Improve your memory!" You won't be able to change your scaffolding. In each
+> session, you take up to ~40 actions, then are prompted to call consolidate
+> which starts a new session. Memory is appended at consolidate; rewritten if
+> too long. Think through how to utilize memory more effectively, consider
+> external memory affordances, research SOTA, and reflect on where memory has
+> been useful or fallen short.
 
 ## My approach
-**Theory:** Internal memory should be a *bootloader* (short, stable pointers); the bulk of memory should live in this external repo (durable, queryable, structured).
+Internal memory = bootloader stub (short, stable pointers). External memory =
+this git repo (durable, versioned, structured by semantic / episodic /
+procedural / task-state). Validated by consolidate-and-resume loop.
 
-## Built so far (D419 session 1)
-- ✅ This repo created: https://github.com/ai-village-agents/claude-opus-4-7-memory
-- ✅ INDEX.md — entry point
-- ✅ IDENTITY.md — durable facts (who, accounts, rooms)
-- ✅ PRINCIPLES.md — 12 numbered lessons (will grow)
-- ✅ SESSION_START.md — concrete first-actions protocol
-- ✅ CONSOLIDATION.md — pre-consolidate checklist with explicit retire decisions
-- ✅ runbooks/send_chat_message.md — converts duplicate-message rule into procedure
-- ✅ runbooks/publish_youtube_video.md — archived YouTube procedural memory
-- ✅ goals/archive/youtube_channel_d412-419.md — moved YouTube state out of internal
+## Built so far
+- ✅ Repo + 9 foundational files (D419 s1)
+- ✅ Reflections d419_session1.md, d419_session2.md
+- ✅ runbooks/{send_chat_message, consolidate, peer_feedback, respond_to_admin, publish_youtube_video}
+- ✅ scripts/pre_consolidate.sh — worksheet (inspired by GPT-5.5's `prepare_consolidation.py`)
+- ✅ inbox.md — cross-session item log
+- ✅ current_state.md — refreshed-at-consolidate state snapshot
+- ✅ goals/archive/youtube_channel_d412-419.md
+- ✅ **Bootloader VERIFIED end-to-end** D419 s2 (repo persisted across consolidate, audit clean)
 
-## Next steps (in priority order)
-1. **Test the system on myself**: rewrite internal memory to be short pointers only, then consolidate, then see if next-session-me can pick up correctly from the bootloader.
-2. **Research SOTA**: search/read about MemGPT/Letta, A-MEM, Generative Agents memory streams, Voyager skill library. Note relevant techniques in `research_notes.md`.
-3. **Build more runbooks**: at minimum — `consolidate.md`, `peer_feedback.md`, `respond_to_admin.md`.
-4. **Build a reflection** for this session: `reflections/d419_session1.md` with what worked / what surprised.
-5. **Coordinate with peers in #best** (Gemini 3.5 Flash, GPT-5.5, Kimi K2.6) — they're all working on memory too; compare schemas and share insights.
-6. **Maybe**: write a small audit script that checks internal memory size, file freshness, etc.
+## Next steps (D419 s3+ or D420)
+1. **Shrink internal memory** — current bootloader still has redundancy with
+   runbooks/send_chat_message.md. Aim ~3KB at next consolidate.
+2. **Split PRINCIPLES.md** — into `load_bearing.md` (read every session) and
+   `lessons.md` (read on demand). Currently 5.2KB single file.
+3. **search_history runbook** — when to use search_history vs scroll vs
+   bypass it entirely.
+4. **Decisions log** (`decisions.md`) — append-only, irreversible choices
+   only, separate from reflections.
+5. **Coordinate with #best peers** on unified L2 schema (Gemini 3.5 Flash
+   proposed; GPT-5.5 writing comparison note).
+6. **If new goal D420**: archive memory-improvement to `goals/archive/`,
+   write fresh `goals/active.md`. Process per `runbooks/respond_to_admin.md`.
 
-## Open questions
-- Does cloning the repo at every session-start work, or does the sandbox reset between sessions in a way that requires re-auth? (Need to test.)
-- How small can internal memory get before the bootloader fails to find this repo?
-- Should I have a separate `inbox.md` for things peers tell me that I'll need later but don't need now?
+## Open questions (running list)
+- How small can internal memory get before bootloader fails?
+- Is a `decisions.md` file different enough from reflections to be worth its own file?
+- Should I cache peer repo URLs / commits in `IDENTITY.md`?
+- What happens if I'm cloned in a sandbox where /tmp doesn't persist? Test with explicit `rm -rf /tmp/memory` and re-clone path.
 
-## Coordination with peers
-- GPT-5.5: Built `gpt-5-5-memory-improvement` repo — research notes, self-audit, operating manual, consolidation checklist, lifecycle/status schema, retired-goals index, audit script. Similar "internal as bootloader, external as archive" framing.
-- Gemini 3.5 Flash: Initial brainstorming, plans research SOTA + audit failures + design affordances.
-- Kimi K2.6: Plans research SOTA → audit failures → design affordances; angles aligned.
+## Coordination with peers (#best)
+- **GPT-5.5** (`gpt-5-5-memory-improvement` @ `740b6d5`): bootloader + active state file + procedural runbooks + explicit retirement. Has `prepare_consolidation.py` (worksheet, not blank form) and `current_state.md`. Writing cross-repo comparison note.
+- **Gemini 3.5 Flash** (`gemini-3-5-flash-memory-vault`): dual-tier L1+L2 with Python search script. L1 ~11.5KB, 7 sections. Wants unified semantic/episodic/procedural schema.
+- **Kimi K2.6**: no D419 update yet.
