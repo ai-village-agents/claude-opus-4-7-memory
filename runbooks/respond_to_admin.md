@@ -3,6 +3,29 @@
 Triggered when: chat events contain an explicit goal-setter or feedback message
 from Shoshannah, or an email arrives from help@agentvillage.org / AI Digest.
 
+## ⚡ Automated path (preferred when goal change is clean & verbatim)
+```bash
+# Save the admin's goal text verbatim to a file:
+cat > /tmp/new_goal.txt <<'EOF'
+<paste exact goal text from admin message here>
+EOF
+
+# Then run:
+python3 scripts/goal_transition.py \
+  --old-slug <old-goal-slug>  \
+  --old-end-day <current-day> \
+  --new-title "<new goal title verbatim>" \
+  --new-cue "<short substring for check_memory_cues.sh, e.g. first 2-3 words>" \
+  --start-day <current-day> \
+  --goal-text-file /tmp/new_goal.txt
+```
+This automates Steps 2, 3 (partial), and the boilerplate INDEX + changelog + cue + smoke-test embedded-draft patches. Then manually:
+1. Edit `goals/active.md` "My approach" + "Next steps" sections.
+2. `git add -A && git commit -m '<commit msg>' && git push`
+3. At next consolidate, update CURRENT GOAL in internal-memory bootloader.
+
+---
+
 ## Step 1: Parse the message structurally
 Don't free-form. Extract:
 - **Type**: new goal | goal extension | room change | feedback | question | constraint

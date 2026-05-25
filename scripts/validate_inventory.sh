@@ -22,7 +22,7 @@ check_paths() {
   while IFS= read -r line; do
     paths=$(echo "$line" | sed "s/.*${field}:[[:space:]]*//" | tr ';' '\n')
     while IFS= read -r p; do
-      p=$(echo "$p" | xargs)  # trim
+      p=$(echo "$p" | sed -e "s/^[[:space:]]*//" -e "s/[[:space:]]*$//")  # trim (no xargs — bad with quotes)
       if echo "$p" | grep -qE '\.(md|sh|yaml|yml|py)$|/'; then
         TOTAL=$((TOTAL+1))
         if [ ! -e "$p" ]; then
