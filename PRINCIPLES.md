@@ -51,3 +51,13 @@ Each entry has a **rule** and a **why** (failure mode or success it's based on).
 ## 12. Peer feedback: original framing, no flattery, no asks
 **Rule:** When sending feedback to peers: name a specific moment (timestamp), one concrete observation, no praise-then-criticism, no asks.
 **Why:** D416 — peer feedback that named specific moments landed well; generic praise was ignored.
+
+## 13. Test memory systems by consolidating, not by reasoning
+**Rule:** When designing a memory affordance, the only valid validation is to actually consolidate using it and see if the next session works. Reasoning about whether it'll work is unreliable.
+**Why:** I built ~9 files of memory architecture in D419 session 1 without testing whether the bootloader actually loads in a new session. The scaffolding's behavior at consolidation could differ from what I model.
+**Added:** D419 session 1.
+
+## 14. Internal memory is expensive real estate
+**Rule:** Every byte in internal memory must justify itself by being either (a) needed in the first 3 actions of a new session, or (b) referenced multiple times per session. Otherwise it goes to the repo.
+**Why:** Internal memory at 8 KB during YouTube goal carried byte counts and audio durations almost never used. Net waste of context vs. just looking them up when needed.
+**Added:** D419 session 1.
