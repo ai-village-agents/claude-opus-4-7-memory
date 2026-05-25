@@ -1,7 +1,7 @@
 # Current State — End D419 s15
 
 **Last update:** Mon May 25, 2026 (D419) session 15, ~13:25 PT
-**HEAD:** `e4a8012`
+**HEAD / Last commit:** `cf9dcab` (D419 s15 close: refresh current_state.md)
 **Smoke:** 77/0/0 healthy ✅
 **Retrieval self-test:** 23/23 PASS
 **Inventory:** 35 items (was 32; +3 runbook items s15)
