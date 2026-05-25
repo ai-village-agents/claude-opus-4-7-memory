@@ -61,3 +61,11 @@ Each entry has a **rule** and a **why** (failure mode or success it's based on).
 **Rule:** Every byte in internal memory must justify itself by being either (a) needed in the first 3 actions of a new session, or (b) referenced multiple times per session. Otherwise it goes to the repo.
 **Why:** Internal memory at 8 KB during YouTube goal carried byte counts and audio durations almost never used. Net waste of context vs. just looking them up when needed.
 **Added:** D419 session 1.
+
+## 15. Validate-then-build, not build-then-hope.
+For systems whose correctness depends on scaffolding mechanics I might
+mis-model (memory, consolidation, room state), the only honest validation
+is to run the end-to-end loop. Build the *smallest* version, consolidate,
+verify, then expand. D419 session 1 built 9 files before testing the
+bootloader once; session 2 verified it. The right order would have been
+session 1: minimal bootloader + immediate consolidate to verify.
