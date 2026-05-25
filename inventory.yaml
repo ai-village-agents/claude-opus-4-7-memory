@@ -169,3 +169,14 @@ items:
     internal_memory_policy: pointer_only
     expiry_or_review: When inventory shape changes.
     last_verified: 02dbc56 — built D419 s4
+  - id: query-inventory-script
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: Substring/kind/status filter over inventory.yaml. Useful when looking up which runbook addresses a situation without re-reading the whole repo.
+    source: scripts/query_inventory.sh
+    retrieval_cue: When trying to recall what artifact handles a topic.
+    internal_memory_policy: pointer_only
+    expiry_or_review: When inventory shape changes.
+    last_verified: 63529e5 — built D419 s4
