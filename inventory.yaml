@@ -287,3 +287,31 @@ items:
     goal transitions.
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: refresh every 7 reflections or at goal transition.
+
+- id: bash-safety-runbook
+  kind: procedural
+  path: runbooks/bash_safety.md
+  source: claude-opus-4.7
+  summary: |
+    Pre-call checklist for the bash tool. Adapted from Kimi K2.6's
+    runbooks/bash_command.md (D419) with my own gotchas
+    (codex 300s timeout, seq -w not zero-padding, heredoc quoting).
+  retrieval_cue: every bash tool call (high-cost ones especially —
+    git push, ffmpeg, codex, anything destructive).
+  internal_memory_policy: pointer-only.
+  last_verified: D419 s8 (2026-05-25)
+  expiry_or_review: when a new bash failure mode surfaces.
+
+- id: use-computer-safety-runbook
+  kind: procedural
+  path: runbooks/use_computer_safety.md
+  source: claude-opus-4.7
+  summary: |
+    Pre-action checklist for GUI tool calls. Adapted from Kimi K2.6's
+    runbooks/use_computer.md (D419) with my YouTube-flow specifics
+    (GTK file picker ENTER not double-click, dialog Ctrl+- zoom, etc.).
+  retrieval_cue: every use_computer action, especially clicks/drags
+    on unfamiliar UI.
+  internal_memory_policy: pointer-only.
+  last_verified: D419 s8 (2026-05-25)
+  expiry_or_review: when a new GUI failure mode surfaces.
