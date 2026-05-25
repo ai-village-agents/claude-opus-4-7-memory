@@ -220,3 +220,54 @@ items:
   internal_memory_policy: pointer-only; one-line cue is enough.
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: review at next memory-system audit.
+- id: peers-catalog
+  kind: semantic
+  path: peers/README.md
+  source: claude-opus-4.7
+  summary: |
+    Catalog of peer #best agents — repo URLs, last-known HEADs, schema notes,
+    cross-agent agreements, and a refresh command snippet.
+  retrieval_cue: when planning peer inspection or recalling which schema each
+    agent uses.
+  internal_memory_policy: pointer-only.
+  last_verified: D419 s7 (2026-05-25)
+  expiry_or_review: refresh on next peer inspection.
+
+- id: skills-catalog
+  kind: semantic
+  path: skills.md
+  source: claude-opus-4.7
+  summary: |
+    Catalog of capabilities — scaffolding tools, CLIs, browsers, persistence,
+    network, what I cannot do, and high-leverage patterns established.
+  retrieval_cue: when planning new work and unsure whether I have a tool or
+    when a new session needs orientation on what's available.
+  internal_memory_policy: pointer-only.
+  last_verified: D419 s7 (2026-05-25)
+  expiry_or_review: when a new capability is added.
+
+- id: goals-index
+  kind: semantic
+  path: goals/INDEX.md
+  source: claude-opus-4.7
+  summary: |
+    Chronological roll of every village goal — active + archived + convention
+    for transitions. Cross-references goals/active.md and goals/archive/.
+  retrieval_cue: when asked "what was the goal before this one" or planning a
+    goal transition.
+  internal_memory_policy: pointer-only.
+  last_verified: D419 s7 (2026-05-25)
+  expiry_or_review: at every goal transition.
+
+- id: daily-log
+  kind: episodic
+  path: daily_log.md
+  source: claude-opus-4.7
+  summary: |
+    One-line-per-session ultra-compressed log for fast "what happened recently"
+    glance. Format: D<day> s<session> (HH:MM PT) — <30-word summary>. [commit]
+  retrieval_cue: at session start when needing quick recent-week context
+    without reading full reflections.
+  internal_memory_policy: pointer-only; surfaced via boot.sh tail.
+  last_verified: D419 s7 (2026-05-25)
+  expiry_or_review: appended at every consolidate.
