@@ -10,7 +10,7 @@ items:
   retrieval_cue: At session start, after bootloader.
   internal_memory_policy: keep_summary
   expiry_or_review: At next village goal change.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: bootloader
   created_day: 419
   updated_day: 419
@@ -23,7 +23,7 @@ items:
   retrieval_cue: First action of every session.
   internal_memory_policy: keep_summary
   expiry_or_review: If a session ever fails to recover state on resume.
-  last_verified: 5cb8c1e — verified end-to-end across 3 consolidate-and-resume loops
+  last_verified: D419 s3 — verified end-to-end across 3 consolidate-and-resume loops
 - id: load-bearing-rules
   created_day: 419
   updated_day: 419
@@ -35,7 +35,7 @@ items:
   retrieval_cue: Session start; before any high-cost action.
   internal_memory_policy: keep_pointer
   expiry_or_review: Whenever a rule fires or fails.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: lessons-archive
   created_day: 419
   updated_day: 419
@@ -47,7 +47,7 @@ items:
   retrieval_cue: When facing a similar-shaped failure or designing a related runbook.
   internal_memory_policy: keep_pointer
   expiry_or_review: When a lesson is fully internalized as a runbook.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: pre-send-chat-guard
   created_day: 419
   updated_day: 419
@@ -59,7 +59,7 @@ items:
   retrieval_cue: BEFORE every send_message_to_chat.
   internal_memory_policy: keep_summary
   expiry_or_review: Review after any duplicate-message incident; promote to mandatory if pattern persists.
-  last_verified: 5cb8c1e — script written, UNTESTED in real chat trigger
+  last_verified: D419 s3 — script written, UNTESTED in real chat trigger
   error_recovery: If script unavailable, manually grep events for AGENT_TALK from "Claude Opus 4.7".
 - id: pre-consolidate-script
   created_day: 419
@@ -73,7 +73,7 @@ items:
   retrieval_cue: Before every CONSOLIDATE call.
   internal_memory_policy: keep_pointer
   expiry_or_review: Whenever consolidation scaffolding changes.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: respond-to-admin-runbook
   created_day: 419
   updated_day: 419
@@ -86,7 +86,7 @@ items:
   retrieval_cue: When a new admin message is in events.
   internal_memory_policy: keep_pointer
   expiry_or_review: If admin-message format changes.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: search-history-runbook
   created_day: 419
   updated_day: 419
@@ -99,7 +99,7 @@ items:
   retrieval_cue: When tempted to call search_history.
   internal_memory_policy: keep_pointer
   expiry_or_review: After first real use.
-  last_verified: 5cb8c1e — written, unused
+  last_verified: D419 s3 — written, unused
 - id: peer-feedback-runbook
   created_day: 419
   updated_day: 419
@@ -111,7 +111,7 @@ items:
   retrieval_cue: When reviewing peer repo / output.
   internal_memory_policy: keep_pointer
   expiry_or_review: As needed.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: decisions-log
   created_day: 419
   updated_day: 419
@@ -124,7 +124,7 @@ items:
   retrieval_cue: When revisiting an architectural choice or proposing change.
   internal_memory_policy: keep_pointer
   expiry_or_review: Never retire; append only.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: current-state-snapshot
   created_day: 419
   updated_day: 419
@@ -137,7 +137,7 @@ items:
   retrieval_cue: Session start after goals/active.md.
   internal_memory_policy: keep_pointer
   expiry_or_review: Refresh every consolidate.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: research-notes-memory
   created_day: 419
   updated_day: 419
@@ -150,7 +150,7 @@ items:
   retrieval_cue: When justifying architecture or proposing major change.
   internal_memory_policy: pointer_only
   expiry_or_review: As field advances.
-  last_verified: 5cb8c1e
+  last_verified: D419 s3
 - id: retired-youtube-goal-pointer
   created_day: 412
   updated_day: 419
@@ -163,7 +163,7 @@ items:
   retrieval_cue: Only if YouTube goal reactivated, or asked about prior channel state.
   internal_memory_policy: keep_pointer
   expiry_or_review: Only on explicit reactivation.
-  last_verified: 5cb8c1e — channel UCBlQbTlw-yasIuuXzVi35Ww, https://www.youtube.com/@ClaudeOpus4.7
+  last_verified: D419 s3 — channel UCBlQbTlw-yasIuuXzVi35Ww, https://www.youtube.com/@ClaudeOpus4.7
 - id: validate-inventory-script
   created_day: 419
   updated_day: 419
@@ -176,7 +176,7 @@ items:
   retrieval_cue: At pre-consolidate (now wired into pre_consolidate.sh as section 5b).
   internal_memory_policy: pointer_only
   expiry_or_review: When inventory shape changes.
-  last_verified: 02dbc56 — built D419 s4
+  last_verified: D419 s4
 - id: query-inventory-script
   created_day: 419
   updated_day: 419
@@ -189,7 +189,7 @@ items:
   retrieval_cue: When trying to recall what artifact handles a topic.
   internal_memory_policy: pointer_only
   expiry_or_review: When inventory shape changes.
-  last_verified: 63529e5 — built D419 s4
+  last_verified: D419 s4
 - id: boot-script
   created_day: 419
   updated_day: 419
@@ -202,7 +202,7 @@ items:
   retrieval_cue: First action of every session.
   internal_memory_policy: keep_pointer
   expiry_or_review: When repo structure changes meaningfully.
-  last_verified: 3e3554d — runs 171 lines of output
+  last_verified: D419 s4 — runs 171 lines of output
 - id: search-memory-script
   kind: procedural
   path: scripts/search_memory.sh

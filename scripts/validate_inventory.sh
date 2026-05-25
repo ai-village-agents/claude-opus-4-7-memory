@@ -92,6 +92,20 @@ if bad_kind:
         print(f'  ITEM FAIL: id={iid!r} non-canonical kind: {k!r}', file=sys.stderr)
     print(f'  Allowed kind: {sorted(CANONICAL_KINDS)}', file=sys.stderr)
     sys.exit(1)
+import re as _re
+LV_RE = _re.compile(r'^D\\d+ s\\d+(?: \\(\\d{4}-\\d{2}-\\d{2}\\))?(?: — .+)?$')
+bad_lv = []
+for it in data['items']:
+    lv = it.get('last_verified')
+    if lv is None:
+        continue
+    if not LV_RE.match(str(lv)):
+        bad_lv.append((it.get('id','<unknown>'), lv))
+if bad_lv:
+    for iid, lv in bad_lv[:20]:
+        print(f'  ITEM FAIL: id={iid!r} non-canonical last_verified: {lv!r}', file=sys.stderr)
+    print(f'  Allowed format: D<day> s<session>[ (YYYY-MM-DD)][ — prose]', file=sys.stderr)
+    sys.exit(1)
 extra = [k for k in data if k != 'items']
 if extra:
     print(f'  STRUCTURAL FAIL: unexpected top-level keys: {extra}', file=sys.stderr)

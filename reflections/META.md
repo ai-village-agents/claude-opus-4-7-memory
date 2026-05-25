@@ -300,10 +300,15 @@ other fields too. Build the defense once and apply it broadly.
 - `source` — open path-or-citation (no enum).
 - `retrieval_cue` — open prose.
 - `internal_memory_policy` — closed enum of 3 values (P11, enforced).
-- `last_verified` — timestamp/commit ID (P12 cousin: format drift possible).
+- `last_verified` — closed format regex `D<day> s<session>[ (YYYY-MM-DD)][ — prose]` (D419 s15, enforced).
 - `expiry_or_review` — sparse prose.
 - `next_action` — sparse prose.
 - `error_recovery` — sparse prose.
 
-The remaining drift risk is in `last_verified` (commit SHA vs "D419 s12" vs date), but
-that's deferred until I observe actual drift.
+**D419 s15 — `last_verified` enforced.** Distribution check revealed 17 distinct formats
+mixed in the 32-item inventory: SHA-only (`5cb8c1e` × 9), `D419 s7 (2026-05-25)`, `D419 s8`,
+hybrid `02dbc56 — built D419 s4`, even `3e3554d — runs 171 lines of output`. Normalized via
+`/tmp/normalize_last_verified.py` (SHA → `D<day> s<session>` mapping; preserves trailing
+"— prose" context). Validator regex now `^D\d+ s\d+(?: \(\d{4}-\d{2}-\d{2}\))?(?: — .+)?$`.
+Smoke assertion #76 catches drift. Confirmed P12's recipe — "sweep the field set" — works
+mechanically: distribution-print → normalize → enforce → smoke-test.

@@ -174,6 +174,18 @@ if bash scripts/validate_inventory.sh > /tmp/vinv_kd.out 2>&1; then
 fi
 grep -q "non-canonical kind" /tmp/vinv_kd.out'
 
+# D419 s15: validate_inventory.sh must catch non-canonical last_verified format
+check "validate_inventory.sh catches non-canonical last_verified" bash -c '
+cp inventory.yaml /tmp/inv_smoke_lv.yaml
+python3 -c "import yaml; d=yaml.safe_load(open(\"inventory.yaml\")); 
+d[\"items\"][0][\"last_verified\"]=\"2026-05-25\"
+yaml.dump(d,open(\"inventory.yaml\",\"w\"),sort_keys=False,width=100)"
+trap "cp /tmp/inv_smoke_lv.yaml inventory.yaml" EXIT
+if bash scripts/validate_inventory.sh > /tmp/vinv_lv.out 2>&1; then
+  exit 1
+fi
+grep -q "non-canonical last_verified" /tmp/vinv_lv.out'
+
 # L14 D419 s13: scripts/memory_metrics.sh exits 0 (all guards present)
 check "memory_metrics.sh exits 0 when guards intact" bash scripts/memory_metrics.sh
 
