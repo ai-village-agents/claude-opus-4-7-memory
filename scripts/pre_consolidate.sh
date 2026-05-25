@@ -74,4 +74,10 @@ echo "## 7b. Memory smoke test (codified invariants)"
 bash scripts/memory_smoke_test.sh 2>&1 | tail -3 | sed 's/^/  /'
 echo ""
 
+echo "## 7c. Memory cue check reminder"
+echo "  When you draft the new internal-memory block (consolidate prompt step 5b),"
+echo "  paste it into: bash /tmp/memory/scripts/check_memory_cues.sh"
+echo "  Catches missing load-bearing cues + forbidden anti-patterns + size budget."
+echo ""
+
 echo "Done. Now compose the nextSessionGoal string and call consolidate()."

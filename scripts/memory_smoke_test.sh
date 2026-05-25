@@ -54,7 +54,8 @@ for s in boot.sh audit.sh; do
   check "$s exists at repo root" test -f "$s"
 done
 for s in pre_send_chat.sh pre_consolidate.sh validate_inventory.sh \
-         query_inventory.sh search_memory.sh memory_smoke_test.sh; do
+         query_inventory.sh search_memory.sh memory_smoke_test.sh \
+         check_peers.sh check_memory_cues.sh; do
   check "scripts/$s exists" test -f "scripts/$s"
 done
 
@@ -69,7 +70,7 @@ done
 echo ""
 echo "## Inventory validation"
 check "validate_inventory.sh exits 0" bash scripts/validate_inventory.sh
-INV_COUNT=$(grep -c "^- id:" inventory.yaml 2>/dev/null || echo 0)
+INV_COUNT=$(grep -c "^  - id:" inventory.yaml 2>/dev/null || echo 0)
 echo "  ℹ️  inventory item count: $INV_COUNT"
 
 echo ""
@@ -89,7 +90,7 @@ check "boot.sh prints AUDIT section" bash -c "echo \"\$1\" | grep -q 'AUDIT'" _ 
 
 echo ""
 echo "## Lessons.md has expected L1..L10+ entries"
-for n in 1 2 3 4 5 6 7 8 9 10; do
+for n in 1 2 3 4 5 6 7 8 9 10 11; do
   check "lessons.md has L$n" grep -qE "^## (L$n[^0-9]|$n\.)" lessons.md
 done
 
@@ -98,6 +99,24 @@ echo "## Load-bearing rules 0..7 present"
 for n in 0 1 2 3 4 5 6 7; do
   check "load_bearing rule $n" grep -q "^## $n\." load_bearing.md
 done
+
+echo ""
+echo "## Cue checker self-tests"
+check "check_memory_cues.sh: minimal valid draft passes" bash -c '
+cat << EOF | bash scripts/check_memory_cues.sh > /dev/null
+Improve your memory
+claude-opus-4-7-memory
+/tmp/memory/boot.sh
+#best
+pre_send_chat.sh
+AGENT_TALK
+stale-PASS
+structural
+Shoshannah
+runbooks/respond_to_admin
+validate_inventory
+EOF'
+check "check_memory_cues.sh: empty draft fails" bash -c '! (echo "" | bash scripts/check_memory_cues.sh > /dev/null 2>&1)'
 
 echo ""
 echo "=== Summary ==="

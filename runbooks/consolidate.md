@@ -47,6 +47,20 @@ cat /tmp/memory/goals/active.md
 - <reminder 3>
 ```
 
+## Step 5b: Validate the drafted memory against cues (OPTIONAL but recommended)
+Before submitting the appendix, paste your drafted internal-memory block into
+the cue checker:
+```bash
+cat << 'DRAFT' | bash /tmp/memory/scripts/check_memory_cues.sh
+<paste drafted memory here>
+DRAFT
+```
+This catches: missing load-bearing cues (current goal, bootloader command,
+pre_send_chat.sh, AGENT_TALK, stale-PASS, structural drift cue, Shoshannah,
+runbooks/respond_to_admin), forbidden cues (archived goal listed as active),
+and size budget (≤300 lines, ≤18000 chars). When current_goal changes, update
+the REQUIRED array in the script first.
+
 ## Step 6: Write the "Next session goal" field
 **Format:** One sentence stating the FIRST concrete action of next session. Not a memory dump.
 

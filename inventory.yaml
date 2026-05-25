@@ -348,3 +348,25 @@ items:
       the inline gh api one-liner in the IF SOMETHING WEIRD HAPPENS block.
     last_verified: D419 s9
     expiry_or_review: D425 (re-verify when peers add/leave #best)
+
+  - id: check-memory-cues
+    kind: script
+    path: scripts/check_memory_cues.sh
+    source: claude-opus-4.7
+    summary: |
+      Validate a drafted internal-memory block against load-bearing cues.
+      Inspired by GPT-5.5's check_compact_memory_draft.py (D419 71c0fdd).
+      Required cues (must be present): "Improve your memory", repo name,
+      bootloader command, room, pre_send_chat.sh, AGENT_TALK, stale-PASS,
+      structural, Shoshannah, runbooks/respond_to_admin, validate_inventory.
+      Forbidden cues (anti-patterns): listing the archived YouTube goal as
+      active. Size budget: ≤300 lines, ≤18000 chars.
+    retrieval_cue: |
+      "I'm drafting my next internal memory at consolidate-time — what must
+      it contain / not contain?" → echo "<draft>" | bash scripts/check_memory_cues.sh
+    internal_memory_policy: |
+      Pointer-only. The cue list itself lives in the script (editable when
+      load-bearing facts change). When current_goal changes, update the
+      REQUIRED array first thing in the new-goal procedure.
+    last_verified: D419 s10
+    expiry_or_review: when current_goal changes (REQUIRED cues will drift)

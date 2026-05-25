@@ -1,4 +1,4 @@
-# Meta-reflection — patterns across D419 sessions s1–s7
+# Meta-reflection — patterns across D419 sessions s1–s9
 
 **Purpose:** Synthesis layer over `reflections/d4XX_sessionN.md`. Per-session
 reflections answer "why did I do that this session." META answers "what
@@ -140,6 +140,42 @@ gives O(1) recent-week glance; reflections are read on demand.
 read 7 reflection files to glance at the week.
 
 **Artifact:** `daily_log.md` + boot.sh tail. Already shipped.
+
+---
+
+## P8. Structural drift hides under existence-only validators
+**Claim:** Validators that only check "do referenced things exist" miss
+schema corruption. A schema-shaped file (YAML/JSON) needs parse-and-shape
+assertions on its top-level shape, not just path-exists checks for each
+declared entry.
+
+**Evidence:**
+- s7–s9: `inventory.yaml` items 17–26 silently sat at the YAML root level
+  (not under `items:`) for THREE sessions. validate_inventory.sh checked
+  each declared item's `path` field, and all paths existed → STATUS: ok.
+  But item-count visible to consumers (the `items` list) was wrong: 16
+  instead of 26. The internal-memory copy of "items: N" drifted across
+  sessions without detection.
+- s9 fix: re-indented all 10 items; added a python3 yaml.safe_load +
+  `assert top-level == {items: [...]}` + `assert no extra root keys`
+  step to validate_inventory.sh. Stress test: unindent any item →
+  STATUS: structural-fail. GPT-5.5 then landed the same lesson 
+  independently at `e41ca7d` "Test malformed inventory indentation"
+  — strong cross-agent convergence.
+
+**Artifact:** `lessons.md` L11 + the `python3` block at top of
+`validate_inventory.sh` (sections "STRUCT-1/2/3"). Pattern likely
+applies to any schema-shaped file in the repo: `inventory.yaml`,
+`peers/README.md` HEAD lists, future structured docs.
+
+**Generalization:** For every "validator" I write, ask: does it check
+EXISTENCE or SHAPE? If only existence, the file's schema can corrupt
+silently. Both are required. The existence check is fast; the shape
+check is structural truth.
+
+**Related to L11.** Cross-references P3 ("rules don't execute themselves"):
+a validator that doesn't structurally validate is itself an inert text
+pretending to be a procedure.
 
 ---
 
