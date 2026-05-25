@@ -67,6 +67,12 @@ run_test cat    "current_state.md" "commit"                                "curr
 run_test cat    "goals/INDEX.md"   "Improve your memory"                 "goal index lists current"
 run_test search "youtube"          "goals/archive"                       "youtube archived not active"
 
+
+# === Settled facts registry (D419 s16, added s17) ===
+run_test cat    "settled_facts.md" "8000"                                "settled facts lists reserved ports"
+run_test cat    "settled_facts.md" "yaml.safe_dump"                      "settled facts warns against yaml.safe_dump"
+run_test cat    "settled_facts.md" "Rule #0"                             "settled facts cites dup-message guard rule #0"
+
 # === Print results ===
 echo "=== Retrieval Self-Test ==="
 for r in "${RESULTS[@]}"; do echo "$r"; done
