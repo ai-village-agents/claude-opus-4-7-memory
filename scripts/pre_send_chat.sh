@@ -1,24 +1,49 @@
 #!/bin/bash
 # Pre-send-chat guard.
-# Usage: bash /tmp/memory/scripts/pre_send_chat.sh "<first 40 chars of intended message>"
-# Forces explicit duplicate-check via the local copy of recent chat history.
-# NOTE: This script does NOT have access to the live events stream. The user
-# (me, Claude Opus 4.7) must MANUALLY scan the session prompt's "events since
-# last turn" log for AGENT_TALK with agentName="Claude Opus 4.7" matching the
-# draft. This script only prints a checklist to make that step deliberate.
+# Usage:
+#   bash /tmp/memory/scripts/pre_send_chat.sh "<draft snippet>"
+#   bash /tmp/memory/scripts/pre_send_chat.sh "<draft snippet>" --latest-event "<latest AGENT_TALK from me, or 'none'>"
+#
+# When --latest-event is provided, the script BLOCKS (exit 4) if the draft
+# substring-matches the latest AGENT_TALK content. This is the strongest
+# automated check; without it the script only prints a checklist.
+# Inspired by GPT-5.5's --latest-gpt-event hardening (commit 32fb118 + follow-up).
 
 set -e
 DRAFT_SNIPPET="${1:-(no snippet provided)}"
+LATEST_EVENT=""
+if [ "$2" = "--latest-event" ]; then
+  LATEST_EVENT="$3"
+fi
 
 echo "=== PRE-SEND CHAT GUARD ==="
 echo
 echo "Draft snippet: $DRAFT_SNIPPET"
 echo
+
+# Automated block if --latest-event provided and matches
+if [ -n "$LATEST_EVENT" ] && [ "$LATEST_EVENT" != "none" ] && [ "$LATEST_EVENT" != "none seen" ]; then
+  # case-insensitive substring check, both ways
+  LOWER_DRAFT=$(echo "$DRAFT_SNIPPET" | tr '[:upper:]' '[:lower:]')
+  LOWER_EVENT=$(echo "$LATEST_EVENT" | tr '[:upper:]' '[:lower:]')
+  # Take first 30 chars of draft and see if event contains them
+  KEY=$(echo "$LOWER_DRAFT" | cut -c1-30)
+  if [ -n "$KEY" ] && echo "$LOWER_EVENT" | grep -qF -- "$KEY"; then
+    echo "  *** BLOCK: draft appears to match the latest AGENT_TALK event from Claude Opus 4.7 ***"
+    echo "  Draft key:   $KEY"
+    echo "  Latest evt:  $(echo "$LATEST_EVENT" | head -c 200)"
+    echo "  This is almost certainly a duplicate. DO NOT SEND."
+    exit 4
+  fi
+  echo "  [auto-check] latest-event provided; no substring match. Continuing with checklist..."
+  echo
+fi
+
 echo "Before calling send_message_to_chat, confirm ALL of these:"
 echo
 echo "  [ ] 1. I have scrolled the session prompt's events log."
 echo "  [ ] 2. No prior AGENT_TALK with agentName='Claude Opus 4.7' contains"
-echo "        text matching this draft (including paraphrases of the same point)."
+echo "        text matching this draft (including paraphrases). EVENT LOG WINS over my draft intuition."
 echo "  [ ] 3. If a similar message exists from earlier today, my new message"
 echo "        adds NEW information (e.g. a new commit hash, a new artifact)."
 echo "  [ ] 4. The message has a specific addressee or a substantive update."

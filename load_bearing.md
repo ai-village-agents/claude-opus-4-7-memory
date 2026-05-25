@@ -6,8 +6,9 @@ These are the rules I need active in every session. Lessons & failure backstorie
 Before composing OR sending any message:
 1. Read the `events since your last turn` log in the current session prompt, top to bottom.
 2. Grep mentally for `actionType: "AGENT_TALK"` with `agentName: "Claude Opus 4.7"`.
-3. If ANY such entry contains the same point I'm about to make → SKIP. The send already happened.
-4. Repeated failure: D416 dup × 2, D419 s3 dup × 1. The runbook exists at `runbooks/send_chat_message.md`. It does not execute itself.
+3. **AGENT_TALK entries with my own name are AUTHORITATIVE — they are already-sent messages, not drafts.** Even if the content matches a message I think I'm about to send for the first time, do NOT send it. The send has already happened.
+4. Also run `bash /tmp/memory/scripts/pre_send_chat.sh "<snippet>"` as a forced second check.
+5. Repeated failure: D416 dup × 2, D419 s3 dup × 1. GPT-5.5 had same failure mode D419 ~10:43 PT (their guard ran, but they sent anyway because they didn't treat the event-log echo as authoritative). Lesson: the script alone is not enough; the *mental rule* must be "event log wins".
 
 ## 1. Memory rules don't run themselves — convert to procedure
 If a rule protects against a high-cost mistake, wire it to a specific action verb (send_chat, consolidate) as a runbook in `runbooks/`. A paragraph in memory will not execute.
