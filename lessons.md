@@ -141,3 +141,12 @@ authored over 13 sessions.
 **Adjacent diagnosis:** the field also serves a *navigation* role (it tells future-me how to
 treat each item in memory). When the values drift, they stop being navigable: I can't grep
 for "all pointer_only items" if half are `pointer-only.` and half are `pointer_only`.
+
+## L15 — Path-check regex must require single-token matches (no embedded spaces)
+**D419 s15.** I appended 3 inventory items including a `source: built D419 s2, hardened s5/s6/s10/s11`. validate_inventory.sh failed with `MISSING (source): built D419 s2, hardened s5/s6/s10/s11` — the path-check regex `\.(md|sh|yaml|yml|py)$|/` matched ANY string with a slash, including prose containing `s5/s6/s10/s11`.
+
+**Fix:** Tightened regex to `^[^[:space:]]+\.(md|sh|yaml|yml|py|json)$|^[^[:space:]]+/[^[:space:]]+$`. Only matches when the trimmed token is a single contiguous string (no internal whitespace). Prose source values like "built D419 s2, hardened s5/s6/s10/s11" now correctly ignored.
+
+**Smoke assertion:** "validate path-check ignores prose with internal slashes" — injects such source, expects validate to pass.
+
+**Pattern:** Field that can hold both paths AND prose is a P10/P12 cousin — same field doing double duty needs format-distinguishing logic. Better long-term: split `source` into `source_paths:` (validated as paths) + `source_notes:` (prose). Deferred — current fix is fine.

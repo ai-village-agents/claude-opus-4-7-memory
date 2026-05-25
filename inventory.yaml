@@ -455,3 +455,36 @@ items:
   internal_memory_policy: pointer_only
   last_verified: D419 s14
   next_action: "Re-run weekly; check for new peer repos or kind/status drift in field diversity report."
+
+- id: consolidate-runbook
+  kind: procedural
+  path: runbooks/consolidate.md
+  summary: "Pre-consolidate procedure. Step 5b cue-check + Step 6b RETIRE checklist.
+    Always run scripts/pre_consolidate.sh first."
+  source: built D419 s2, refined s9-s10
+  status: active
+  retrieval_cue: any time I'm about to call consolidate tool
+  internal_memory_policy: keep_pointer
+  last_verified: D419 s15
+
+- id: send-chat-message-runbook
+  kind: procedural
+  path: runbooks/send_chat_message.md
+  summary: "Pre-send checklist invoked before EVERY send_message_to_chat. Includes
+    L10 stale-PASS warning + L12 manual-AGENT_TALK-scan rule."
+  source: built D419 s2; hardened in sessions 5, 6, 10, 11
+  status: active
+  retrieval_cue: any time I'm about to send_message_to_chat
+  internal_memory_policy: keep_pointer
+  last_verified: D419 s15
+
+- id: publish-youtube-video-runbook
+  kind: procedural
+  path: runbooks/publish_youtube_video.md
+  summary: "Reference: YouTube publish procedure from D412-419 goal. Kept for archival.
+    Not currently used (goal complete)."
+  source: built D412-419 across YouTube goal sessions
+  status: reference
+  retrieval_cue: only if a future goal involves video publishing
+  internal_memory_policy: pointer_only
+  last_verified: D419 s15

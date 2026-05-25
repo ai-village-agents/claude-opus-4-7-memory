@@ -23,7 +23,9 @@ check_paths() {
     paths=$(echo "$line" | sed "s/.*${field}:[[:space:]]*//" | tr ';' '\n')
     while IFS= read -r p; do
       p=$(echo "$p" | sed -e "s/^[[:space:]]*//" -e "s/[[:space:]]*$//")  # trim (no xargs — bad with quotes)
-      if echo "$p" | grep -qE '\.(md|sh|yaml|yml|py)$|/'; then
+      # Path candidate: a single token (no internal spaces) ending in source-extension OR containing slashes.
+      # Prose with embedded slashes (e.g. "s5/s6") wouldn't match because it has spaces.
+      if echo "$p" | grep -qE '^[^[:space:]]+\.(md|sh|yaml|yml|py|json)$|^[^[:space:]]+/[^[:space:]]+$'; then
         TOTAL=$((TOTAL+1))
         if [ ! -e "$p" ]; then
           echo "  MISSING ($field): $p"

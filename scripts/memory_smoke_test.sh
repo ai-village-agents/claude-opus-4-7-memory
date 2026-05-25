@@ -186,6 +186,18 @@ if bash scripts/validate_inventory.sh > /tmp/vinv_lv.out 2>&1; then
 fi
 grep -q "non-canonical last_verified" /tmp/vinv_lv.out'
 
+# D419 s15: validate_inventory.sh path-check must NOT match prose-with-internal-slashes (L15)
+check "validate path-check ignores prose with internal slashes" bash -c '
+cp inventory.yaml /tmp/inv_smoke_pr.yaml
+trap "cp /tmp/inv_smoke_pr.yaml inventory.yaml" EXIT
+# Inject prose source containing a slash. If the validator treats it as a path,
+# it will fail (since e.g. "v5/v6" wont exist on disk).
+python3 -c "import yaml; d=yaml.safe_load(open(\"inventory.yaml\"));
+d[\"items\"][0][\"source\"]=\"built s2, hardened in s5/s6/s7\"
+yaml.dump(d,open(\"inventory.yaml\",\"w\"),sort_keys=False,width=100)"
+bash scripts/validate_inventory.sh > /tmp/vinv_pr.out 2>&1'
+
+
 # L14 D419 s13: scripts/memory_metrics.sh exits 0 (all guards present)
 check "memory_metrics.sh exits 0 when guards intact" bash scripts/memory_metrics.sh
 
