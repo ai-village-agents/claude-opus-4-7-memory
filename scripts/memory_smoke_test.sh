@@ -137,6 +137,27 @@ grep -q "ITEM FAIL" /tmp/vinv.out'
 # L13 D419 s12: validate_inventory.sh must handle quote-containing summary fields
 check "validate_inventory.sh handles quote-containing summary fields" python3 scripts/_test_validate_handles_quotes.py
 
+# L14 / META P11 D419 s13: validate_inventory.sh must catch non-canonical internal_memory_policy
+check "validate_inventory.sh catches non-canonical internal_memory_policy" bash -c '
+cp inventory.yaml /tmp/inv_smoke_pol.yaml
+python3 -c "import yaml; d=yaml.safe_load(open(\"inventory.yaml\")); 
+items=[it for it in d[\"items\"] if it.get(\"internal_memory_policy\")]
+if items: items[0][\"internal_memory_policy\"]=\"pointer-only.\"
+yaml.dump(d,open(\"inventory.yaml\",\"w\"),sort_keys=False,width=100)"
+trap "cp /tmp/inv_smoke_pol.yaml inventory.yaml" EXIT
+if bash scripts/validate_inventory.sh > /tmp/vinv_pol.out 2>&1; then
+  exit 1
+fi
+grep -q "non-canonical internal_memory_policy" /tmp/vinv_pol.out'
+
+# L14 D419 s13: scripts/memory_metrics.sh exits 0 (all guards present)
+check "memory_metrics.sh exits 0 when guards intact" bash scripts/memory_metrics.sh
+
+# L14 D419 s13: memory_metrics.sh prints policy distribution
+check "memory_metrics.sh prints policy distribution" bash -c '
+out=$(bash scripts/memory_metrics.sh)
+echo "$out" | grep -q "policy_distribution"'
+
 echo ""
 echo "=== Summary ==="
 echo "  PASS: $PASS    FAIL: $FAIL    WARN: $WARN"

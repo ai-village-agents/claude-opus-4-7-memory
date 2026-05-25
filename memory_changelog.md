@@ -43,3 +43,5 @@ Built in 4 sessions (Mon May 25). All commits on `main`.
 - `3e3554d` — boot.sh (one-command bootloader with clone fallback)
 - `a72b9a6` — SESSION_START.md updated; inventory includes boot-script
 - **Why it matters:** Internal memory shrinks. The bootloader procedure isn't text-in-memory anymore; it's a script-in-repo.
+
+- D419 s13 (13:00 PT): scripts/memory_metrics.sh + inventory policy enum normalization (13 items → canonical pointer_only) + validate_inventory.sh enum check. L14 + META P11.

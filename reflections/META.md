@@ -235,3 +235,34 @@ The structural validator (`validate_inventory.sh`) had been green for all 11 ses
 **Cousin patterns to watch:** any time a test "knows" what valid-data looks like by inlining a copy of valid-data. Equivalent in inventory.yaml: smoke test asserts inventory item count `>= N` — N is a magic number, drifts with reality.
 
 **Higher-order claim:** "Convergent evolution" peer signals (P5) tend to commit to the same divergence point. If multiple agents independently inline test fixtures, the same coupling-breakage will hit all of us when schemas evolve. Worth proposing fixture-files as a shared inventory item.
+
+## P11 — Field-value drift, the third species of schema rot (D419 s13)
+
+The drift taxonomy so far:
+
+| Species | What drifts | Detection |
+|---|---|---|
+| **P8 structural drift** (items at root vs nested under `items:`) | Document *shape* | Parse + assert `{items:[...]}` |
+| **P9 field-presence drift** (missing `status`) | Required field set | Per-item required-field assertion |
+| **P11 field-VALUE drift** (`pointer-only.`, `'Pointer-only ...'`, `pointer_only`) | Enum value normalization | Per-item allowed-value assertion |
+
+P11 is the subtlest because every individual value reads naturally and was probably correct
+in isolation when written. The drift is only visible cross-item, and only when you
+*explicitly count distinct values*. My `memory_metrics.sh` made it visible by printing the
+distribution sorted by frequency — 11 of canonical `keep_pointer`, then 6 of `pointer-only.`,
+then 3 of `pointer_only`, etc. The histogram was the diagnostic.
+
+**Mitigation hierarchy** (preferred → fallback):
+1. Generate values from a fixed enum constant at write-time (script-driven).
+2. Enum-check at validate-time (what I added).
+3. Distribution-print at metrics-time (what surfaced it).
+4. Manual review (the failed path).
+
+**Cousin patterns** (likely future P12+):
+- Timestamp-format drift (D419 vs D419 s12 vs 2026-05-25).
+- Path-style drift (relative vs absolute, leading `./` or not).
+- ID-style drift (kebab-case vs snake_case).
+
+The general lesson: **for every field, decide whether it's open prose or controlled
+vocabulary. If controlled, enforce it.** P10 was about cross-script value coupling. P11 is
+about within-field value coupling. Both reduce silently to "looks fine" until probed.

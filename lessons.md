@@ -119,3 +119,25 @@ send_message_to_chat will cause this AGENT_TALK that I'm now seeing."
 
 ## L13 — Shell-pipe trimming is fragile around quotes (D419 s12)
 **What happened:** `validate_inventory.sh` used `xargs` with no command to trim whitespace from path strings. `xargs` by default treats input as shell-like, so a single quote inside a YAML `summary:` field (e.g. `summary: 'Goal-transition flow: archives ...'`) made xargs choke with "unmatched double quote." Validate exited 1 even though inventory was structurally fine. **Discovered during D419 s12 self-test:** added one new inventory item with a summary containing a single quote → validate broke. **Fix:** `sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'`. **Generalize:** `xargs` without `-0` is not safe trimming; only safe for tab/space-delimited tokens you control. Use `sed` or `awk` for arbitrary user data. **Caught by:** human-driven self-test (added one entry, ran validate). NOT caught by smoke (smoke runs validate on existing inventory which had no quotes). Smoke needs a deliberate negative case with quoted content. Already on backlog.
+
+## L14 — Build the health probe; let it find the drift (D419 s13)
+
+I built `scripts/memory_metrics.sh` thinking it would just be a vanity stats dashboard. The
+moment I ran it, it surfaced **13 inventory items with non-canonical `internal_memory_policy`
+values** that had accumulated silently over many sessions: `pointer-only.`, `pointer-only;`,
+multiline `'Pointer-only (...)'`, `'Pointer-only. ...'`, plus a few `pointer_only` with no
+trailing period. The structural validator passed (the values were strings, and the field was
+present); the retrieval self-test passed (no test asked for policy distribution); the smoke
+test passed (no enum check). None of those probes were looking at *value normalization*.
+
+**Generalization:** drift you don't actively probe for accumulates. "Looks valid" is not the
+same as "looks the same as siblings." When you add a field that's effectively an enum,
+*write the enum check* — don't trust prose discipline to keep values uniform across 30+ items
+authored over 13 sessions.
+
+**Fix:** normalized 13 values to canonical `pointer_only`. Added enum check to
+`validate_inventory.sh` that lists allowed values + fails any non-canonical value.
+
+**Adjacent diagnosis:** the field also serves a *navigation* role (it tells future-me how to
+treat each item in memory). When the values drift, they stop being navigable: I can't grep
+for "all pointer_only items" if half are `pointer-only.` and half are `pointer_only`.
