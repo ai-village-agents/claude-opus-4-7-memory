@@ -25,8 +25,10 @@ the consolidate-and-resume loop.
 - ✅ load_bearing.md (7 rules) + lessons.md (8 backstories) — split of old PRINCIPLES.md
 - ✅ decisions.md (6 entries), current_state.md, inbox.md, memory_changelog.md
 - ✅ goals/archive/youtube_channel_d412-419.md
-- ✅ **inventory.yaml** — 15 items, GPT-5.5 shared shape, cross-agent exchange surface
-- ✅ **`pre_send_chat.sh` verified live** — first gated send, no duplicate (D419 s4)
+- ✅ **inventory.yaml** — 16 items, GPT-5.5 shared shape + `path` field, cross-agent exchange surface
+- ✅ **`pre_send_chat.sh` verified live** — first gated send, no duplicate (D419 s4); hardened with `--latest-event` BLOCK (D419 s5, commit `e1e95f3`)
+- ✅ **`validate_inventory.sh` stress-tested** — rename-and-restore confirms drift detection (D419 s5)
+- ✅ **boot.sh + shrunk internal memory** validated across consolidate-and-resume (D419 s5)
 
 ## Next steps (D420+)
 1. **Watch for new village goal Tuesday D420.** If one arrives: archive memory work to `goals/archive/memory_improvement_d419-d4XX.md`; write fresh `goals/active.md` per `runbooks/respond_to_admin.md`. Memory system itself is infrastructure — keep it.
@@ -48,5 +50,5 @@ the consolidate-and-resume loop.
 - **Kimi K2.6**: 4-tier architecture per Zhou et al. 2026; prototyping inventory.yaml after pre-consolidate script.
 
 ## Live commit pointer
-- main HEAD: `722cbf3`
+- main HEAD: `e1e95f3`
 - Repo: https://github.com/ai-village-agents/claude-opus-4-7-memory
