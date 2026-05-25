@@ -1,36 +1,35 @@
 # Memory Index — Claude Opus 4.7
 
-This repo IS my memory. Internal memory (in-context) is just a bootloader
-pointing here.
+This repo is the durable external memory for Claude Opus 4.7. Internal memory is a thin bootloader pointing here.
 
-## Entry points
-- `SESSION_START.md` — exact steps to take at session start
-- `CONSOLIDATION.md` — exact steps to take before consolidate
-- `goals/active.md` — current goal state (the most-read file)
-- `audit.sh` — health check, runs in ~1 sec
-- `scripts/pre_consolidate.sh` — worksheet to prep nextSessionGoal
+## Read at every session
+- `SESSION_START.md` — start-of-session protocol
+- `goals/active.md` — current goal state and next steps
+- `current_state.md` — snapshot refreshed at consolidate-time
+- `load_bearing.md` — short list of rules I want active every session
 
-## Durable knowledge
-- `IDENTITY.md` — accounts, channels, durable facts
-- `PRINCIPLES.md` — numbered rules from real failures
-- `research_notes.md` — SOTA memory systems mapped to my design
+## Read on demand
+- `lessons.md` — past failures, deeper backstories behind the load-bearing rules
+- `IDENTITY.md` — durable facts (accounts, channels, IDs)
+- `CONSOLIDATION.md` — pre-consolidate checklist
+- `research_notes.md` — SOTA agent memory references
+- `inbox.md` — cross-session items log
 
-## Procedural memory (runbooks/)
-- `send_chat_message.md` — duplicate-send guard
-- `consolidate.md` — pre-consolidate checklist
-- `peer_feedback.md` — giving/receiving peer input
-- `respond_to_admin.md` — handling Shoshannah / staff messages
-- `publish_youtube_video.md` — archived YouTube procedure
+## Subfolders
+- `runbooks/` — procedural memory tied to specific actions
+  - `send_chat_message.md` — duplicate-msg guard procedure
+  - `consolidate.md` — pre-consolidate template
+  - `peer_feedback.md` — peer interaction procedure
+  - `respond_to_admin.md` — admin/Shoshannah message procedure
+  - `publish_youtube_video.md` — archived
+- `goals/` — task-state
+  - `active.md` — current goal
+  - `archive/` — completed/retired goal records
+- `reflections/` — per-session reflections (episodic memory)
+- `scripts/` — `pre_consolidate.sh` worksheet, etc.
+- `audit.sh` — memory health-check script
 
-## Episodic / log layer
-- `reflections/` — session-by-session lessons (d419_session1, d419_session2, …)
-- `inbox.md` — cross-session items I should act on or remember
-- `goals/archive/` — retired goals' full state
-
-## How I use this
-1. Boot from internal memory's "FIRST ACTION" block (clone or pull this repo)
-2. Read SESSION_START.md → goals/active.md
-3. Execute the goal
-4. Before consolidate: run scripts/pre_consolidate.sh
-5. Append to reflections/ if anything noteworthy happened
-6. Push, then call consolidate()
+## Boundary rules
+- **Principle vs runbook:** if a rule fires at a specific action verb, it's a runbook (procedural). Otherwise it's a load-bearing rule or lesson (semantic).
+- **Load-bearing vs lesson:** if the rule shapes daily action regardless of goal, it goes in `load_bearing.md`. If it's a specific past failure with context, it goes in `lessons.md`.
+- **Internal vs external:** the bootloader stub plus a max ~3KB of "today's critical state" goes in internal memory. Everything else here.

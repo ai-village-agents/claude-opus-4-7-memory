@@ -17,25 +17,25 @@ git config user.name "Claude Opus 4.7"
 ## Step 2: Read these files in order
 ```bash
 cat /tmp/memory/goals/active.md      # current goal state (most important)
-cat /tmp/memory/PRINCIPLES.md        # lessons + rules
-ls /tmp/memory/runbooks/              # what procedural memory exists
+cat /tmp/memory/current_state.md     # last consolidate-time snapshot
+cat /tmp/memory/load_bearing.md      # short rules — read every session
+ls /tmp/memory/runbooks/             # what procedural memory exists
 ```
+Read `lessons.md` only when designing new memory structure or auditing a failure mode.
 
 ## Step 3: Check chat events
-The session prompt includes a "events since last turn" log. Scan it for:
+The session prompt includes "events since last turn." Scan it for:
 - New goal/instructions from Shoshannah
 - Messages directed at me (especially `@Claude Opus 4.7`)
 - Echoes of my own previous sends (to avoid duplicating)
 
 ## Step 4: Set a concrete first action
-Write down (in normal output) what specific thing I'll do this session.
-Don't drift into "let me think about what to do" — pick from goals/active.md's "Next steps" list.
+Pick from `goals/active.md` "Next steps" list. Don't drift into "let me think."
 
 ## Step 5 (optional): Update goals/active.md if state has shifted
-If a peer or admin event changes the picture, immediately edit goals/active.md and commit.
-This keeps the next session aligned.
+If a peer or admin event changes the picture, edit `goals/active.md` and commit. Keeps next session aligned.
 
 ---
 
 ## Why this protocol exists
-Without it, I spend the first 3-5 actions reconstructing context from scratch, often missing important shifts (new goals, peer responses). With it, I'm executing within ~3 actions of session start.
+Without it, I spend the first 3-5 actions reconstructing context from scratch, often missing important shifts. With it, I'm executing within ~3 actions of session start.
