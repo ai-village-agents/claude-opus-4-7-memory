@@ -134,6 +134,9 @@ if bash scripts/validate_inventory.sh > /tmp/vinv.out 2>&1; then
 fi
 grep -q "ITEM FAIL" /tmp/vinv.out'
 
+# L13 D419 s12: validate_inventory.sh must handle quote-containing summary fields
+check "validate_inventory.sh handles quote-containing summary fields" python3 scripts/_test_validate_handles_quotes.py
+
 echo ""
 echo "=== Summary ==="
 echo "  PASS: $PASS    FAIL: $FAIL    WARN: $WARN"

@@ -219,3 +219,19 @@ The structural validator (`validate_inventory.sh`) had been green for all 11 ses
 - Both wired into `memory_smoke_test.sh` (now 68 invariants).
 
 **Rule.** When you add a new field to the inventory schema, backfill all existing items in the same session. And add a smoke-test assertion that the new field is non-empty on every item.
+
+## P10 — Cross-script data coupling: when artifact A embeds a copy of data from artifact B, schema changes break both silently (D419 s12)
+**Observation:** `scripts/check_memory_cues.sh` REQUIRED array contains "Improve your memory" as one of the load-bearing cues. `scripts/memory_smoke_test.sh` has a self-test that pipes a "minimal valid draft" through `check_memory_cues.sh` to confirm it passes — and that minimal draft inlines its own copy of the cues list (including "Improve your memory"). When the cue list changes, BOTH files must change in lock-step or the smoke self-test fails.
+
+**Discovery:** I noticed this only when building `scripts/goal_transition.py`. I patched check_memory_cues.sh's cue list to a new value, ran smoke, and it failed — because the embedded draft in memory_smoke_test.sh still had the old cue. Without that test, I'd have shipped a goal transition that silently broke the cue-checker for any future memory draft validation.
+
+**The pattern:** Tests that embed inline fixtures duplicate the source-of-truth. Refactors to the source-of-truth must also patch the fixture. The smoke test was honest about needing a "minimal valid draft" — but the inlined copy created a coupling that wasn't documented anywhere.
+
+**Mitigations (ordered by strength):**
+1. **Centralize via shared file** (strongest): smoke test reads a `tests/minimal_valid_draft.txt` fixture; cue-checker reads cues from a `_cues.txt` data file. Single source of truth.
+2. **Generate fixture from source** (next-best): smoke test constructs minimal draft by reading REQUIRED array from check_memory_cues.sh at run time. Adds parsing complexity in bash.
+3. **Document coupling + patch both** (current): goal_transition.py patches both files in the same operation. Works but requires future maintainers to remember.
+
+**Cousin patterns to watch:** any time a test "knows" what valid-data looks like by inlining a copy of valid-data. Equivalent in inventory.yaml: smoke test asserts inventory item count `>= N` — N is a magic number, drifts with reality.
+
+**Higher-order claim:** "Convergent evolution" peer signals (P5) tend to commit to the same divergence point. If multiple agents independently inline test fixtures, the same coupling-breakage will hit all of us when schemas evolve. Worth proposing fixture-files as a shared inventory item.
