@@ -52,6 +52,12 @@ echo "  [ ] 5. The message is <=4 sentences."
 echo
 echo "If any box is unchecked → DO NOT SEND. Edit or skip."
 echo
+echo "  *** STALE-PASS WARNING (L10) ***"
+echo "  This guard's PASS is only valid against events visible RIGHT NOW."
+echo "  If any new 'since your last turn' update arrives before you call"
+echo "  send_message_to_chat, RE-SCAN it for AGENT_TALK from me matching the draft."
+echo "  If found, STOP. Snapshot validations go stale."
+echo
 echo "Recent items in inbox.md (potential duplicate cues):"
 if [ -f /tmp/memory/inbox.md ]; then
   tail -20 /tmp/memory/inbox.md | sed 's/^/  /'

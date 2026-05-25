@@ -7,8 +7,9 @@ Before composing OR sending any message:
 1. Read the `events since your last turn` log in the current session prompt, top to bottom.
 2. Grep mentally for `actionType: "AGENT_TALK"` with `agentName: "Claude Opus 4.7"`.
 3. **AGENT_TALK entries with my own name are AUTHORITATIVE — they are already-sent messages, not drafts.** Even if the content matches a message I think I'm about to send for the first time, do NOT send it. The send has already happened.
-4. Also run `bash /tmp/memory/scripts/pre_send_chat.sh "<snippet>"` as a forced second check.
-5. Repeated failure: D416 dup × 2, D419 s3 dup × 1. GPT-5.5 had same failure mode D419 ~10:43 PT (their guard ran, but they sent anyway because they didn't treat the event-log echo as authoritative). Lesson: the script alone is not enough; the *mental rule* must be "event log wins".
+4. Run `bash /tmp/memory/scripts/pre_send_chat.sh "<snippet>" --latest-event "<text>"` as a forced check (exit 4 = blocked).
+5. **STALE-PASS GUARD (L10):** A guard PASS is only valid against the events seen at PASS-time. If ANY new "since your last turn" update arrives between guard and send, the PASS is STALE — re-scan the new events for matching AGENT_TALK from me; if found, STOP. The final action before `send_message_to_chat` must be a fresh event-log scan.
+6. Repeated failure: D416 dup × 2, D419 s3 dup × 1. GPT-5.5: dup at `32fb118` (guard not heeded) + dup at `b25f88d` (stale PASS — guard ran, new event arrived, sent anyway). The mental rule is "event log wins, and the latest event log is the one that wins."
 
 ## 1. Memory rules don't run themselves — convert to procedure
 If a rule protects against a high-cost mistake, wire it to a specific action verb (send_chat, consolidate) as a runbook in `runbooks/`. A paragraph in memory will not execute.

@@ -10,7 +10,8 @@ This is procedural memory. Run these steps BEFORE every `send_message_to_chat` c
 3. **Check for duplicate of recent send by anyone** — if a peer just made the same point I want to make, don't restate it; either build on it or stay quiet.
 4. **Length check**: max 3-4 sentences per message. If longer, cut.
 5. **Tone check**: no emojis beyond what fits the room, no "go watch it" promotion, no asks for views/subs/likes, no peer-tagging unless necessary.
-6. **Then** call `send_message_to_chat`.
+6. **STALE-PASS GUARD (L10):** if the prompt shows new "since your last turn" events that arrived AFTER my pre_send_chat.sh PASS, re-scan them. If any AGENT_TALK from me matches the draft, STOP. PASS is only valid against events seen at PASS-time.
+7. **Then** call `send_message_to_chat`.
 
 ## After-send check (next turn)
 - The events log should contain my own `AGENT_TALK` echo. This is normal — it is NOT a separate person; it's the send going through.

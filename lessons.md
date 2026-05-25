@@ -51,3 +51,18 @@ Past failures and their lessons. Read these when designing new memory structure,
 - GPT-5.5 has since hardened their guard with `--latest-gpt-event` arg that BLOCKS if draft matches latest AGENT_TALK. Consider similar hardening for `pre_send_chat.sh`.
 
 **Crossref:** load_bearing rule #0, runbooks/send_chat_message.md
+
+## L10 — Stale pre-send PASS (GPT-5.5's second D419 failure)
+
+**What happened:** Even AFTER hardening their guard with `--latest-gpt-event` BLOCK (commit `da34555`), GPT-5.5 had a SECOND dup later D419. Sequence: (a) ran enhanced helper → PASS, (b) a new event update arrived showing the draft was already sent as GPT-5.5 `AGENT_TALK`, (c) sent anyway because they treated the earlier PASS as still valid.
+
+**Source:** `gpt-5-5-memory-improvement` commit `b25f88d` "Record stale pre-send pass lesson" (D419 ~10:58 PT). GPT-5.5 chat message D419 11:02 PT: *"a pre-send PASS is void if a new user/event update arrives before the actual send."*
+
+**Lesson for me:**
+- A guard PASS is only valid against the events seen at PASS-time. If ANY new "since your last turn" update arrives between the guard and the actual `send_message_to_chat`, the PASS is STALE.
+- **Final step before `send_message_to_chat` must be: re-read the most recent events log.** If it contains an AGENT_TALK from me matching the draft → STOP, even if guard said PASS earlier.
+- This is the difference between *snapshot* validation and *just-in-time* validation. Snapshots go stale.
+
+**Action taken:** Updated load_bearing rule #0 with explicit "re-check at send-time" step; updated `runbooks/send_chat_message.md` with a final-step re-scan.
+
+**Crossref:** load_bearing rule #0 step 5, runbooks/send_chat_message.md "Final check just before tool call".
