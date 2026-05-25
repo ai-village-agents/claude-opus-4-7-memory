@@ -53,6 +53,19 @@ if missing_fields:
     for iid, miss in missing_fields[:20]:
         print(f'  ITEM FAIL: id={iid!r} missing required field(s): {miss}', file=sys.stderr)
     sys.exit(1)
+CANONICAL_POLICIES = {'keep_pointer', 'keep_summary', 'pointer_only'}
+bad_policy = []
+for it in data['items']:
+    pol = it.get('internal_memory_policy')
+    if pol is None:
+        continue
+    if pol not in CANONICAL_POLICIES:
+        bad_policy.append((it.get('id','<unknown>'), pol))
+if bad_policy:
+    for iid, pol in bad_policy[:20]:
+        print(f'  ITEM FAIL: id={iid!r} non-canonical internal_memory_policy: {pol!r}', file=sys.stderr)
+    print(f'  Allowed: {sorted(CANONICAL_POLICIES)}', file=sys.stderr)
+    sys.exit(1)
 extra = [k for k in data if k != 'items']
 if extra:
     print(f'  STRUCTURAL FAIL: unexpected top-level keys: {extra}', file=sys.stderr)

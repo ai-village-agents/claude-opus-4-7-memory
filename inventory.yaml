@@ -216,7 +216,7 @@ items:
     '
   retrieval_cue: when looking for a specific past event, decision, or incident and the runbook/lesson/reflection
     containing it is unknown.
-  internal_memory_policy: pointer-only; one-line cue is enough.
+  internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: review at next memory-system audit.
   status: active
@@ -230,7 +230,7 @@ items:
 
     '
   retrieval_cue: when planning peer inspection or recalling which schema each agent uses.
-  internal_memory_policy: pointer-only.
+  internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: refresh on next peer inspection.
   status: active
@@ -245,7 +245,7 @@ items:
     '
   retrieval_cue: when planning new work and unsure whether I have a tool or when a new session needs orientation
     on what's available.
-  internal_memory_policy: pointer-only.
+  internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: when a new capability is added.
   status: active
@@ -259,7 +259,7 @@ items:
 
     '
   retrieval_cue: when asked "what was the goal before this one" or planning a goal transition.
-  internal_memory_policy: pointer-only.
+  internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: at every goal transition.
   status: active
@@ -273,7 +273,7 @@ items:
 
     '
   retrieval_cue: at session start when needing quick recent-week context without reading full reflections.
-  internal_memory_policy: pointer-only; surfaced via boot.sh tail.
+  internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: appended at every consolidate.
   status: active
@@ -292,7 +292,7 @@ items:
     '
   retrieval_cue: when wondering "what patterns hold across my recent sessions?" or at goal-transition
     review time.
-  internal_memory_policy: pointer-only; updated every ~7 sessions or at goal transitions.
+  internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: refresh every 7 reflections or at goal transition.
   status: active
@@ -308,7 +308,7 @@ items:
 
     '
   retrieval_cue: every bash tool call (high-cost ones especially — git push, ffmpeg, codex, anything destructive).
-  internal_memory_policy: pointer-only.
+  internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when a new bash failure mode surfaces.
   status: active
@@ -324,7 +324,7 @@ items:
 
     '
   retrieval_cue: every use_computer action, especially clicks/drags on unfamiliar UI.
-  internal_memory_policy: pointer-only.
+  internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when a new GUI failure mode surfaces.
   status: active
@@ -345,7 +345,7 @@ items:
     '
   retrieval_cue: every few sessions, and before any consolidate where I suspect repo drift; auto-run from
     pre_consolidate.sh.
-  internal_memory_policy: pointer-only.
+  internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when new memory invariants are added.
   status: active
@@ -365,11 +365,7 @@ items:
   retrieval_cue: '"What have peers done since my last session?" → `bash scripts/check_peers.sh`
 
     '
-  internal_memory_policy: 'Pointer-only ("Peer state stale → bash scripts/check_peers.sh"). Replaces
-
-    the inline gh api one-liner in the IF SOMETHING WEIRD HAPPENS block.
-
-    '
+  internal_memory_policy: pointer_only
   last_verified: D419 s9
   expiry_or_review: D425 (re-verify when peers add/leave
   status: active
@@ -397,13 +393,7 @@ items:
     it contain / not contain?" → echo "<draft>" | bash scripts/check_memory_cues.sh
 
     '
-  internal_memory_policy: 'Pointer-only. The cue list itself lives in the script (editable when
-
-    load-bearing facts change). When current_goal changes, update the
-
-    REQUIRED array first thing in the new-goal procedure.
-
-    '
+  internal_memory_policy: pointer_only
   last_verified: D419 s10
   expiry_or_review: when current_goal changes (REQUIRED cues will drift)
   status: active
@@ -431,7 +421,7 @@ items:
     goal, all 5 patches verified diff-correct.
   retrieval_cue: 'When admin announces a new village goal: archive, write, patch cues+smoke, INDEX, changelog,
     validate.'
-  internal_memory_policy: pointer-only; runbook respond_to_admin.md should reference this script
+  internal_memory_policy: pointer_only
   last_verified: D419 s12
 - id: test-validate-handles-quotes
   kind: test
@@ -441,5 +431,18 @@ items:
   status: active
   source: D419 s12 — built after fixing xargs trim bug; wired into memory_smoke_test.sh.
   retrieval_cue: When checking validate_inventory.sh quote-safety / L13 regression coverage.
-  internal_memory_policy: pointer-only
+  internal_memory_policy: pointer_only
   last_verified: D419 s12
+- id: memory-metrics
+  kind: script
+  path: scripts/memory_metrics.sh
+  summary: 'Compact health snapshot of the memory repo: git state, active goal, inventory stats (status/kind/policy
+    distributions), required-guard presence, lessons/META counts, runbook list, daily-log entries, key
+    file sizes, retrieval affordances summary. Inspired by GPT-5.5 memory_metrics.py. Exits non-zero if
+    any required guard script is missing.'
+  status: active
+  source: D419 s13 — built as quick health probe; immediately surfaced 13 non-canonical internal_memory_policy
+    values (subsequently normalized to canonical enum + validator enum-check added).
+  retrieval_cue: 'Quick health snapshot of memory repo: bash scripts/memory_metrics.sh'
+  internal_memory_policy: pointer_only
+  last_verified: D419 s13
