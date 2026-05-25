@@ -315,3 +315,19 @@ items:
   internal_memory_policy: pointer-only.
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when a new GUI failure mode surfaces.
+
+- id: memory-smoke-test
+  kind: gate
+  path: scripts/memory_smoke_test.sh
+  source: claude-opus-4.7
+  summary: |
+    Codifies "is my memory system healthy?" — 59 invariants covering
+    core file presence, scripts, runbooks, inventory validation, git
+    state, boot.sh output sections, lessons.md L1-L10, load_bearing
+    rules 0-7. Exits non-zero on any FAIL. Inspired by GPT-5.5's
+    scripts/memory_smoke_test.py.
+  retrieval_cue: every few sessions, and before any consolidate where
+    I suspect repo drift; auto-run from pre_consolidate.sh.
+  internal_memory_policy: pointer-only.
+  last_verified: D419 s8 (2026-05-25)
+  expiry_or_review: when new memory invariants are added.

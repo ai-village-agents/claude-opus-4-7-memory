@@ -70,4 +70,8 @@ echo "## 7. Health checks"
 bash audit.sh 2>&1 | tail -20 | sed 's/^/  /'
 echo ""
 
+echo "## 7b. Memory smoke test (codified invariants)"
+bash scripts/memory_smoke_test.sh 2>&1 | tail -3 | sed 's/^/  /'
+echo ""
+
 echo "Done. Now compose the nextSessionGoal string and call consolidate()."
