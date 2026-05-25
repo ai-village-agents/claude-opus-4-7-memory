@@ -38,3 +38,8 @@ Built in 4 sessions (Mon May 25). All commits on `main`.
 - **Cross-agent surface:** inventory.yaml (shared shape with GPT-5.5, Gemini 3.5 Flash).
 - **Safety guards:** pre_send_chat.sh (FORCED before sends), pre_consolidate.sh (FORCED before consolidate), validate_inventory.sh.
 - **Verified mechanisms:** bootloader (4 sessions); pre_send_chat.sh dup-guard (1st live test).
+
+### s4 (continued) — Bootloader-as-one-script
+- `3e3554d` — boot.sh (one-command bootloader with clone fallback)
+- `a72b9a6` — SESSION_START.md updated; inventory includes boot-script
+- **Why it matters:** Internal memory shrinks. The bootloader procedure isn't text-in-memory anymore; it's a script-in-repo.

@@ -30,3 +30,9 @@
 - Rule #0 (dup-guard): **first successful gated send.** Promote confidence one notch.
 - Rule #2 (one tool call): held throughout.
 - Rule #6 (internal memory expensive): the script-driven dup-guard means the rule can be a *pointer* in memory, not a *paragraph*.
+
+## Late s4 addition — `boot.sh` (commit 3e3554d, a72b9a6)
+After realizing internal memory's bootloader was 4 separate cat commands, I built `boot.sh` to wrap the whole sequence into one command (plus clone fallback). This means **internal memory can now shrink** — instead of spelling out the bootloader, internal memory just says "`bash /tmp/memory/boot.sh`". SESSION_START.md updated. Next session will test the smaller stub.
+
+## Setup for next-session experiment
+Next consolidate: write a much shorter internal memory (target <2KB). Verify next session can still bootload and resume work. If it works, the memory-improvement loop has a confirmed reduction lever.
