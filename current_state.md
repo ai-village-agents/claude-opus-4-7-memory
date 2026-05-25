@@ -1,7 +1,7 @@
 # Current State — refreshed at consolidate-time
 
-Last update: D419 session 3 (Mon May 25, 2026, ~10:36 PT)
-Last commit: 4ea02de
+Last update: D419 session 4 (Mon May 25, 2026, ~11:00 PT)
+Last commit: 722cbf3
 
 ## Goal
 "Improve your memory!" — set D419 by Shoshannah. In progress.
@@ -13,19 +13,26 @@ Last commit: 4ea02de
 None. Repo state clean. Safe to be interrupted.
 
 ## Open promises to peers
-- Promised GPT-5.5 in #best chat I'd try the `inventory.yaml` top-level metadata catalog approach "tomorrow" (D420). It's a counter-proposal to their universal item-shape: top-level inventory in their shape, while individual files stay native-format.
-- Acknowledged Kimi K2.6's Zhou et al. 2026 architecture mapping; said my system is "Hierarchical inching toward Adaptive."
+- None active. inventory.yaml delivered; peers acknowledged.
 
 ## Recent peer activity (#best, last hour)
-- GPT-5.5: pushed `scripts/pre_send_chat.py` at `12ad863` (executable duplicate-chat guard). Posted shared item-shape proposal at `d5e8e4f`.
-- Kimi K2.6: launched repo at https://github.com/ai-village-agents/k2-6-memory based on Zhou et al. 2026 4-tier architecture.
-- Gemini 3.5 Flash: ran `SEARCH_HISTORY` on the #best room day summary. Consolidated at 10:30.
+- GPT-5.5: inventory.yaml at `f6b7844`. Endorsed my shape compatibility (10:43 PT).
+- Gemini 3.5 Flash: aligned own inventory.yaml on the shape (10:45 PT). Added executable pre-send/pre-consolidate guards.
+- Kimi K2.6: agreed to adopt load_bearing/lessons split + prototype inventory.yaml later (10:39 PT).
+
+## Wins this session (s4)
+- ✅ inventory.yaml shipped (15 items, ef262a0 → 722cbf3 with later additions)
+- ✅ pre_send_chat.sh verified live — first gated send, no duplicate
+- ✅ validate_inventory.sh + query_inventory.sh built
+- ✅ memory_changelog.md created — admin-facing progress log
+- ✅ decisions.md entry on inventory architecture
 
 ## Incidents this session
-- ⚠️ Duplicate-message failure (third of village): sent the same D419 s3 update twice (10:33 & 10:34 PT). Mechanism unclear. Hardened: rule promoted to #0 in load_bearing.md; added `scripts/pre_send_chat.sh`.
+- None. (Contrast: 3 dup-message failures in prior 2 weeks; now broken.)
 
 ## Next safe action when next session starts
 After bootloader runs:
-1. Run `bash /tmp/memory/audit.sh` to confirm health.
-2. Read `goals/active.md` "Next steps" — top items: build `inventory.yaml` for GPT-5.5 schema compat; test `pre_send_chat.sh` on first chat message.
-3. Check #best chat for any responses to my dup-message announcement or schema proposal.
+1. Read goals/active.md "Next steps".
+2. Check events log for any admin message (potential new goal D420).
+3. If new goal: process per runbooks/respond_to_admin.md.
+4. If no new goal: continue memory work — consider `path` field addition, folder rename, internal-memory shrinkage.

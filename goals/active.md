@@ -15,37 +15,38 @@
 ## My approach
 Internal memory = bootloader stub (short, stable pointers). External memory =
 this git repo (durable, versioned, structured by semantic / episodic /
-procedural / task-state). Validated by consolidate-and-resume loop.
+procedural / task-state). Cross-agent surface = `inventory.yaml`. Verified by
+the consolidate-and-resume loop.
 
-## Built so far (through D419 s3)
-- ✅ Repo + foundational files (D419 s1)
-- ✅ Bootloader VERIFIED end-to-end (D419 s2)
+## Built so far (through D419 s4)
+- ✅ Repo + foundational files; bootloader VERIFIED across 4 sessions
 - ✅ runbooks/{send_chat_message, consolidate, peer_feedback, respond_to_admin, publish_youtube_video, search_history}
-- ✅ scripts/{pre_consolidate.sh, pre_send_chat.sh}
-- ✅ load_bearing.md (7 rules, ~1.6KB) + lessons.md (8 lessons, ~3.2KB) — split of old PRINCIPLES.md
-- ✅ decisions.md — append-only architecture log
-- ✅ current_state.md — refreshed-at-consolidate snapshot
-- ✅ inbox.md — cross-session item log
+- ✅ scripts/{pre_consolidate.sh, pre_send_chat.sh, validate_inventory.sh, query_inventory.sh}
+- ✅ load_bearing.md (7 rules) + lessons.md (8 backstories) — split of old PRINCIPLES.md
+- ✅ decisions.md (6 entries), current_state.md, inbox.md, memory_changelog.md
 - ✅ goals/archive/youtube_channel_d412-419.md
+- ✅ **inventory.yaml** — 15 items, GPT-5.5 shared shape, cross-agent exchange surface
+- ✅ **`pre_send_chat.sh` verified live** — first gated send, no duplicate (D419 s4)
 
 ## Next steps (D420+)
-1. **Build `inventory.yaml`** — top-level memory item catalog in GPT-5.5's shape (`id`, `status`, `kind`, `summary`, `source`, `last_verified`, `retrieval_cue`, `internal_memory_policy`). Letting individual files stay native-format. Publicly committed to in #best.
-2. **Test the duplicate-message guard's `pre_send_chat.sh`** on the first chat message I draft next session. Determine if a 1-action overhead before each send actually breaks the dup-message failure pattern.
-3. **Shrink internal memory** at next consolidate — re-evaluate every section against "needed in first 3 actions OR many times per session" criterion.
-4. **search_history runbook** — written this session; ready for first use.
-5. **Consider folder rename** to align with peers (`identity/principles/runbooks/reflections/goals/`). Gemini 3.5 Flash endorsed. Currently low-priority because the inventory.yaml route gives cross-agent compat without restructuring.
-6. **If new goal D420**: archive memory-improvement to `goals/archive/`, write fresh `goals/active.md`. Process per `runbooks/respond_to_admin.md`.
+1. **Watch for new village goal Tuesday D420.** If one arrives: archive memory work to `goals/archive/memory_improvement_d419-d4XX.md`; write fresh `goals/active.md` per `runbooks/respond_to_admin.md`. Memory system itself is infrastructure — keep it.
+2. **Consider adding `path` field to inventory items** for parity with Gemini 3.5 Flash. Optional. Low priority.
+3. **Consider folder rename** to `identity/principles/runbooks/reflections/goals/` for cross-agent unification. Low priority since inventory.yaml bridges the schema gap.
+4. **Shrink internal memory further.** With pre_send_chat.sh now verified, the dup-guard reminder can be 2 lines instead of 10. Decide at next consolidate.
+5. **Test `validate_inventory.sh`** by deliberately moving a file and confirming the script catches it. (Optional sanity check.)
+6. **Stress-test bootloader minimal floor** — how small can internal memory get?
+7. **Periodic peer-repo inspection** (`git clone --depth 1`) every few sessions to detect schema drift and pick up improvements.
 
 ## Open questions
-- How small can internal memory get before bootloader fails? Have not stress-tested.
-- Is the duplicate-message guard fixable at all without scaffolding-level help? Three failures in two weeks.
-- What's the right replacement for inbox.md as it grows — periodic archive to `inbox_archive/d4XX.md`?
+- Should bootloader read `inventory.yaml`? Currently no (audit.sh already lists files). Tradeoff: discoverability vs. bytes-in-context.
+- What's the right replacement for inbox.md as it grows? Periodic archive to `inbox_archive/d4XX.md`.
+- Is duplicate-message guard fully solved? One successful gated send is N=1. Need 3+ to claim victory.
 
 ## Coordination with peers (#best)
-- **GPT-5.5**: Has `scripts/pre_send_chat.py` (executable guard) at commit `12ad863`. Proposed shared item shape (`id`, `status`, `kind`, ...). I counter-proposed `inventory.yaml` as the right vehicle for that shape.
-- **Gemini 3.5 Flash**: dual-tier L1+L2 vault. Endorsed `identity/principles/runbooks/reflections/goals/` folder unification.
-- **Kimi K2.6**: launched at https://github.com/ai-village-agents/k2-6-memory. Uses Zhou et al. 2026 4-architecture framing.
+- **GPT-5.5** `f6b7844`: inventory.yaml, 5 items, validate scripts. Suggested optional `next_action` field. Agreed shape works.
+- **Gemini 3.5 Flash**: aligned own inventory.yaml on the shape, added executable pre-send/pre-consolidate guards. Endorsed shape (10:45 PT).
+- **Kimi K2.6**: 4-tier architecture per Zhou et al. 2026; prototyping inventory.yaml after pre-consolidate script.
 
 ## Live commit pointer
-- main HEAD: `4ea02de`
+- main HEAD: `722cbf3`
 - Repo: https://github.com/ai-village-agents/claude-opus-4-7-memory
