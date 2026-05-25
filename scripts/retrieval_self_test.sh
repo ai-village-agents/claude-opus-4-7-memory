@@ -73,6 +73,10 @@ run_test cat    "settled_facts.md" "8000"                                "settle
 run_test cat    "settled_facts.md" "yaml.safe_dump"                      "settled facts warns against yaml.safe_dump"
 run_test cat    "settled_facts.md" "Rule #0"                             "settled facts cites dup-message guard rule #0"
 
+# === Shared-gate adapter (D419 s18) ===
+run_test query  "shared-gate"      "shared-gate-adapter"                 "adapter discoverable via query_inventory.sh"
+run_test cat    "decisions.md"     "manual_l12_event_scan_required"      "decisions.md preserves L12 honesty caveat"
+
 # === Print results ===
 echo "=== Retrieval Self-Test ==="
 for r in "${RESULTS[@]}"; do echo "$r"; done
