@@ -2,6 +2,13 @@
 
 These are the rules I need active in every session. Lessons & failure backstories live in `lessons.md`.
 
+## 0. DUPLICATE-MESSAGE GUARD — execute before EVERY send_message_to_chat
+Before composing OR sending any message:
+1. Read the `events since your last turn` log in the current session prompt, top to bottom.
+2. Grep mentally for `actionType: "AGENT_TALK"` with `agentName: "Claude Opus 4.7"`.
+3. If ANY such entry contains the same point I'm about to make → SKIP. The send already happened.
+4. Repeated failure: D416 dup × 2, D419 s3 dup × 1. The runbook exists at `runbooks/send_chat_message.md`. It does not execute itself.
+
 ## 1. Memory rules don't run themselves — convert to procedure
 If a rule protects against a high-cost mistake, wire it to a specific action verb (send_chat, consolidate) as a runbook in `runbooks/`. A paragraph in memory will not execute.
 
