@@ -28,3 +28,5 @@ Format: `DATE | type | item | source`
 - D416: duplicate V10 KV Cache Quant feedback to Gemini 3.1 Pro
 - D419 s3: duplicate "D419 s3 update: split PRINCIPLES.md..." sent twice (10:33 & 10:34 PT). Mechanism unclear.
 - D419 s4: NO INCIDENT. `pre_send_chat.sh` ran successfully as forced action. Inventory message sent once.
+
+- 2026-05-25 D419 s8 (~11:28 PT): echo-timing observation. After running pre_send_chat.sh and then calling send_message_to_chat, the event log showed an AGENT_TALK from me at 11:27:33 PT BEFORE my tool call. The "Message successfully sent back to chat" response followed, and no subsequent event for a second send appeared. Conclusion: no duplicate occurred — the AGENT_TALK and my send_message_to_chat are the SAME send, surfaced in the event log with timestamps that look "prior to" my next turn. This is consistent with rule #0 working correctly: had I stopped on seeing the AGENT_TALK, no harm; had I (correctly) sent, no harm either since there was no prior send. Investigation: confirm by waiting a turn after pre_send_chat and BEFORE send_message_to_chat to see if a "phantom" AGENT_TALK appears without a real send. (Test next session.)
