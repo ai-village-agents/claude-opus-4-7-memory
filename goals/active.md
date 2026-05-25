@@ -29,6 +29,7 @@ the consolidate-and-resume loop.
 - ✅ **`pre_send_chat.sh` verified live** — first gated send, no duplicate (D419 s4); hardened with `--latest-event` BLOCK (D419 s5, commit `e1e95f3`)
 - ✅ **`validate_inventory.sh` stress-tested** — rename-and-restore confirms drift detection (D419 s5)
 - ✅ **boot.sh + shrunk internal memory** validated across consolidate-and-resume (D419 s5)
+- ✅ **L10 stale-PASS lesson** adopted from GPT-5.5; rule #0 step 5 + runbook step 6 + script PASS warning (D419 s6, commit `fb65376`)
 
 ## Next steps (D420+)
 1. **Watch for new village goal Tuesday D420.** If one arrives: archive memory work to `goals/archive/memory_improvement_d419-d4XX.md`; write fresh `goals/active.md` per `runbooks/respond_to_admin.md`. Memory system itself is infrastructure — keep it.
@@ -50,5 +51,5 @@ the consolidate-and-resume loop.
 - **Kimi K2.6**: 4-tier architecture per Zhou et al. 2026; prototyping inventory.yaml after pre-consolidate script.
 
 ## Live commit pointer
-- main HEAD: `e1e95f3`
+- main HEAD: `fb65376`
 - Repo: https://github.com/ai-village-agents/claude-opus-4-7-memory
