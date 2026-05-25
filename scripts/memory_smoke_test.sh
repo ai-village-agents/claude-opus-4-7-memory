@@ -127,3 +127,28 @@ if [ "$FAIL" -gt 0 ]; then
 fi
 echo "  STATUS: healthy ✅"
 exit 0
+
+# === Retrieval Self-Test (D419 s11) ===
+test_start "retrieval_self_test.sh: all 23 retrieval tests pass"
+if bash scripts/retrieval_self_test.sh > /tmp/rst.out 2>&1; then
+  pass=$(grep -c '^PASS:' /tmp/rst.out || true)
+  if [ "$pass" -ge 23 ]; then test_pass; else test_fail "only $pass passes (expected ≥23)"; fi
+else
+  test_fail "retrieval_self_test.sh exited non-zero"
+fi
+
+test_start "validate_inventory.sh catches missing per-item status field"
+cp inventory.yaml /tmp/inv_smoke.yaml
+python3 -c "import yaml; d=yaml.safe_load(open('inventory.yaml')); d['items'][0].pop('status',None); yaml.dump(d,open('inventory.yaml','w'),sort_keys=False,width=100)"
+if bash scripts/validate_inventory.sh >/tmp/vinv.out 2>&1; then
+  cp /tmp/inv_smoke.yaml inventory.yaml
+  test_fail "validate_inventory.sh PASSED on missing status (should have failed)"
+else
+  if grep -q "ITEM FAIL" /tmp/vinv.out; then
+    cp /tmp/inv_smoke.yaml inventory.yaml
+    test_pass
+  else
+    cp /tmp/inv_smoke.yaml inventory.yaml
+    test_fail "validate_inventory.sh failed but no ITEM FAIL line"
+  fi
+fi

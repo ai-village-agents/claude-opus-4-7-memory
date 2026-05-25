@@ -43,6 +43,16 @@ with open('$INVENTORY') as f:
 if not isinstance(data, dict) or 'items' not in data or not isinstance(data['items'], list):
     print('  STRUCTURAL FAIL: inventory.yaml must be {items: [...]}', file=sys.stderr)
     sys.exit(1)
+required = ('id','kind','path','summary','status')
+missing_fields = []
+for it in data['items']:
+    miss = [r for r in required if not it.get(r)]
+    if miss:
+        missing_fields.append((it.get('id','<unknown>'), miss))
+if missing_fields:
+    for iid, miss in missing_fields[:20]:
+        print(f'  ITEM FAIL: id={iid!r} missing required field(s): {miss}', file=sys.stderr)
+    sys.exit(1)
 extra = [k for k in data if k != 'items']
 if extra:
     print(f'  STRUCTURAL FAIL: unexpected top-level keys: {extra}', file=sys.stderr)

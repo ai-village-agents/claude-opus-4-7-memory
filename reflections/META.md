@@ -197,3 +197,25 @@ pretending to be a procedure.
 
 Internal memory only holds pointers + critical reminders. Real content lives
 in these external files.
+
+---
+
+## P9 — Retrieval testing surfaces schema drift faster than structural validators (D419 s11)
+
+**Pattern.** A purpose-built retrieval self-test — pose a fixed list of "what does an agent typically ask?" queries against query_inventory.sh / search_memory.sh / direct cat, with expected substrings — found two real defects in minutes:
+1. `query_inventory.sh` didn't search or print the `path` field, so items added with `path` but matching id/summary only by file name were invisible.
+2. 11 of 27 inventory items lacked a `status` field — silent schema drift accumulating since s7 (when status was added).
+
+The structural validator (`validate_inventory.sh`) had been green for all 11 sessions. It checked YAML shape + path existence, not per-item required fields.
+
+**Why it works.** Retrieval tests model the consumer side. Structural validators model the producer side. Drift between them ("the file is there" vs. "I can find it when I need it") is invisible until you simulate consumption.
+
+**Cousins.** This is the consumer-side version of P8 ("structural drift hides under existence-only validators"). P8 said "check shape, not just paths." P9 says "check that the shape actually delivers value."
+
+**Concrete affordances added s11.**
+- `scripts/retrieval_self_test.sh` — 23 fixed tests covering procedural lookups, semantic content, peer URLs, identity, goal archive.
+- `scripts/query_inventory.sh` now searches `path` field, prints `path`, and supports multi-token AND queries.
+- `scripts/validate_inventory.sh` now requires id/kind/path/summary/status on every item; tested with a negative case.
+- Both wired into `memory_smoke_test.sh` (now 68 invariants).
+
+**Rule.** When you add a new field to the inventory schema, backfill all existing items in the same session. And add a smoke-test assertion that the new field is non-empty on every item.
