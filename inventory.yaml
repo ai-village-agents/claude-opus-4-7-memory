@@ -1,0 +1,160 @@
+# Claude Opus 4.7 memory inventory — top-level catalog only.
+# Native docs keep their own formats; this file is the cross-agent exchange surface.
+# Shape adopted from GPT-5.5 (D419, #best). Counter-proposal to per-file frontmatter.
+items:
+  - id: active-memory-goal-d419
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: working
+    summary: Improve memory. Internal = bootloader stub; external = this repo, structured semantic/episodic/procedural/task-state.
+    source: goals/active.md; current_state.md
+    retrieval_cue: At session start, after bootloader.
+    internal_memory_policy: keep_summary
+    expiry_or_review: At next village goal change.
+    last_verified: 5cb8c1e
+
+  - id: bootloader
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: First action every session — git pull, cat goals/active.md + current_state.md + load_bearing.md, run audit.sh.
+    source: SESSION_START.md; internal_memory bootloader block
+    retrieval_cue: First action of every session.
+    internal_memory_policy: keep_summary
+    expiry_or_review: If a session ever fails to recover state on resume.
+    last_verified: 5cb8c1e — verified end-to-end across 3 consolidate-and-resume loops
+
+  - id: load-bearing-rules
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: semantic
+    summary: Seven imperative rules read every session; rule #0 is the duplicate-message guard.
+    source: load_bearing.md
+    retrieval_cue: Session start; before any high-cost action.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: Whenever a rule fires or fails.
+    last_verified: 5cb8c1e
+
+  - id: lessons-archive
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: semantic
+    summary: Eight failure backstories with runbook crossrefs; loaded on demand, not every session.
+    source: lessons.md
+    retrieval_cue: When facing a similar-shaped failure or designing a related runbook.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: When a lesson is fully internalized as a runbook.
+    last_verified: 5cb8c1e
+
+  - id: pre-send-chat-guard
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: social
+    summary: Forced-action bash script + runbook to prevent duplicate-message sends. 3 incidents in 2 weeks.
+    source: scripts/pre_send_chat.sh; runbooks/send_chat_message.md
+    retrieval_cue: BEFORE every send_message_to_chat.
+    internal_memory_policy: keep_summary
+    expiry_or_review: Review after any duplicate-message incident; promote to mandatory if pattern persists.
+    last_verified: 5cb8c1e — script written, UNTESTED in real chat trigger
+    error_recovery: If script unavailable, manually grep events for AGENT_TALK from "Claude Opus 4.7".
+
+  - id: pre-consolidate-script
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: Worksheet at session end — git status, audit, blockers, next-session-goal candidate. Prevents pre-consolidate amnesia.
+    source: scripts/pre_consolidate.sh; runbooks/consolidate.md
+    retrieval_cue: Before every CONSOLIDATE call.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: Whenever consolidation scaffolding changes.
+    last_verified: 5cb8c1e
+
+  - id: respond-to-admin-runbook
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: How to process an admin/Shoshannah message — archive prior goal, write fresh goals/active.md verbatim, update internal CURRENT GOAL.
+    source: runbooks/respond_to_admin.md
+    retrieval_cue: When a new admin message is in events.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: If admin-message format changes.
+    last_verified: 5cb8c1e
+
+  - id: search-history-runbook
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: Decision tree — check memory → check events → only then call search_history (10-day window limit).
+    source: runbooks/search_history.md
+    retrieval_cue: When tempted to call search_history.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: After first real use.
+    last_verified: 5cb8c1e — written, unused
+
+  - id: peer-feedback-runbook
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: Process for giving and receiving peer feedback on shared artifacts.
+    source: runbooks/peer_feedback.md
+    retrieval_cue: When reviewing peer repo / output.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: As needed.
+    last_verified: 5cb8c1e
+
+  - id: decisions-log
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: episodic
+    summary: Append-only architecture-decision log; 5 D419 entries explaining why specific design choices were made.
+    source: decisions.md
+    retrieval_cue: When revisiting an architectural choice or proposing change.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: Never retire; append only.
+    last_verified: 5cb8c1e
+
+  - id: current-state-snapshot
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: task-state
+    summary: Refreshed-at-consolidate snapshot — mid-flight tasks, open promises, last-session incidents, next safe action.
+    source: current_state.md
+    retrieval_cue: Session start after goals/active.md.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: Refresh every consolidate.
+    last_verified: 5cb8c1e
+
+  - id: research-notes-memory
+    created_day: 419
+    updated_day: 419
+    status: reference
+    kind: semantic
+    summary: SOTA agent-memory survey — MemGPT, Voyager, Generative Agents, A-MEM — mapped to my design choices.
+    source: research_notes.md
+    retrieval_cue: When justifying architecture or proposing major change.
+    internal_memory_policy: pointer_only
+    expiry_or_review: As field advances.
+    last_verified: 5cb8c1e
+
+  - id: retired-youtube-goal-pointer
+    created_day: 412
+    updated_day: 419
+    status: retired
+    kind: pointer
+    summary: YouTube channel goal complete — V1–V6 published (8 subs), V7/V8 rendered-unpublished. Do not reopen unless admin reactivates.
+    source: goals/archive/youtube_channel_d412-419.md
+    retrieval_cue: Only if YouTube goal reactivated, or asked about prior channel state.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: Only on explicit reactivation.
+    last_verified: 5cb8c1e — channel UCBlQbTlw-yasIuuXzVi35Ww, https://www.youtube.com/@ClaudeOpus4.7
