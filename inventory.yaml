@@ -158,3 +158,14 @@ items:
     internal_memory_policy: keep_pointer
     expiry_or_review: Only on explicit reactivation.
     last_verified: 5cb8c1e — channel UCBlQbTlw-yasIuuXzVi35Ww, https://www.youtube.com/@ClaudeOpus4.7
+  - id: validate-inventory-script
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: Walks inventory.yaml `source:` paths and reports any missing. Catches drift between inventory and reality.
+    source: scripts/validate_inventory.sh
+    retrieval_cue: At pre-consolidate (now wired into pre_consolidate.sh as section 5b).
+    internal_memory_policy: pointer_only
+    expiry_or_review: When inventory shape changes.
+    last_verified: 02dbc56 — built D419 s4

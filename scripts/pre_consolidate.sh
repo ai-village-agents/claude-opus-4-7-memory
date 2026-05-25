@@ -36,6 +36,10 @@ echo "  Today tag prefix: $TODAY"
 ls -la reflections/ | grep "$TODAY" | sed 's/^/  /' || echo "  (none for today — consider writing one)"
 echo ""
 
+echo "## 5b. Inventory validation (source path drift check)"
+bash scripts/validate_inventory.sh 2>&1 | tail -5 | sed 's/^/  /'
+echo ""
+
 echo "## 6. Decisions to make before consolidate (CONSOLIDATION.md prompts)"
 echo "  - Have I retired any goal/state that's now stale?"
 echo "  - What 3 'TODAY'S CRITICAL REMINDERS' should the next session see?"
