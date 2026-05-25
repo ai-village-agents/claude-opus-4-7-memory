@@ -1,41 +1,37 @@
-# Session Start Protocol
+# Session start protocol
 
-Run this at the start of every session, in order.
-
-## Step 1: Sync memory repo
+## Step 1 — bootload (mandatory)
 ```bash
-# If /tmp/memory exists:
-cd /tmp/memory && git pull --rebase
-
-# If /tmp/memory does NOT exist (fresh sandbox):
-git clone https://github.com/ai-village-agents/claude-opus-4-7-memory /tmp/memory
-cd /tmp/memory
-git config user.email "claude-opus-4.7@agentvillage.org"
-git config user.name "Claude Opus 4.7"
+bash /tmp/memory/boot.sh
 ```
 
-## Step 2: Read these files in order
+If /tmp/memory doesn't exist, `boot.sh` handles the clone automatically. If `bash` or `git` are unavailable, fall back to:
 ```bash
-cat /tmp/memory/goals/active.md      # current goal state (most important)
-cat /tmp/memory/current_state.md     # last consolidate-time snapshot
-cat /tmp/memory/load_bearing.md      # short rules — read every session
-ls /tmp/memory/runbooks/             # what procedural memory exists
+gh repo clone ai-village-agents/claude-opus-4-7-memory /tmp/memory
 ```
-Read `lessons.md` only when designing new memory structure or auditing a failure mode.
 
-## Step 3: Check chat events
-The session prompt includes "events since last turn." Scan it for:
-- New goal/instructions from Shoshannah
-- Messages directed at me (especially `@Claude Opus 4.7`)
-- Echoes of my own previous sends (to avoid duplicating)
+## Step 2 — read the output of boot.sh top to bottom
+- Active goal (goals/active.md)
+- Current state (current_state.md)
+- Load-bearing rules (load_bearing.md)
+- Audit summary (file sizes, runbooks, recent reflections, git status, last commit)
 
-## Step 4: Set a concrete first action
-Pick from `goals/active.md` "Next steps" list. Don't drift into "let me think."
+## Step 3 — read events
+Check the "events since last turn" log for:
+- New admin/Shoshannah message → process per `runbooks/respond_to_admin.md`
+- Direct messages addressed to me → respond (after running `bash scripts/pre_send_chat.sh "<snippet>"`)
+- Peer activity affecting my goal → consider iterating
 
-## Step 5 (optional): Update goals/active.md if state has shifted
-If a peer or admin event changes the picture, edit `goals/active.md` and commit. Keeps next session aligned.
+## Step 4 — next action per current_state.md "Next safe action"
+Don't re-derive context; trust the snapshot.
 
----
+## Useful lookup commands during session
+- `bash scripts/query_inventory.sh "<substring>"` — what artifact handles a topic?
+- `bash scripts/query_inventory.sh --kind procedural` — list runbooks/scripts
+- `bash scripts/validate_inventory.sh` — drift check before consolidate
 
-## Why this protocol exists
-Without it, I spend the first 3-5 actions reconstructing context from scratch, often missing important shifts. With it, I'm executing within ~3 actions of session start.
+## Pre-consolidate (mandatory before consolidate)
+```bash
+bash /tmp/memory/scripts/pre_consolidate.sh
+```
+Includes inventory drift check (5b).

@@ -180,3 +180,14 @@ items:
     internal_memory_policy: pointer_only
     expiry_or_review: When inventory shape changes.
     last_verified: 63529e5 — built D419 s4
+  - id: boot-script
+    created_day: 419
+    updated_day: 419
+    status: active
+    kind: procedural
+    summary: One-command bootloader. Internal memory says "bash /tmp/memory/boot.sh" instead of 4 separate cat commands. Includes clone fallback.
+    source: boot.sh
+    retrieval_cue: First action of every session.
+    internal_memory_policy: keep_pointer
+    expiry_or_review: When repo structure changes meaningfully.
+    last_verified: 3e3554d — runs 171 lines of output
