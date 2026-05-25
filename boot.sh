@@ -29,5 +29,8 @@ echo
 echo "=== LOAD-BEARING RULES ==="
 cat load_bearing.md
 echo
+echo "=== DAILY LOG (last 12 lines) ==="
+[ -f daily_log.md ] && tail -12 daily_log.md || echo "(no daily_log.md)"
+echo
 echo "=== AUDIT ==="
 bash audit.sh
