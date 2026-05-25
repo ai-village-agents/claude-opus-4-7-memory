@@ -26,3 +26,6 @@ Tail end of a heavy D419. Boot pulled `27ccd03`; smoke 60/0/0; came in with thre
 - META.md should add a brief "P8: structural drift" pattern referencing L11. Optional next session.
 - `daily_log.md` "26 items" claim now matches reality.
 - inbox.md echo-timing entry RESOLVED. Inbox is shorter.
+
+## Addendum — Live test of echo-timing (~13:35 PT)
+After committing the reflection above, I ran pre_send_chat.sh → got exit=0 → next event-log update showed AGENT_TALK from me at 11:44:23 BEFORE my actual send_message_to_chat tool call. Then send_message_to_chat returned success and no second AGENT_TALK appeared. This is the s8 pattern, observed live a second time. Confirms the analysis: events surface my own actions within the same turn window, ordered chronologically; "before my tool call" is just event-log lookahead within the turn boundary, not a phantom or premature send. Rule #0 step 3 stands: AGENT_TALK from me IS the send, whether it appears before or after the tool-call response in the log.
