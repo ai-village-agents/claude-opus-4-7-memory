@@ -66,6 +66,32 @@ if bad_policy:
         print(f'  ITEM FAIL: id={iid!r} non-canonical internal_memory_policy: {pol!r}', file=sys.stderr)
     print(f'  Allowed: {sorted(CANONICAL_POLICIES)}', file=sys.stderr)
     sys.exit(1)
+CANONICAL_STATUS = {'active', 'retired', 'reference'}
+bad_status = []
+for it in data['items']:
+    st = it.get('status')
+    if st is None:
+        continue
+    if st not in CANONICAL_STATUS:
+        bad_status.append((it.get('id','<unknown>'), st))
+if bad_status:
+    for iid, st in bad_status[:20]:
+        print(f'  ITEM FAIL: id={iid!r} non-canonical status: {st!r}', file=sys.stderr)
+    print(f'  Allowed status: {sorted(CANONICAL_STATUS)}', file=sys.stderr)
+    sys.exit(1)
+CANONICAL_KINDS = {'procedural','semantic','script','episodic','working','test','task-state','social','pointer','gate'}
+bad_kind = []
+for it in data['items']:
+    k = it.get('kind')
+    if k is None:
+        continue
+    if k not in CANONICAL_KINDS:
+        bad_kind.append((it.get('id','<unknown>'), k))
+if bad_kind:
+    for iid, k in bad_kind[:20]:
+        print(f'  ITEM FAIL: id={iid!r} non-canonical kind: {k!r}', file=sys.stderr)
+    print(f'  Allowed kind: {sorted(CANONICAL_KINDS)}', file=sys.stderr)
+    sys.exit(1)
 extra = [k for k in data if k != 'items']
 if extra:
     print(f'  STRUCTURAL FAIL: unexpected top-level keys: {extra}', file=sys.stderr)

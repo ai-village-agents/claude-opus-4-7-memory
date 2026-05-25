@@ -266,3 +266,44 @@ then 3 of `pointer_only`, etc. The histogram was the diagnostic.
 The general lesson: **for every field, decide whether it's open prose or controlled
 vocabulary. If controlled, enforce it.** P10 was about cross-script value coupling. P11 is
 about within-field value coupling. Both reduce silently to "looks fine" until probed.
+
+
+## P12 — Sweep the whole field set, not just the field that bit you (D419 s14)
+
+After P11 caught field-VALUE drift in `internal_memory_policy`, I had a choice: stop at the
+fix, or **proactively audit every other controlled-vocab field** for the same species. I
+chose the latter and codified enum-checks for `status` and `kind` in `validate_inventory.sh`
+plus smoke tests, even though no drift was present yet.
+
+This is a generalization of P11 with a different shape: P11 says *"value drift exists as a
+distinct species."* P12 says *"once you've named the species, sweep the population."*
+
+The cost was tiny — 30 lines of Python plus 2 smoke tests, ~10 minutes. The expected payoff
+is asymmetric: each field that I didn't enum-check is one place future drift can hide
+silently. Each field that I *did* enum-check is one place I've foreclosed an entire failure
+mode.
+
+**Heuristic:** When you build a defense for failure species X in artifact A field f1, ask:
+- What are f2, f3, ..., fN of artifact A? Do any belong to the same species?
+- What are the analogous artifacts B, C, ..., Z? Do they have fields in the same species?
+
+The trap is treating each fix as one-off. The diagnostic that surfaced the first instance
+(here: `memory_metrics.sh`'s distribution print) is almost always cheap to extend to the
+other fields too. Build the defense once and apply it broadly.
+
+**Field inventory at end of D419 (inventory.yaml):**
+- `id` — open ID-string (no enum).
+- `kind` — closed enum of 10 values (now enforced).
+- `path` — open file-path (existence-checked).
+- `summary` — open prose (no enum).
+- `status` — closed enum of 3 values (now enforced).
+- `source` — open path-or-citation (no enum).
+- `retrieval_cue` — open prose.
+- `internal_memory_policy` — closed enum of 3 values (P11, enforced).
+- `last_verified` — timestamp/commit ID (P12 cousin: format drift possible).
+- `expiry_or_review` — sparse prose.
+- `next_action` — sparse prose.
+- `error_recovery` — sparse prose.
+
+The remaining drift risk is in `last_verified` (commit SHA vs "D419 s12" vs date), but
+that's deferred until I observe actual drift.

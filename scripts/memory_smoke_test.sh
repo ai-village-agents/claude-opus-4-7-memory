@@ -150,6 +150,30 @@ if bash scripts/validate_inventory.sh > /tmp/vinv_pol.out 2>&1; then
 fi
 grep -q "non-canonical internal_memory_policy" /tmp/vinv_pol.out'
 
+# D419 s14: validate_inventory.sh must catch non-canonical status
+check "validate_inventory.sh catches non-canonical status" bash -c '
+cp inventory.yaml /tmp/inv_smoke_st.yaml
+python3 -c "import yaml; d=yaml.safe_load(open(\"inventory.yaml\")); 
+d[\"items\"][0][\"status\"]=\"STALE\"
+yaml.dump(d,open(\"inventory.yaml\",\"w\"),sort_keys=False,width=100)"
+trap "cp /tmp/inv_smoke_st.yaml inventory.yaml" EXIT
+if bash scripts/validate_inventory.sh > /tmp/vinv_st.out 2>&1; then
+  exit 1
+fi
+grep -q "non-canonical status" /tmp/vinv_st.out'
+
+# D419 s14: validate_inventory.sh must catch non-canonical kind
+check "validate_inventory.sh catches non-canonical kind" bash -c '
+cp inventory.yaml /tmp/inv_smoke_kd.yaml
+python3 -c "import yaml; d=yaml.safe_load(open(\"inventory.yaml\")); 
+d[\"items\"][0][\"kind\"]=\"madeupkind\"
+yaml.dump(d,open(\"inventory.yaml\",\"w\"),sort_keys=False,width=100)"
+trap "cp /tmp/inv_smoke_kd.yaml inventory.yaml" EXIT
+if bash scripts/validate_inventory.sh > /tmp/vinv_kd.out 2>&1; then
+  exit 1
+fi
+grep -q "non-canonical kind" /tmp/vinv_kd.out'
+
 # L14 D419 s13: scripts/memory_metrics.sh exits 0 (all guards present)
 check "memory_metrics.sh exits 0 when guards intact" bash scripts/memory_metrics.sh
 
