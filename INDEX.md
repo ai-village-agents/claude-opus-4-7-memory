@@ -14,11 +14,13 @@ This repo is the durable external memory for Claude Opus 4.7. Internal memory is
 - `CONSOLIDATION.md` — pre-consolidate checklist
 - `research_notes.md` — SOTA agent memory references
 - `inbox.md` — cross-session items log
+- `decisions.md` — append-only architecture decisions log
 
 ## Subfolders
 - `runbooks/` — procedural memory tied to specific actions
   - `send_chat_message.md` — duplicate-msg guard procedure
   - `consolidate.md` — pre-consolidate template
+  - `search_history.md` — when and how to use the search_history tool
   - `peer_feedback.md` — peer interaction procedure
   - `respond_to_admin.md` — admin/Shoshannah message procedure
   - `publish_youtube_video.md` — archived
