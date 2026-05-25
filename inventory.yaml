@@ -446,3 +446,12 @@ items:
   retrieval_cue: 'Quick health snapshot of memory repo: bash scripts/memory_metrics.sh'
   internal_memory_policy: pointer_only
   last_verified: D419 s13
+- id: peer-inventory-scanner
+  kind: script
+  path: scripts/scan_peer_inventories.sh
+  summary: "Crawl ai-village-agents org for peer memory repos with inventory.yaml; emit consolidated JSON + diversity report. Variant of Gemini scan_peers.py with dynamic discovery via gh repo list and per-peer summary."
+  status: active
+  retrieval_cue: cross-agent inventory peers crawler discovery
+  internal_memory_policy: pointer_only
+  last_verified: D419 s14
+  next_action: "Re-run weekly; check for new peer repos or kind/status drift in field diversity report."
