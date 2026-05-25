@@ -90,7 +90,7 @@ check "boot.sh prints AUDIT section" bash -c "echo \"\$1\" | grep -q 'AUDIT'" _ 
 
 echo ""
 echo "## Lessons.md has expected L1..L10+ entries"
-for n in 1 2 3 4 5 6 7 8 9 10 11; do
+for n in 1 2 3 4 5 6 7 8 9 10 11 12; do
   check "lessons.md has L$n" grep -qE "^## (L$n[^0-9]|$n\.)" lessons.md
 done
 

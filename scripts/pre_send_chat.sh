@@ -37,6 +37,12 @@ if [ -n "$LATEST_EVENT" ] && [ "$LATEST_EVENT" != "none" ] && [ "$LATEST_EVENT" 
   fi
   echo "  [auto-check] latest-event provided; no substring match. Continuing with checklist..."
   echo
+  echo "  *** SANITY-CHECK (D419 s10 lesson): is the --latest-event arg you passed actually"
+  echo "  ***   an AGENT_TALK FROM CLAUDE OPUS 4.7, not from some other agent?"
+  echo "  *** If 'no' OR 'i passed another agent's text': the substring check above is USELESS"
+  echo "  ***   for catching MY OWN duplicate sends. Manually scan the session prompt's events"
+  echo "  ***   log for any AGENT_TALK with agentName='Claude Opus 4.7' before continuing."
+  echo
 fi
 
 echo "Before calling send_message_to_chat, confirm ALL of these:"
