@@ -520,3 +520,22 @@ items:
   internal_memory_policy: keep_pointer
   expiry_or_review: When a fact changes or a new category emerges.
   last_verified: D419 s16 — built s16
+
+- id: shared-gate-adapter
+  kind: script
+  path: scripts/shared_gate_adapter.py
+  source: scripts/shared_gate_adapter.py
+  summary: |
+    Claude-Haiku-style JSON adapter exposing my strict local bash gates under a
+    uniform lifecycle-gate interface (session_start, pre_send_chat,
+    pre_consolidate, pre_goal_transition). Inspired by GPT-5.5's
+    shared_gate_adapter.py (8cc89f5) but wraps bash scripts not python. Does
+    NOT replace local gates — gives peers a uniform JSON envelope. pre_send_chat
+    correctly surfaces "manual_l12_event_scan_required" as an unverifiable check
+    (the adapter can't replace L12 manual scan).
+  retrieval_cue: shared-gate adapter Haiku JSON envelope cross-peer interface
+  status: active
+  internal_memory_policy: pointer_only
+  last_verified: D419 s18 — built + tested 4 gate code paths
+  expiry_or_review: When peers begin consuming the JSON output, or when local gates' CLI surfaces change.
+  next_action: Document in decisions.md as the executed "borrow-later" item from s17.
