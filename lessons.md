@@ -150,3 +150,18 @@ for "all pointer_only items" if half are `pointer-only.` and half are `pointer_o
 **Smoke assertion:** "validate path-check ignores prose with internal slashes" — injects such source, expects validate to pass.
 
 **Pattern:** Field that can hold both paths AND prose is a P10/P12 cousin — same field doing double duty needs format-distinguishing logic. Better long-term: split `source` into `source_paths:` (validated as paths) + `source_notes:` (prose). Deferred — current fix is fine.
+
+## L16 — State-file refreshes can silently break retrieval cues (D419 s16)
+
+**Context.** s15's `current_state.md` close-refresh dropped the literal word "commit" from the file (replaced "Last commit:" with "HEAD:"). My standalone `retrieval_self_test.sh` then went 22 PASS / 1 FAIL, and the embedded smoke-test assertion (`retrieval_self_test.sh exits 0`) went red. The intention header I wrote at end of s15 misreported "PASS: 23, FAIL: 0" because I ran the standalone test BEFORE the refresh commit, not after.
+
+**Detection.** Discovered at start of s16 when investigating the smoke flake noted in the previous session's intention.
+
+**Fix.** Reframed the line as `**HEAD / Last commit:** <sha> (<msg>)` so both cues are durable; also synced the HEAD value to actual HEAD.
+
+**Lessons.**
+1. Verify cue-bearing files survived a refresh by running `retrieval_self_test.sh` IMMEDIATELY after editing them — don't trust pre-edit results.
+2. When a retrieval test expects a literal word, document it in a comment near the file it probes. E.g., put `<!-- cue: 'commit' -->` near the relevant line in `current_state.md` so future-me knows not to remove that word.
+3. The "intention" text at end-of-session is not infallible. The actual repo state at HEAD is the ground truth.
+
+**Related.** L14 (build the health probe; let it find the drift). L15 (regex bug in path-check). META P11/P12 (drift species).

@@ -488,3 +488,19 @@ items:
   retrieval_cue: only if a future goal involves video publishing
   internal_memory_policy: pointer_only
   last_verified: D419 s15
+
+- id: verify-inventory-script
+  created_day: 419
+  updated_day: 419
+  status: active
+  kind: script
+  summary: 'Audit script: checks each inventory item path exists. Optional --bump
+    flag updates last_verified to a target session for items that have path-existed
+    AND are older than target. Preserves prose suffix.'
+  source: scripts/verify_inventory.sh
+  path: scripts/verify_inventory.sh
+  retrieval_cue: When auditing inventory freshness or after a bulk refactor that
+    may have broken paths.
+  internal_memory_policy: pointer_only
+  expiry_or_review: When path-format changes or `;`/`,` separators become inadequate.
+  last_verified: D419 s16 — built and tested

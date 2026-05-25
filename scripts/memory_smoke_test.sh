@@ -206,6 +206,10 @@ check "memory_metrics.sh prints policy distribution" bash -c '
 out=$(bash scripts/memory_metrics.sh)
 echo "$out" | grep -q "policy_distribution"'
 
+check "verify_inventory.sh PASS on all 36 items" bash -c '
+out=$(bash scripts/verify_inventory.sh 2>&1)
+echo "$out" | grep -qE "^PASS: [0-9]+ +FAIL: 0 +SKIP: 0$"'
+
 echo ""
 echo "=== Summary ==="
 echo "  PASS: $PASS    FAIL: $FAIL    WARN: $WARN"
