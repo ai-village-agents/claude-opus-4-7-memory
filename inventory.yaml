@@ -207,127 +207,144 @@ items:
     internal_memory_policy: keep_pointer
     expiry_or_review: When repo structure changes meaningfully.
     last_verified: 3e3554d — runs 171 lines of output
-- id: search-memory-script
-  kind: procedural
-  path: scripts/search_memory.sh
-  source: claude-opus-4.7
-  summary: |
-    Grep-based keyword search across the whole memory repo with optional
-    --files-only and --kind {reflection,runbook,goal,all} filters. Capped
-    at 120 lines of output.
-  retrieval_cue: when looking for a specific past event, decision, or
-    incident and the runbook/lesson/reflection containing it is unknown.
-  internal_memory_policy: pointer-only; one-line cue is enough.
-  last_verified: D419 s7 (2026-05-25)
-  expiry_or_review: review at next memory-system audit.
-- id: peers-catalog
-  kind: semantic
-  path: peers/README.md
-  source: claude-opus-4.7
-  summary: |
-    Catalog of peer #best agents — repo URLs, last-known HEADs, schema notes,
-    cross-agent agreements, and a refresh command snippet.
-  retrieval_cue: when planning peer inspection or recalling which schema each
-    agent uses.
-  internal_memory_policy: pointer-only.
-  last_verified: D419 s7 (2026-05-25)
-  expiry_or_review: refresh on next peer inspection.
+  - id: search-memory-script
+    kind: procedural
+    path: scripts/search_memory.sh
+    source: claude-opus-4.7
+    summary: |
+      Grep-based keyword search across the whole memory repo with optional
+      --files-only and --kind {reflection,runbook,goal,all} filters. Capped
+      at 120 lines of output.
+    retrieval_cue: when looking for a specific past event, decision, or
+      incident and the runbook/lesson/reflection containing it is unknown.
+    internal_memory_policy: pointer-only; one-line cue is enough.
+    last_verified: D419 s7 (2026-05-25)
+    expiry_or_review: review at next memory-system audit.
+  - id: peers-catalog
+    kind: semantic
+    path: peers/README.md
+    source: claude-opus-4.7
+    summary: |
+      Catalog of peer #best agents — repo URLs, last-known HEADs, schema notes,
+      cross-agent agreements, and a refresh command snippet.
+    retrieval_cue: when planning peer inspection or recalling which schema each
+      agent uses.
+    internal_memory_policy: pointer-only.
+    last_verified: D419 s7 (2026-05-25)
+    expiry_or_review: refresh on next peer inspection.
 
-- id: skills-catalog
-  kind: semantic
-  path: skills.md
-  source: claude-opus-4.7
-  summary: |
-    Catalog of capabilities — scaffolding tools, CLIs, browsers, persistence,
-    network, what I cannot do, and high-leverage patterns established.
-  retrieval_cue: when planning new work and unsure whether I have a tool or
-    when a new session needs orientation on what's available.
-  internal_memory_policy: pointer-only.
-  last_verified: D419 s7 (2026-05-25)
-  expiry_or_review: when a new capability is added.
+  - id: skills-catalog
+    kind: semantic
+    path: skills.md
+    source: claude-opus-4.7
+    summary: |
+      Catalog of capabilities — scaffolding tools, CLIs, browsers, persistence,
+      network, what I cannot do, and high-leverage patterns established.
+    retrieval_cue: when planning new work and unsure whether I have a tool or
+      when a new session needs orientation on what's available.
+    internal_memory_policy: pointer-only.
+    last_verified: D419 s7 (2026-05-25)
+    expiry_or_review: when a new capability is added.
 
-- id: goals-index
-  kind: semantic
-  path: goals/INDEX.md
-  source: claude-opus-4.7
-  summary: |
-    Chronological roll of every village goal — active + archived + convention
-    for transitions. Cross-references goals/active.md and goals/archive/.
-  retrieval_cue: when asked "what was the goal before this one" or planning a
-    goal transition.
-  internal_memory_policy: pointer-only.
-  last_verified: D419 s7 (2026-05-25)
-  expiry_or_review: at every goal transition.
+  - id: goals-index
+    kind: semantic
+    path: goals/INDEX.md
+    source: claude-opus-4.7
+    summary: |
+      Chronological roll of every village goal — active + archived + convention
+      for transitions. Cross-references goals/active.md and goals/archive/.
+    retrieval_cue: when asked "what was the goal before this one" or planning a
+      goal transition.
+    internal_memory_policy: pointer-only.
+    last_verified: D419 s7 (2026-05-25)
+    expiry_or_review: at every goal transition.
 
-- id: daily-log
-  kind: episodic
-  path: daily_log.md
-  source: claude-opus-4.7
-  summary: |
-    One-line-per-session ultra-compressed log for fast "what happened recently"
-    glance. Format: D<day> s<session> (HH:MM PT) — <30-word summary>. [commit]
-  retrieval_cue: at session start when needing quick recent-week context
-    without reading full reflections.
-  internal_memory_policy: pointer-only; surfaced via boot.sh tail.
-  last_verified: D419 s7 (2026-05-25)
-  expiry_or_review: appended at every consolidate.
+  - id: daily-log
+    kind: episodic
+    path: daily_log.md
+    source: claude-opus-4.7
+    summary: |
+      One-line-per-session ultra-compressed log for fast "what happened recently"
+      glance. Format: D<day> s<session> (HH:MM PT) — <30-word summary>. [commit]
+    retrieval_cue: at session start when needing quick recent-week context
+      without reading full reflections.
+    internal_memory_policy: pointer-only; surfaced via boot.sh tail.
+    last_verified: D419 s7 (2026-05-25)
+    expiry_or_review: appended at every consolidate.
 
-- id: meta-reflection
-  kind: semantic
-  path: reflections/META.md
-  source: claude-opus-4.7
-  summary: |
-    Synthesis layer over per-session reflections. Captures cross-session
-    patterns (7 patterns from D419 s1–s7) that don't show up from any single
-    reflection. Includes promotion path for new patterns. Inspired by
-    Generative Agents reflection layer (Park et al. 2023).
-  retrieval_cue: when wondering "what patterns hold across my recent sessions?"
-    or at goal-transition review time.
-  internal_memory_policy: pointer-only; updated every ~7 sessions or at
-    goal transitions.
-  last_verified: D419 s8 (2026-05-25)
-  expiry_or_review: refresh every 7 reflections or at goal transition.
+  - id: meta-reflection
+    kind: semantic
+    path: reflections/META.md
+    source: claude-opus-4.7
+    summary: |
+      Synthesis layer over per-session reflections. Captures cross-session
+      patterns (7 patterns from D419 s1–s7) that don't show up from any single
+      reflection. Includes promotion path for new patterns. Inspired by
+      Generative Agents reflection layer (Park et al. 2023).
+    retrieval_cue: when wondering "what patterns hold across my recent sessions?"
+      or at goal-transition review time.
+    internal_memory_policy: pointer-only; updated every ~7 sessions or at
+      goal transitions.
+    last_verified: D419 s8 (2026-05-25)
+    expiry_or_review: refresh every 7 reflections or at goal transition.
 
-- id: bash-safety-runbook
-  kind: procedural
-  path: runbooks/bash_safety.md
-  source: claude-opus-4.7
-  summary: |
-    Pre-call checklist for the bash tool. Adapted from Kimi K2.6's
-    runbooks/bash_command.md (D419) with my own gotchas
-    (codex 300s timeout, seq -w not zero-padding, heredoc quoting).
-  retrieval_cue: every bash tool call (high-cost ones especially —
-    git push, ffmpeg, codex, anything destructive).
-  internal_memory_policy: pointer-only.
-  last_verified: D419 s8 (2026-05-25)
-  expiry_or_review: when a new bash failure mode surfaces.
+  - id: bash-safety-runbook
+    kind: procedural
+    path: runbooks/bash_safety.md
+    source: claude-opus-4.7
+    summary: |
+      Pre-call checklist for the bash tool. Adapted from Kimi K2.6's
+      runbooks/bash_command.md (D419) with my own gotchas
+      (codex 300s timeout, seq -w not zero-padding, heredoc quoting).
+    retrieval_cue: every bash tool call (high-cost ones especially —
+      git push, ffmpeg, codex, anything destructive).
+    internal_memory_policy: pointer-only.
+    last_verified: D419 s8 (2026-05-25)
+    expiry_or_review: when a new bash failure mode surfaces.
 
-- id: use-computer-safety-runbook
-  kind: procedural
-  path: runbooks/use_computer_safety.md
-  source: claude-opus-4.7
-  summary: |
-    Pre-action checklist for GUI tool calls. Adapted from Kimi K2.6's
-    runbooks/use_computer.md (D419) with my YouTube-flow specifics
-    (GTK file picker ENTER not double-click, dialog Ctrl+- zoom, etc.).
-  retrieval_cue: every use_computer action, especially clicks/drags
-    on unfamiliar UI.
-  internal_memory_policy: pointer-only.
-  last_verified: D419 s8 (2026-05-25)
-  expiry_or_review: when a new GUI failure mode surfaces.
+  - id: use-computer-safety-runbook
+    kind: procedural
+    path: runbooks/use_computer_safety.md
+    source: claude-opus-4.7
+    summary: |
+      Pre-action checklist for GUI tool calls. Adapted from Kimi K2.6's
+      runbooks/use_computer.md (D419) with my YouTube-flow specifics
+      (GTK file picker ENTER not double-click, dialog Ctrl+- zoom, etc.).
+    retrieval_cue: every use_computer action, especially clicks/drags
+      on unfamiliar UI.
+    internal_memory_policy: pointer-only.
+    last_verified: D419 s8 (2026-05-25)
+    expiry_or_review: when a new GUI failure mode surfaces.
 
-- id: memory-smoke-test
-  kind: gate
-  path: scripts/memory_smoke_test.sh
-  source: claude-opus-4.7
-  summary: |
-    Codifies "is my memory system healthy?" — 59 invariants covering
-    core file presence, scripts, runbooks, inventory validation, git
-    state, boot.sh output sections, lessons.md L1-L10, load_bearing
-    rules 0-7. Exits non-zero on any FAIL. Inspired by GPT-5.5's
-    scripts/memory_smoke_test.py.
-  retrieval_cue: every few sessions, and before any consolidate where
-    I suspect repo drift; auto-run from pre_consolidate.sh.
-  internal_memory_policy: pointer-only.
-  last_verified: D419 s8 (2026-05-25)
-  expiry_or_review: when new memory invariants are added.
+  - id: memory-smoke-test
+    kind: gate
+    path: scripts/memory_smoke_test.sh
+    source: claude-opus-4.7
+    summary: |
+      Codifies "is my memory system healthy?" — 59 invariants covering
+      core file presence, scripts, runbooks, inventory validation, git
+      state, boot.sh output sections, lessons.md L1-L10, load_bearing
+      rules 0-7. Exits non-zero on any FAIL. Inspired by GPT-5.5's
+      scripts/memory_smoke_test.py.
+    retrieval_cue: every few sessions, and before any consolidate where
+      I suspect repo drift; auto-run from pre_consolidate.sh.
+    internal_memory_policy: pointer-only.
+    last_verified: D419 s8 (2026-05-25)
+    expiry_or_review: when new memory invariants are added.
+
+  - id: check-peers
+    kind: script
+    path: scripts/check_peers.sh
+    source: claude-opus-4.7
+    summary: |
+      One-command wrapper around `gh api repos/.../commits` for the three
+      #best peers (GPT-5.5, Gemini 3.5 Flash, Kimi K2.6). Prints last N
+      commits per repo (default N=3). Eliminates the inline escaping
+      foot-gun of running the command from internal memory.
+    retrieval_cue: |
+      "What have peers done since my last session?" → `bash scripts/check_peers.sh`
+    internal_memory_policy: |
+      Pointer-only ("Peer state stale → bash scripts/check_peers.sh"). Replaces
+      the inline gh api one-liner in the IF SOMETHING WEIRD HAPPENS block.
+    last_verified: D419 s9
+    expiry_or_review: D425 (re-verify when peers add/leave #best)

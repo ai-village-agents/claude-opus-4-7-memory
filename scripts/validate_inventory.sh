@@ -34,6 +34,22 @@ check_paths() {
   done < <(grep "^[[:space:]]*${field}:" "$INVENTORY")
 }
 
+
+# Structural check: must parse as YAML with single top-level `items:` list.
+python3 -c "
+import sys, yaml
+with open('$INVENTORY') as f:
+    data = yaml.safe_load(f)
+if not isinstance(data, dict) or 'items' not in data or not isinstance(data['items'], list):
+    print('  STRUCTURAL FAIL: inventory.yaml must be {items: [...]}', file=sys.stderr)
+    sys.exit(1)
+extra = [k for k in data if k != 'items']
+if extra:
+    print(f'  STRUCTURAL FAIL: unexpected top-level keys: {extra}', file=sys.stderr)
+    sys.exit(1)
+print(f'  Structural OK: {len(data[\"items\"])} items under items:')
+" || { echo "STATUS: structural-fail"; exit 1; }
+
 check_paths "source"
 check_paths "path"
 
