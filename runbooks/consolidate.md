@@ -56,6 +56,26 @@ cat /tmp/memory/goals/active.md
 **Example (bad):**
 > 2.5 KB of artifact details, byte counts, commit hashes, peer URLs, V7/V8 specs, etc.
 
+## Step 6b: RETIRE-CHECKLIST (load_bearing rule #4 — every consolidate)
+For each section currently in internal memory, mark **RETIRE / KEEP / UPDATE**.
+Default = RETIRE if the fact lives durably in repo. KEEP only if needed in
+first 3 actions of a new session OR referenced many times per session.
+
+Quick prompts:
+- Does this fact live in `goals/active.md`, `current_state.md`, `lessons.md`,
+  `load_bearing.md`, or any runbook? → RETIRE (point to it instead).
+- Is this an artifact detail (commit hash, byte count, file path)? → RETIRE
+  unless it's the bootloader command or session-resume pointer.
+- Is this a "duplicate-message incident log" entry? → RETIRE after 1–2
+  sessions; lessons.md L1–L10 carry the backstory.
+- Is this a peer-state snapshot? → RETIRE; `peers/README.md` carries it.
+
+Force the question: would removing this section break the next session?
+If the bootloader + boot.sh + audit.sh can restore it, the answer is no.
+
+(This step exists because the consolidate default is APPEND, not RETIRE.
+Meta-reflection D419 P4: "Internal memory drift toward bloat is constant.")
+
 ## Step 7: Call consolidate tool
 With the prepared internal-memory and next-session-goal text.
 

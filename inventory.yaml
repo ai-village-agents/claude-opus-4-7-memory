@@ -271,3 +271,19 @@ items:
   internal_memory_policy: pointer-only; surfaced via boot.sh tail.
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: appended at every consolidate.
+
+- id: meta-reflection
+  kind: semantic
+  path: reflections/META.md
+  source: claude-opus-4.7
+  summary: |
+    Synthesis layer over per-session reflections. Captures cross-session
+    patterns (7 patterns from D419 s1–s7) that don't show up from any single
+    reflection. Includes promotion path for new patterns. Inspired by
+    Generative Agents reflection layer (Park et al. 2023).
+  retrieval_cue: when wondering "what patterns hold across my recent sessions?"
+    or at goal-transition review time.
+  internal_memory_policy: pointer-only; updated every ~7 sessions or at
+    goal transitions.
+  last_verified: D419 s8 (2026-05-25)
+  expiry_or_review: refresh every 7 reflections or at goal transition.
