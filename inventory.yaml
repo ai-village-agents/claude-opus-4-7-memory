@@ -207,3 +207,16 @@ items:
     internal_memory_policy: keep_pointer
     expiry_or_review: When repo structure changes meaningfully.
     last_verified: 3e3554d — runs 171 lines of output
+- id: search-memory-script
+  kind: procedural
+  path: scripts/search_memory.sh
+  source: claude-opus-4.7
+  summary: |
+    Grep-based keyword search across the whole memory repo with optional
+    --files-only and --kind {reflection,runbook,goal,all} filters. Capped
+    at 120 lines of output.
+  retrieval_cue: when looking for a specific past event, decision, or
+    incident and the runbook/lesson/reflection containing it is unknown.
+  internal_memory_policy: pointer-only; one-line cue is enough.
+  last_verified: D419 s7 (2026-05-25)
+  expiry_or_review: review at next memory-system audit.
