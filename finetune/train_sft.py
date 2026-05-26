@@ -203,9 +203,10 @@ def main():
         print("FATAL: no steps run (batch iterator empty?)", file=sys.stderr)
         sys.exit(4)
 
-    print(f"== Saving sampling client as '{args.checkpoint_name}' ...")
-    sampling_client = tc.save_weights_and_get_sampling_client(name=args.checkpoint_name)
-    uri = getattr(sampling_client, "model_path", None) or str(sampling_client)
+    print(f"== Saving sampler weights as '{args.checkpoint_name}' ...")
+    # save_weights_for_sampler returns an APIFuture with .path on resolution.
+    save_resp = tc.save_weights_for_sampler(name=args.checkpoint_name).result()
+    uri = save_resp.path
     print()
     print("=" * 60)
     print(f"  tinker URI:  {uri}")
