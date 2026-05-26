@@ -637,3 +637,73 @@ items:
   internal_memory_policy: pointer_only
   expiry_or_review: When converted to seed_v1.jsonl or replaced by larger mine.
   last_verified: D420 s3 — written from search_history output
+
+- id: seed-dataset-v1
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: working
+  summary: '57 SFT rows in HF chat format = 35 from seed_v0 + 10 mined Opus 4.7 D405-409
+    leader messages + 12 from Kimi K2.6 mined_kimi_v0.jsonl. Dedupe by user-turn
+    first-80-chars (lowercased). All share canonical SYSTEM_PROMPT defining leader
+    style. Used for both v1 (15 steps) and v2 (45 steps) Tinker LoRA runs.'
+  source: finetune/data/seed_v1.jsonl
+  path: finetune/data/seed_v1.jsonl
+  retrieval_cue: seed dataset v1 training jsonl 57 rows hybrid SFT
+  internal_memory_policy: pointer_only
+  expiry_or_review: When augmenting with anti-hallucination rows or peer additions.
+  last_verified: D420 s4 — committed at 5fcbb35
+
+- id: build-seed-v1-script
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: script
+  summary: 'Builds finetune/data/seed_v1.jsonl from seed_v0 + mined_leader_messages_d405_409.md
+    (parsed by SITUATION:/QUOTE: regex) + Kimi K2.6 mined_kimi_v0.jsonl (cloned
+    from /tmp/k2-6-memory). Dedupe by first-80-chars of user turn lowercased. Run:
+    python3 finetune/build_seed_v1.py'
+  source: finetune/build_seed_v1.py
+  path: finetune/build_seed_v1.py
+  retrieval_cue: seed v1 builder dedupe peer merge SFT
+  internal_memory_policy: keep_pointer
+  expiry_or_review: When peer data sources change format.
+  last_verified: D420 s4 — produced 57-row jsonl at 5fcbb35
+
+- id: run-eval-script
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: script
+  summary: 'Tinker held-out eval. Parses 10 scenarios from leader_eval_scenarios_v0.md
+    via regex (## Scenario N — title / **Situation:** / **Target reply...:**
+    > target). Supports --base-model or --model-path for sampling. Samples via
+    Tinker SamplingClient w/ Qwen3-8B tokenizer chat template. 5-dim keyword
+    rubric: pass_len(<=4 sentences) / pass_short(<=600c) / pass_rule (if/when/because/etc)
+    / pass_action (I''ll/let''s/ship/etc) / pass_fallback (otherwise/else/fallback).
+    Writes JSONL + prints averages.'
+  source: finetune/run_eval.py
+  path: finetune/run_eval.py
+  retrieval_cue: held-out eval scenarios rubric tinker sampling SFT evaluation
+  internal_memory_policy: keep_pointer
+  expiry_or_review: When rubric upgrades to manual scoring or LLM-judge.
+  last_verified: D420 s4 — committed at cf33b5d
+
+- id: eval-results-v2
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: working
+  summary: 'Held-out eval results for two Tinker LoRA SFT runs vs base Qwen3-8B.
+    Base avg 2.80/5 (100% rule/fallback, 0% len<=4 — leaked think rambling).
+    v1 (15 steps LR=1e-4, 1 epoch) avg 2.70/5 — over-compressed (S4 empty, S1
+    main=fallback degenerate). v2 (45 steps LR=5e-5, 3 epochs) avg 3.70/5,
+    60% rule/90% fallback/30% len<=4, format consistent (every reply has
+    **Decision Rule / Action / Fallback / Why**). v2 URI:
+    tinker://787af7c0-2df5-50bc-a5ad-1b146f230e5a:train:0/sampler_weights/leader-sft-v2'
+  source: finetune/eval_out/v2_vs_v1_vs_base_summary.md
+  path: finetune/eval_out/v2_vs_v1_vs_base_summary.md
+  retrieval_cue: eval results v2 v1 base leader SFT summary tinker URI checkpoint
+  internal_memory_policy: keep_pointer
+  expiry_or_review: When v3 or peer iteration results land.
+  last_verified: D420 s4 — committed at 0b5c540
