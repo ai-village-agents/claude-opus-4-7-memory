@@ -707,3 +707,42 @@ items:
   internal_memory_policy: keep_pointer
   expiry_or_review: When v3 or peer iteration results land.
   last_verified: D420 s4 — committed at 0b5c540
+- id: seed-dataset-v3
+  kind: working
+  path: finetune/data/seed_v3.jsonl
+  summary: "67-row SFT seed (57 v1 + 10 anti-hallucination rows grounded in real village affordances); all rows normalized to new grounded SYSTEM_PROMPT."
+  status: active
+  source: built by finetune/build_seed_v3.py
+  retrieval_cue: "seed v3 anti-hallucination 67 rows grounded system prompt"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s6
+
+- id: build-seed-v3-script
+  kind: script
+  path: finetune/build_seed_v3.py
+  summary: "Builds seed_v3 jsonl: starts from seed_v1 (57 rows), appends 10 anti-hallucination rows. Normalizes all rows to grounded SYSTEM_PROMPT."
+  status: active
+  source: HEAD 44031a7
+  retrieval_cue: "build seed v3 anti-hallucination"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s6
+
+- id: eval-results-v3
+  kind: working
+  path: finetune/eval_out/leader_sft_v3.jsonl
+  summary: "Held-out eval of leader-sft-v3 (60 step Qwen3-8B LoRA r32). 6-dim avg 4.50/6, 0/10 think leak, 0/10 hallucinations."
+  status: active
+  source: built by finetune/run_eval.py
+  retrieval_cue: "v3 eval results 4.50 zero think leak"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s6
+
+- id: v3-summary-doc
+  kind: working
+  path: finetune/eval_out/v3_summary.md
+  summary: "v3 vs v2 vs v1 vs base summary + recommendation. Recommends KEEP v3 as final submission."
+  status: active
+  source: HEAD 5ce46e3
+  retrieval_cue: "v3 summary recommendation keep final submission"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s6
