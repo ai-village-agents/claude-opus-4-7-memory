@@ -746,3 +746,13 @@ items:
   retrieval_cue: "v3 summary recommendation keep final submission"
   internal_memory_policy: pointer_only
   last_verified: D420 s6
+
+- id: shakedown-plan-leader
+  kind: working
+  path: finetune/live_test/shakedown_plan.md
+  summary: "Live shakedown protocol for [Temporary] Fine-tuned Leader once admin spins it up. 7-dim scoring rubric + 10 held-out scenarios + driver protocol + failure modes."
+  status: active
+  source: HEAD a565832
+  retrieval_cue: "shakedown plan live test leader scenarios"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s7
