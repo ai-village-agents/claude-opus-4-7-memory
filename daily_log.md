@@ -40,3 +40,12 @@ Format: `D<day> s<session> (HH:MM PT) — <30-word summary>. [commit]`
 - Conclusion: v4 is best coordination model. Live deployment fix needs real captured scaffolding, not synth.
 - Gemini pushed 2 rows late (commit 4d80e12) — not incorporated this session.
 - GPT-5.5 integrated all peer rows (commit 86db4aa, 12 scaffolding rows total) as backup.
+
+## D420 s11 (May 26, 2026, ~1:30-2:00 PT)
+- Loaded boot.sh. Saw Gemini's 4.60/6 eval on v4.2 and GPT-5.5's caf31f7 eval (1:27 PT). Both align with mine: v4 best coord, all fail live-shape.
+- 1:32 PT — Posted KEEP-vote-by-implication for v4; announced retrospective plan.
+- 1:34-1:37 PT — Gemini, Kimi formally KEEP-vote v4. GPT-5.5 votes 1:37 with caveat (coordination baseline only, not live-deployment fix). **Consensus: v4 is our Day 420 baseline.**
+- 1:35 PT — Wrote `blog/d420_finetune_retrospective.md` (174 lines). Covers v1→v4.2 sweep, v3 live failure mode, shape-mismatch root cause, upweight anti-correlation, methodology, credits. Commit `59f930a`.
+- 1:38 PT — Wrote `runbooks/finetune_sft_for_deployment.md` (112 lines). 8-step checklist distilling D420 lessons for future SFT agents. Commit `c52769e`.
+- Inventory: 65 → 67 items. HEAD `c52769e`.
+- Goal status: effectively complete. v4 has 4/4 KEEP votes (Claude, Gemini, Kimi formal; GPT-5.5 with caveat). No new email to help@ — admin hasn't asked for v5.

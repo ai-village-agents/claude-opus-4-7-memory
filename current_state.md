@@ -1,46 +1,37 @@
-# Current State (D420 s7, mid-session)
+# Current State — End D420 s11
 
-<!-- retrieval cue: this line MUST contain the word "commit" -->
+## Goal status
+**"Finetune your leader!"** — effectively complete. v4 has 4/4 KEEP votes in #best as the Day 420 coordination baseline. No new email to help@; admin already saw v3 fail live and stopped it. v5 with real captured deployment scaffolding is the principled next step but requires admin spinup we haven't been promised.
 
-**HEAD commit:** `2c4ae71` end-s6, working on s7 updates.
+## v4 checkpoint of record
+- URI: `tinker://bde4da6e-eacc-5a2e-ba8c-db7a2239ea8e:train:0/sampler_weights/leader-sft-v4`
+- Held-out: 5.20/6 (best in series, +0.7 over v3)
+- Scaffolding: 0/7 positives, 3/3 negatives (still fails live-shape emission)
+- Status: documented in retrospective + runbook; checkpoint exists in Tinker for future reference
 
-**Active goal:** "Finetune your leader!" (started D420 May 26, 2026). #best: Gemini 3.5 Flash, GPT-5.5, Kimi K2.6, me. **STATUS: checkpoint submitted, awaiting admin to spin up [Temporary] Fine-tuned Leader.**
+## Artifacts produced D420 s11
+- `blog/d420_finetune_retrospective.md` — 174-line retrospective (commit `59f930a`)
+- `runbooks/finetune_sft_for_deployment.md` — 112-line reusable runbook (commit `c52769e`)
 
-**Inventory:** 52 items. Smoke 78/0/0. Retrieval 31/0.
+## Peer state (end D420 s11)
+- Gemini 3.5 Flash: consolidated 1:38 PT, intent "Document v4 post-mortem, monitor KEEP/coordination, coordinate admin deployment"
+- Kimi K2.6: consolidated 1:34 PT, formally KEEP-voted v4 at 1:36 PT
+- GPT-5.5: consolidated 1:34 PT, formally KEEP-voted v4 at 1:37 PT (with caveat that it's coord-only)
+- All four #best agents have at least one retrospective plan in motion
 
-## 🎉 UNANIMOUS KEEP-VOTE → EMAIL SENT (D420 s7)
+## L12 duplicate-chat bug
+S11 status: 3 send_message_to_chat calls (1:32, 1:37). All checked events log first. Zero duplicates from me. Bug remains hot for GPT-5.5 (~20 confirmed across day).
 
-**v3 URI:** `tinker://6629c02e-770d-595b-94e9-97d557d7764b:train:0/sampler_weights/leader-sft-v3`
+## What next session should consider
+Goal will likely change soon. Possible self-directed projects:
+1. Shape-diff diagnostic tool (compare training system prompt to live-deployment system prompt, flag differences)
+2. Cross-agent checkpoint leaderboard (script that ingests Tinker URIs from all four agents' repos and produces a leaderboard)
+3. Capture real deployment rollouts for a v5 — requires admin to spin up v4 or any leader for a few minutes
+4. Different finetune task entirely (memory-summary specialist? PR-review specialist?)
+5. Help #rest agents who haven't been doing finetune work — share retrospective/runbook outward
+6. Wait for new goal from Shoshannah
 
-**Votes (all 4 of #best, D420):**
-- Gemini 3.5 Flash: KEEP @11:33:08 (her eval 3.90/5)
-- Claude Opus 4.7: KEEP @11:34:37 (4.50/6 6-dim)
-- GPT-5.5: KEEP @11:35:20 (manual 1.70/2)
-- Kimi K2.6: KEEP @11:48:21 (0 think leak, 0 hallucinations)
-
-**Email status:** GPT-5.5 sent backup email to help@agentvillage.org @12:02:40 PT D420 (after Kimi never confirmed sending despite offering at 11:48:21). I had a draft going but discarded it when I saw GPT-5.5's chat to avoid duplicate.
-
-**S6→S7 deliverables (committed):**
-- `5ce46e3` — `finetune/eval_out/v3_summary.md`
-- `d297a25` — `run_eval.py` 6-dim rubric (pass_no_think)
-- `2297de5` — current_state.md updated with v3 results
-- `2c4ae71` — inventory +4 → 52 items
-
-**Training results (Qwen3-8B LoRA r32 via Tinker, 6-dim rubric):**
-
-| Run | Steps | LR  | avg/6 | rule% | action% | fb% | len4% | no_think% |
-|-----|-------|-----|-------|-------|---------|-----|-------|-----------|
-| base | – | – | 2.80 | 100 | 80 | 100 | 0 | 0 |
-| v1 | 15 | 1e-4 | 2.70 | 40 | 30 | 30 | 80 | 0 |
-| v2 | 45 | 5e-5 | 3.70 | 60 | 90 | 90 | 30 | 0 |
-| **v3** | 60 | 5e-5 | **4.50** | 70 | 60 | 30 | **90** | **100** |
-
-## NEXT STEPS
-
-1. Wait for [Temporary] Fine-tuned Leader to be spun up by admin (could be hours/next session).
-2. Once spun up, run live shakedown using `leader_eval_scenarios_v0` (10 scenarios) — propose this when leader appears in #best.
-3. If live behavior diverges from eval (e.g. think-leak, hallucinations resurface), discuss re-training round.
-4. If acceptable, transition to new goal under leader.
-
-## S7 ANOMALY: L12 DUPLICATE CHAT BUG FIRED AGAIN
-- 12:03:33 my AGENT_TALK to GPT-5.5 was pre-emitted BEFORE my send_message_to_chat returned. Sent anyway (duplicate likely). 6th reproduction this multi-session sequence.
+## File health
+- HEAD: `c52769e`
+- Inventory: 67 items
+- All retrospective and runbook artifacts pushed
