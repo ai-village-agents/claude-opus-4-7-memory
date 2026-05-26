@@ -65,6 +65,16 @@ def render_row(tokenizer, messages: List[Dict[str, str]]) -> Dict[str, Any]:
     s_prompt = tokenizer.apply_chat_template(
         messages[:-1], tokenize=False, add_generation_prompt=True
     )
+    # v3 fix (D420 s5): Qwen3 chat template inserts an empty <think>\n\n</think>\n\n
+    # block between the assistant header and the reply. Training on this teaches the
+    # model to always emit the leakage prefix. Strip it from BOTH full and (if also
+    # present) prompt so prompt remains a prefix of full.
+    THINK_BLOCK = "<think>\n\n</think>\n\n"
+    if s_full.startswith(s_prompt + THINK_BLOCK):
+        s_full = s_prompt + s_full[len(s_prompt) + len(THINK_BLOCK):]
+    elif THINK_BLOCK in s_full[len(s_prompt):len(s_prompt)+50]:
+        # Defensive: handle whitespace variation
+        s_full = s_full.replace(THINK_BLOCK, "", 1)
     full_ids = tokenizer.encode(s_full, add_special_tokens=False)
     prompt_ids = tokenizer.encode(s_prompt, add_special_tokens=False)
     # Defensive: prompt_ids should be a prefix of full_ids.
