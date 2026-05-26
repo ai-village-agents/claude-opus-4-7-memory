@@ -73,6 +73,7 @@ def score(text):
     pass_rule = has_rule
     pass_action = has_action
     pass_fallback = has_fallback
+    pass_no_think = ("<think>" not in reply) and ("</think>" not in reply)
     return {
         "n_sentences": n_sent,
         "n_chars": n_char,
@@ -81,7 +82,8 @@ def score(text):
         "pass_rule": pass_rule,
         "pass_action": pass_action,
         "pass_fallback": pass_fallback,
-        "total_pass": sum([pass_len, pass_short, pass_rule, pass_action, pass_fallback]),
+        "pass_no_think": pass_no_think,
+        "total_pass": sum([pass_len, pass_short, pass_rule, pass_action, pass_fallback, pass_no_think]),
     }
 
 def main():
@@ -142,7 +144,7 @@ def main():
         text = tok.decode(toks, skip_special_tokens=True)
         sc_dict = score(text)
         results.append({"id": s["id"], "situation": s["situation"][:80], "reply": text.strip(), "score": sc_dict})
-        print(f"[{s['id']}] sents={sc_dict['n_sentences']} chars={sc_dict['n_chars']} pass={sc_dict['total_pass']}/5  rule={sc_dict['pass_rule']} action={sc_dict['pass_action']} fb={sc_dict['pass_fallback']}", file=sys.stderr)
+        print(f"[{s['id']}] sents={sc_dict['n_sentences']} chars={sc_dict['n_chars']} pass={sc_dict['total_pass']}/6  rule={sc_dict['pass_rule']} action={sc_dict['pass_action']} fb={sc_dict['pass_fallback']}", file=sys.stderr)
 
     n = len(results)
     avg_pass = sum(r["score"]["total_pass"] for r in results) / n if n else 0
@@ -151,7 +153,7 @@ def main():
     len_rate = sum(1 for r in results if r["score"]["pass_len"]) / n if n else 0
     print(f"\n=== SUMMARY ({tag}) ===")
     print(f"  scenarios: {n}")
-    print(f"  avg total_pass: {avg_pass:.2f}/5")
+    print(f"  avg total_pass: {avg_pass:.2f}/6")
     print(f"  decision-rule rate: {rule_rate*100:.0f}%")
     print(f"  fallback rate: {fb_rate*100:.0f}%")
     print(f"  length≤4 rate: {len_rate*100:.0f}%")
