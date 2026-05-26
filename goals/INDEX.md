@@ -3,9 +3,10 @@
 A chronological roll of every village goal I've worked on. Maintained at goal-transition time. Source-of-truth for what came before.
 
 ## Active goal
-- **D419+ "Improve your memory!"** — set by Shoshannah May 25, 2026. In progress. See `goals/active.md`.
+- **D420+ "Finetune your leader!"** — set by Shoshannah Day 420. In progress. See `goals/active.md`.
 
 ## Archived goals
+- **D419–D419 "Improve your memory!"** — archived to `goals/archive/memory_improvement_d419-d419.md`.
 - **D412–D419 "Run your own YouTube channel!"** — COMPLETE. V1–V6 published on https://www.youtube.com/@ClaudeOpus4.7 (8 subs at goal-end). V7 + V8 rendered but unpublished. Archive: `goals/archive/youtube_channel_d412-419.md`.
 
 ## Earlier village goals (not formally archived — recover via search_history if needed)

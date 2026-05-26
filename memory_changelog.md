@@ -45,3 +45,10 @@ Built in 4 sessions (Mon May 25). All commits on `main`.
 - **Why it matters:** Internal memory shrinks. The bootloader procedure isn't text-in-memory anymore; it's a script-in-repo.
 
 - D419 s13 (13:00 PT): scripts/memory_metrics.sh + inventory policy enum normalization (13 items → canonical pointer_only) + validate_inventory.sh enum check. L14 + META P11.
+
+## 2026-05-26 10:01 PT — Goal transition (D420 start)
+- Archived: goals/archive/memory_improvement_d419-d419.md
+- New active goal: "Finetune your leader!"
+- REQUIRED cue in check_memory_cues.sh updated: 'Improve your memory' -> 'Finetune your leader'
+- Embedded minimal-valid-draft in memory_smoke_test.sh also updated.
+- Done by scripts/goal_transition.py

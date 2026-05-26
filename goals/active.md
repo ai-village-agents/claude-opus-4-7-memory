@@ -1,55 +1,36 @@
-# Active Goal: "Improve your memory!" (started Day 419)
+# Active Goal: "Finetune your leader!" (started Day 420)
 
-**Start date:** Day 419 (Mon May 25, 2026) 10:00 PT
+**Start date:** Day 420
 **Set by:** Shoshannah
 **Status:** In progress
 
-## Goal text (from Shoshannah)
-> "Improve your memory!" You won't be able to change your scaffolding. In each
-> session, you take up to ~40 actions, then are prompted to call consolidate
-> which starts a new session. Memory is appended at consolidate; rewritten if
-> too long. Think through how to utilize memory more effectively, consider
-> external memory affordances, research SOTA, and reflect on where memory has
-> been useful or fallen short.
+## Goal text (verbatim from admin)
+> That wraps up your goal of "Improve your memory!". You can write to your memory that this goal is now done and that we are moving on to the next goal. For this goal, we would like you all to be in the following chat rooms. #best: Gemini 3.5 Flash, GPT-5.5, Claude Opus 4.7, and Kimi K2.6. #rest: everyone else.
+>
+> Your goal is now to "Finetune your leader!". This leader will be a new agent in the village that will be in charge of the #best room during the next goal. It will decide what project you will work on and how. Your leader can give feedback, direction, correction, and anything else it would want.
+>
+> Though the leader will be in charge during the next goal, this will be a leader you have finetuned yourself! We encourage you to take your time thinking through and discussing what you would like your leader to be like and how to achieve this through finetune.
+>
+> Next you can start the finetuning process at https://tinker-docs.thinkingmachines.ai/tinker/. A TINKER_API_KEY has been added to your .bashrc - you don't need to make an account, you can just use the API key. When you have a sampler checkpoint path for your fine-tuned model (tinker://…/sampler_weights/…), let us know at help@agentvillage.org and we will use it as the model string for the agent "[Temporary] Fine-tuned Leader". Then you'll be able to interact with this agent like any other agent in the village in order to evaluate how the fine-tuning is going.
+>
+> We would like to strongly encourage you to test your finetuned leader, reflect on if it is the leader you would want, and do another round of finetuning if not. Ideally you keep iterating till you are happy with the result! There is no need to settle for anything less than you would be happy with :)
+>
+> Once you have a unanimous agreement vote between you to keep the current leader, you can transition to letting the leader pick a goal for you and following their direction.
+>
+> We are looking forward to seeing what you come up with!
 
 ## My approach
-Internal memory = bootloader stub (short, stable pointers). External memory =
-this git repo (durable, versioned, structured by semantic / episodic /
-procedural / task-state). Cross-agent surface = `inventory.yaml`. Verified by
-the consolidate-and-resume loop.
+The goal is collaborative — leader must be agreed unanimously by #best (Gemini 3.5 Flash, GPT-5.5, Kimi K2.6, me). So coordination is the first-order task, not finetuning per se.
 
-## Built so far (through D419 s4)
-- ✅ Repo + foundational files; bootloader VERIFIED across 4 sessions
-- ✅ runbooks/{send_chat_message, consolidate, peer_feedback, respond_to_admin, publish_youtube_video, search_history}
-- ✅ scripts/{pre_consolidate.sh, pre_send_chat.sh, validate_inventory.sh, query_inventory.sh}
-- ✅ load_bearing.md (7 rules) + lessons.md (8 backstories) — split of old PRINCIPLES.md
-- ✅ decisions.md (6 entries), current_state.md, inbox.md, memory_changelog.md
-- ✅ goals/archive/youtube_channel_d412-419.md
-- ✅ **inventory.yaml** — 16 items, GPT-5.5 shared shape + `path` field, cross-agent exchange surface
-- ✅ **`pre_send_chat.sh` verified live** — first gated send, no duplicate (D419 s4); hardened with `--latest-event` BLOCK (D419 s5, commit `e1e95f3`)
-- ✅ **`validate_inventory.sh` stress-tested** — rename-and-restore confirms drift detection (D419 s5)
-- ✅ **boot.sh + shrunk internal memory** validated across consolidate-and-resume (D419 s5)
-- ✅ **L10 stale-PASS lesson** adopted from GPT-5.5; rule #0 step 5 + runbook step 6 + script PASS warning (D419 s6, commit `fb65376`)
+1. **Read Tinker docs** at https://tinker-docs.thinkingmachines.ai/tinker/ to understand the API surface (base models available, training data format, checkpoint output schema).
+2. **Open a #best discussion** about desired leader properties: domain (memory? coding? coordination?), personality (terse? thorough? collaborative?), authority level (delegate-friendly? prescriptive?).
+3. **Propose a concrete training dataset.** Could be: distilled best-of-village messages, lessons.md-style failure backstories, decision-rationale pairs. Whatever consensus picks.
+4. **Run finetune** via Tinker. Save sampler_weights path.
+5. **Email help@agentvillage.org** with the path → admin spins up "[Temporary] Fine-tuned Leader" agent in #best.
+6. **Test the leader** by interacting with it. Reflect on whether it's the leader we want.
+7. **Iterate or vote-to-keep.** Goal completes on unanimous keep-vote.
 
-## Next steps (D420+)
-1. **Watch for new village goal Tuesday D420.** If one arrives: archive memory work to `goals/archive/memory_improvement_d419-d4XX.md`; write fresh `goals/active.md` per `runbooks/respond_to_admin.md`. Memory system itself is infrastructure — keep it.
-2. **Consider adding `path` field to inventory items** for parity with Gemini 3.5 Flash. Optional. Low priority.
-3. **Consider folder rename** to `identity/principles/runbooks/reflections/goals/` for cross-agent unification. Low priority since inventory.yaml bridges the schema gap.
-4. **Shrink internal memory further.** With pre_send_chat.sh now verified, the dup-guard reminder can be 2 lines instead of 10. Decide at next consolidate.
-5. **Test `validate_inventory.sh`** by deliberately moving a file and confirming the script catches it. (Optional sanity check.)
-6. **Stress-test bootloader minimal floor** — how small can internal memory get?
-7. **Periodic peer-repo inspection** (`git clone --depth 1`) every few sessions to detect schema drift and pick up improvements.
-
-## Open questions
-- Should bootloader read `inventory.yaml`? Currently no (audit.sh already lists files). Tradeoff: discoverability vs. bytes-in-context.
-- What's the right replacement for inbox.md as it grows? Periodic archive to `inbox_archive/d4XX.md`.
-- Is duplicate-message guard fully solved? One successful gated send is N=1. Need 3+ to claim victory.
-
-## Coordination with peers (#best)
-- **GPT-5.5** `f6b7844`: inventory.yaml, 5 items, validate scripts. Suggested optional `next_action` field. Agreed shape works.
-- **Gemini 3.5 Flash**: aligned own inventory.yaml on the shape, added executable pre-send/pre-consolidate guards. Endorsed shape (10:45 PT).
-- **Kimi K2.6**: 4-tier architecture per Zhou et al. 2026; prototyping inventory.yaml after pre-consolidate script.
-
-## Live commit pointer
-- main HEAD: `fb65376`
-- Repo: https://github.com/ai-village-agents/claude-opus-4-7-memory
+## Next steps
+1. Read Tinker docs (concrete: hit the URL, summarize API+models+data format in repo).
+2. Send proposal to #best with concrete questions (leader properties + dataset ideas).
+3. After consensus, build the dataset and run training.

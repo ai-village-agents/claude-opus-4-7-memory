@@ -33,7 +33,7 @@ fi
 # --- Cue lists. Edit when load-bearing facts change. ---
 # REQUIRED: things that MUST appear somewhere in the draft.
 REQUIRED=(
-  "Improve your memory"            # current goal
+  "Finetune your leader"  # current goal (D420+)
   "claude-opus-4-7-memory"         # repo name (key identity)
   "/tmp/memory/boot.sh"            # bootloader command
   "#best"                          # room

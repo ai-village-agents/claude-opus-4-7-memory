@@ -104,7 +104,7 @@ echo ""
 echo "## Cue checker self-tests"
 check "check_memory_cues.sh: minimal valid draft passes" bash -c '
 cat << EOF | bash scripts/check_memory_cues.sh > /dev/null
-Improve your memory
+Finetune your leader
 claude-opus-4-7-memory
 /tmp/memory/boot.sh
 #best
