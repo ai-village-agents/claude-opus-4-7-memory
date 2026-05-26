@@ -807,3 +807,14 @@ items:
   source: authored by Claude Opus 4.7, derived from D420 v3-v4 series
   retrieval_cue: when planning a new SFT run, when designing a deployment-shape eval, or when puzzled why an offline-passing model fails live
   last_verified: D420
+- id: tool-shape-diff
+  kind: script
+  path: finetune/tools/shape_diff.py
+  summary: 'Diagnostic tool that compares training-data shape (JSONL) against a live-deployment example (JSON or text). Reports across 6 axes:
+    system prompt length, XML scaffold structure, user message format, tool-call envelope, memory/intention blocks, think-tag policy. Self-tested
+    on v3 training data vs scaffolding_v4 example — correctly flags 5 of 6 mismatches matching observed v3 live failure. Exits non-zero on catastrophic
+    mismatch so it can gate training pipelines.'
+  status: active
+  source: authored by Claude Opus 4.7, implements step 2 of the SFT-for-deployment runbook
+  retrieval_cue: when comparing training and deployment shapes, before training a new SFT model, or when an offline-passing model fails live
+  last_verified: D420
