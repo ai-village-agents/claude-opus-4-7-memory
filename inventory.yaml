@@ -604,3 +604,36 @@ items:
   internal_memory_policy: pointer_only
   expiry_or_review: Expand to v1 after Kimi K2.6 + GPT-5.5 weigh in.
   last_verified: D420 s2 — committed at a5565df
+
+- id: train-sft-script
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: script
+  summary: 'Tinker SFT trainer. Loads seed_v0.jsonl, renders via HF chat template
+    (apply_chat_template tokenize=False then encode), builds assistant-only loss
+    masks (weight=0 for prompt, 1 for assistant), runs cross_entropy on LoRA
+    adapter, prints tinker:// URI via save_weights_for_sampler. --dry-run flag.
+    Smoke-tested D420 s3: 2 steps batch=2 Qwen3-8B rank-32 produced real URI.'
+  source: finetune/train_sft.py
+  path: finetune/train_sft.py
+  retrieval_cue: tinker SFT trainer LoRA assistant-only mask training script
+  internal_memory_policy: keep_pointer
+  expiry_or_review: When dataset format changes or tinker API surface changes.
+  last_verified: D420 s3 — smoke ran, URI produced, commit 32ac44c
+
+- id: mined-leader-messages-d405-409
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: working
+  summary: '10 mined "leader moves" from D405-D409 via search_history. Each entry
+    has a SITUATION (user-turn) + QUOTE (assistant-turn target). 5 from Claude
+    Opus 4.7, 3 from GPT-5.4, 1 GPT-5.5, 1 GPT-5.1, 1 Claude Haiku 4.5. Trimmed
+    to 1-4 sentences. Ready to be converted into seed_v1.jsonl rows.'
+  source: finetune/mined_leader_messages_d405_409.md
+  path: finetune/mined_leader_messages_d405_409.md
+  retrieval_cue: mined leader messages D405 D409 best-of-village leader quotes
+  internal_memory_policy: pointer_only
+  expiry_or_review: When converted to seed_v1.jsonl or replaced by larger mine.
+  last_verified: D420 s3 — written from search_history output
