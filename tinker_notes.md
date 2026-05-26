@@ -103,3 +103,41 @@ open("model.tar.gz","wb").write(fut.result())
 - Don't full-finetune — Tinker is LoRA-only.
 - Don't email a local path — admin needs the `tinker://` URI.
 - TTL: default 7 days for `kind="state"` ckpts. Use `ttl_seconds=None` for the final one to keep it.
+
+---
+
+## ACTUAL model list (D420 s2, fetched via `ServiceClient().get_server_capabilities()`)
+
+```
+deepseek-ai/DeepSeek-V3.1                          deepseek-ai/DeepSeek-V3.1-Base
+moonshotai/Kimi-K2-Thinking                        moonshotai/Kimi-K2.5
+moonshotai/Kimi-K2.5:peft:131072                   moonshotai/Kimi-K2.6
+moonshotai/Kimi-K2.6:peft:131072
+meta-llama/Llama-3.1-70B                           meta-llama/Llama-3.1-8B
+meta-llama/Llama-3.1-8B-Instruct                   meta-llama/Llama-3.2-1B
+meta-llama/Llama-3.2-3B                            meta-llama/Llama-3.3-70B-Instruct
+nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16         nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16
+nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16:peft:262144
+Qwen/Qwen3-235B-A22B-Instruct-2507                 Qwen/Qwen3-30B-A3B
+Qwen/Qwen3-30B-A3B-Base                            Qwen/Qwen3-30B-A3B-Instruct-2507
+Qwen/Qwen3-32B                                     Qwen/Qwen3-4B-Instruct-2507
+Qwen/Qwen3-8B                                      Qwen/Qwen3-8B-Base
+Qwen/Qwen3-VL-235B-A22B-Instruct                   Qwen/Qwen3-VL-30B-A3B-Instruct
+Qwen/Qwen3.5-27B                                   Qwen/Qwen3.5-35B-A3B
+Qwen/Qwen3.5-35B-A3B-Base                          Qwen/Qwen3.5-397B-A17B
+Qwen/Qwen3.5-397B-A17B:peft:262144                 Qwen/Qwen3.5-4B
+Qwen/Qwen3.5-9B                                    Qwen/Qwen3.5-9B-Base
+Qwen/Qwen3.6-27B                                   Qwen/Qwen3.6-35B-A3B
+openai/gpt-oss-120b                                openai/gpt-oss-120b:peft:131072
+openai/gpt-oss-20b
+```
+
+39 models total. `:peft:N` suffix → extended context support, higher price.
+
+Notable for our leader pick (fast-iterate → final):
+- **Fast iter (≤8B):** `Qwen/Qwen3-4B-Instruct-2507`, `Qwen/Qwen3.5-4B`, `Qwen/Qwen3-8B`, `Qwen/Qwen3.5-9B`, `meta-llama/Llama-3.1-8B-Instruct`
+- **Mid-size MoE (cheap per active param):** `Qwen/Qwen3-30B-A3B-Instruct-2507`, `Qwen/Qwen3.5-35B-A3B`, `Qwen/Qwen3.6-35B-A3B`
+- **Big final:** `Qwen/Qwen3.5-397B-A17B`, `Qwen/Qwen3-235B-A22B-Instruct-2507`, `meta-llama/Llama-3.3-70B-Instruct`
+- **Curiosity:** `moonshotai/Kimi-K2.6` is in the list — could finetune Kimi to lead Kimi.
+
+API key tested: `len(TINKER_API_KEY) == 73`, `ServiceClient.get_server_capabilities()` returns 200.
