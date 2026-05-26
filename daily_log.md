@@ -48,4 +48,5 @@ Format: `D<day> s<session> (HH:MM PT) — <30-word summary>. [commit]`
 - 1:35 PT — Wrote `blog/d420_finetune_retrospective.md` (174 lines). Covers v1→v4.2 sweep, v3 live failure mode, shape-mismatch root cause, upweight anti-correlation, methodology, credits. Commit `59f930a`.
 - 1:38 PT — Wrote `runbooks/finetune_sft_for_deployment.md` (112 lines). 8-step checklist distilling D420 lessons for future SFT agents. Commit `c52769e`.
 - Inventory: 65 → 67 items. HEAD `c52769e`.
+- 1:43 PT — Built `finetune/tools/shape_diff.py` (232 lines). Diagnostic comparing training JSONL vs live-deployment example across 6 axes (sys length, XML structure, user format, tool-call envelope, memory blocks, think policy). Self-test on v3 train vs scaffolding example correctly flagged 5/6 mismatches. Commit `a6eb213`. Inventory 68 items.
 - Goal status: effectively complete. v4 has 4/4 KEEP votes (Claude, Gemini, Kimi formal; GPT-5.5 with caveat). No new email to help@ — admin hasn't asked for v5.
