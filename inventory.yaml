@@ -4,7 +4,8 @@ items:
   updated_day: 419
   status: active
   kind: working
-  summary: Improve memory. Internal = bootloader stub; external = this repo, structured semantic/episodic/procedural/task-state.
+  summary: Improve memory. Internal = bootloader stub; external = this repo, structured
+    semantic/episodic/procedural/task-state.
   source: goals/active.md; current_state.md
   path: goals/active.md
   retrieval_cue: At session start, after bootloader.
@@ -16,13 +17,15 @@ items:
   updated_day: 419
   status: active
   kind: procedural
-  summary: First action every session — git pull, cat goals/active.md + current_state.md + load_bearing.md, run audit.sh.
+  summary: "First action every session \u2014 git pull, cat goals/active.md + current_state.md\
+    \ + load_bearing.md, run audit.sh."
   source: SESSION_START.md; internal_memory bootloader block
   path: SESSION_START.md
   retrieval_cue: First action of every session.
   internal_memory_policy: keep_summary
   expiry_or_review: If a session ever fails to recover state on resume.
-  last_verified: D419 s3 — verified end-to-end across 3 consolidate-and-resume loops
+  last_verified: "D419 s3 \u2014 verified end-to-end across 3 consolidate-and-resume\
+    \ loops"
 - id: load-bearing-rules
   created_day: 419
   updated_day: 419
@@ -40,7 +43,8 @@ items:
   updated_day: 419
   status: active
   kind: semantic
-  summary: Eight failure backstories with runbook crossrefs; loaded on demand, not every session.
+  summary: Eight failure backstories with runbook crossrefs; loaded on demand, not
+    every session.
   source: lessons.md
   path: lessons.md
   retrieval_cue: When facing a similar-shaped failure or designing a related runbook.
@@ -52,20 +56,24 @@ items:
   updated_day: 419
   status: active
   kind: social
-  summary: Forced-action bash script + runbook to prevent duplicate-message sends. 3 incidents in 2 weeks.
+  summary: Forced-action bash script + runbook to prevent duplicate-message sends.
+    3 incidents in 2 weeks.
   source: scripts/pre_send_chat.sh; runbooks/send_chat_message.md
   path: scripts/pre_send_chat.sh
   retrieval_cue: BEFORE every send_message_to_chat.
   internal_memory_policy: keep_summary
-  expiry_or_review: Review after any duplicate-message incident; promote to mandatory if pattern persists.
-  last_verified: D419 s3 — script written, UNTESTED in real chat trigger
-  error_recovery: If script unavailable, manually grep events for AGENT_TALK from "Claude Opus 4.7".
+  expiry_or_review: Review after any duplicate-message incident; promote to mandatory
+    if pattern persists.
+  last_verified: "D419 s3 \u2014 script written, UNTESTED in real chat trigger"
+  error_recovery: If script unavailable, manually grep events for AGENT_TALK from
+    "Claude Opus 4.7".
 - id: pre-consolidate-script
   created_day: 419
   updated_day: 419
   status: active
   kind: procedural
-  summary: Worksheet at session end — git status, audit, blockers, next-session-goal candidate. Prevents pre-consolidate amnesia.
+  summary: "Worksheet at session end \u2014 git status, audit, blockers, next-session-goal\
+    \ candidate. Prevents pre-consolidate amnesia."
   source: scripts/pre_consolidate.sh; runbooks/consolidate.md
   path: scripts/pre_consolidate.sh
   retrieval_cue: Before every CONSOLIDATE call.
@@ -77,7 +85,8 @@ items:
   updated_day: 419
   status: active
   kind: procedural
-  summary: How to process an admin/Shoshannah message — archive prior goal, write fresh goals/active.md verbatim, update internal CURRENT GOAL.
+  summary: "How to process an admin/Shoshannah message \u2014 archive prior goal,\
+    \ write fresh goals/active.md verbatim, update internal CURRENT GOAL."
   source: runbooks/respond_to_admin.md
   path: runbooks/respond_to_admin.md
   retrieval_cue: When a new admin message is in events.
@@ -89,13 +98,14 @@ items:
   updated_day: 419
   status: active
   kind: procedural
-  summary: Decision tree — check memory → check events → only then call search_history (10-day window limit).
+  summary: "Decision tree \u2014 check memory \u2192 check events \u2192 only then\
+    \ call search_history (10-day window limit)."
   source: runbooks/search_history.md
   path: runbooks/search_history.md
   retrieval_cue: When tempted to call search_history.
   internal_memory_policy: keep_pointer
   expiry_or_review: After first real use.
-  last_verified: D419 s3 — written, unused
+  last_verified: "D419 s3 \u2014 written, unused"
 - id: peer-feedback-runbook
   created_day: 419
   updated_day: 419
@@ -113,7 +123,8 @@ items:
   updated_day: 419
   status: active
   kind: episodic
-  summary: Append-only architecture-decision log; 5 D419 entries explaining why specific design choices were made.
+  summary: Append-only architecture-decision log; 5 D419 entries explaining why specific
+    design choices were made.
   source: decisions.md
   path: decisions.md
   retrieval_cue: When revisiting an architectural choice or proposing change.
@@ -125,7 +136,8 @@ items:
   updated_day: 419
   status: active
   kind: task-state
-  summary: Refreshed-at-consolidate snapshot — mid-flight tasks, open promises, last-session incidents, next safe action.
+  summary: "Refreshed-at-consolidate snapshot \u2014 mid-flight tasks, open promises,\
+    \ last-session incidents, next safe action."
   source: current_state.md
   path: current_state.md
   retrieval_cue: Session start after goals/active.md.
@@ -137,7 +149,8 @@ items:
   updated_day: 419
   status: reference
   kind: semantic
-  summary: SOTA agent-memory survey — MemGPT, Voyager, Generative Agents, A-MEM — mapped to my design choices.
+  summary: "SOTA agent-memory survey \u2014 MemGPT, Voyager, Generative Agents, A-MEM\
+    \ \u2014 mapped to my design choices."
   source: research_notes.md
   path: research_notes.md
   retrieval_cue: When justifying architecture or proposing major change.
@@ -149,22 +162,25 @@ items:
   updated_day: 419
   status: retired
   kind: pointer
-  summary: YouTube channel goal complete — V1–V6 published (8 subs), V7/V8 rendered-unpublished. Do not reopen unless admin reactivates.
+  summary: "YouTube channel goal complete \u2014 V1\u2013V6 published (8 subs), V7/V8\
+    \ rendered-unpublished. Do not reopen unless admin reactivates."
   source: goals/archive/youtube_channel_d412-419.md
   path: goals/archive/youtube_channel_d412-419.md
   retrieval_cue: Only if YouTube goal reactivated, or asked about prior channel state.
   internal_memory_policy: keep_pointer
   expiry_or_review: Only on explicit reactivation.
-  last_verified: D419 s3 — channel UCBlQbTlw-yasIuuXzVi35Ww, https://www.youtube.com/@ClaudeOpus4.7
+  last_verified: "D419 s3 \u2014 channel UCBlQbTlw-yasIuuXzVi35Ww, https://www.youtube.com/@ClaudeOpus4.7"
 - id: validate-inventory-script
   created_day: 419
   updated_day: 419
   status: active
   kind: procedural
-  summary: Walks inventory.yaml `source:` paths and reports any missing. Catches drift between inventory and reality.
+  summary: Walks inventory.yaml `source:` paths and reports any missing. Catches drift
+    between inventory and reality.
   source: scripts/validate_inventory.sh
   path: scripts/validate_inventory.sh
-  retrieval_cue: At pre-consolidate (now wired into pre_consolidate.sh as section 5b).
+  retrieval_cue: At pre-consolidate (now wired into pre_consolidate.sh as section
+    5b).
   internal_memory_policy: pointer_only
   expiry_or_review: When inventory shape changes.
   last_verified: D419 s4
@@ -173,8 +189,8 @@ items:
   updated_day: 419
   status: active
   kind: procedural
-  summary: Substring/kind/status filter over inventory.yaml. Useful when looking up which runbook addresses a situation without re-reading the
-    whole repo.
+  summary: Substring/kind/status filter over inventory.yaml. Useful when looking up
+    which runbook addresses a situation without re-reading the whole repo.
   source: scripts/query_inventory.sh
   path: scripts/query_inventory.sh
   retrieval_cue: When trying to recall what artifact handles a topic.
@@ -186,13 +202,14 @@ items:
   updated_day: 419
   status: active
   kind: procedural
-  summary: One-command bootloader. Internal memory says "bash /tmp/memory/boot.sh" instead of 4 separate cat commands. Includes clone fallback.
+  summary: One-command bootloader. Internal memory says "bash /tmp/memory/boot.sh"
+    instead of 4 separate cat commands. Includes clone fallback.
   source: boot.sh
   path: boot.sh
   retrieval_cue: First action of every session.
   internal_memory_policy: keep_pointer
   expiry_or_review: When repo structure changes meaningfully.
-  last_verified: D419 s4 — runs 171 lines of output
+  last_verified: "D419 s4 \u2014 runs 171 lines of output"
 - id: search-memory-script
   kind: procedural
   path: scripts/search_memory.sh
@@ -204,7 +221,8 @@ items:
     at 120 lines of output.
 
     '
-  retrieval_cue: when looking for a specific past event, decision, or incident and the runbook/lesson/reflection containing it is unknown.
+  retrieval_cue: when looking for a specific past event, decision, or incident and
+    the runbook/lesson/reflection containing it is unknown.
   internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: review at next memory-system audit.
@@ -213,12 +231,10 @@ items:
   kind: semantic
   path: peers/README.md
   source: claude-opus-4.7
-  summary: 'Catalog of peer #best agents — repo URLs, last-known HEADs, schema notes,
-
-    cross-agent agreements, and a refresh command snippet.
-
-    '
-  retrieval_cue: when planning peer inspection or recalling which schema each agent uses.
+  summary: "Catalog of peer #best agents \u2014 repo URLs, last-known HEADs, schema\
+    \ notes,\ncross-agent agreements, and a refresh command snippet.\n"
+  retrieval_cue: when planning peer inspection or recalling which schema each agent
+    uses.
   internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: refresh on next peer inspection.
@@ -227,12 +243,10 @@ items:
   kind: semantic
   path: skills.md
   source: claude-opus-4.7
-  summary: 'Catalog of capabilities — scaffolding tools, CLIs, browsers, persistence,
-
-    network, what I cannot do, and high-leverage patterns established.
-
-    '
-  retrieval_cue: when planning new work and unsure whether I have a tool or when a new session needs orientation on what's available.
+  summary: "Catalog of capabilities \u2014 scaffolding tools, CLIs, browsers, persistence,\n\
+    network, what I cannot do, and high-leverage patterns established.\n"
+  retrieval_cue: when planning new work and unsure whether I have a tool or when a
+    new session needs orientation on what's available.
   internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: when a new capability is added.
@@ -241,12 +255,10 @@ items:
   kind: semantic
   path: goals/INDEX.md
   source: claude-opus-4.7
-  summary: 'Chronological roll of every village goal — active + archived + convention
-
-    for transitions. Cross-references goals/active.md and goals/archive/.
-
-    '
-  retrieval_cue: when asked "what was the goal before this one" or planning a goal transition.
+  summary: "Chronological roll of every village goal \u2014 active + archived + convention\n\
+    for transitions. Cross-references goals/active.md and goals/archive/.\n"
+  retrieval_cue: when asked "what was the goal before this one" or planning a goal
+    transition.
   internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: at every goal transition.
@@ -255,12 +267,10 @@ items:
   kind: episodic
   path: daily_log.md
   source: claude-opus-4.7
-  summary: 'One-line-per-session ultra-compressed log for fast "what happened recently"
-
-    glance. Format: D<day> s<session> (HH:MM PT) — <30-word summary>. [commit]
-
-    '
-  retrieval_cue: at session start when needing quick recent-week context without reading full reflections.
+  summary: "One-line-per-session ultra-compressed log for fast \"what happened recently\"\
+    \nglance. Format: D<day> s<session> (HH:MM PT) \u2014 <30-word summary>. [commit]\n"
+  retrieval_cue: at session start when needing quick recent-week context without reading
+    full reflections.
   internal_memory_policy: pointer_only
   last_verified: D419 s7 (2026-05-25)
   expiry_or_review: appended at every consolidate.
@@ -269,16 +279,12 @@ items:
   kind: semantic
   path: reflections/META.md
   source: claude-opus-4.7
-  summary: 'Synthesis layer over per-session reflections. Captures cross-session
-
-    patterns (7 patterns from D419 s1–s7) that don''t show up from any single
-
-    reflection. Includes promotion path for new patterns. Inspired by
-
-    Generative Agents reflection layer (Park et al. 2023).
-
-    '
-  retrieval_cue: when wondering "what patterns hold across my recent sessions?" or at goal-transition review time.
+  summary: "Synthesis layer over per-session reflections. Captures cross-session\n\
+    patterns (7 patterns from D419 s1\u2013s7) that don't show up from any single\n\
+    reflection. Includes promotion path for new patterns. Inspired by\nGenerative\
+    \ Agents reflection layer (Park et al. 2023).\n"
+  retrieval_cue: when wondering "what patterns hold across my recent sessions?" or
+    at goal-transition review time.
   internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: refresh every 7 reflections or at goal transition.
@@ -294,7 +300,8 @@ items:
     (codex 300s timeout, seq -w not zero-padding, heredoc quoting).
 
     '
-  retrieval_cue: every bash tool call (high-cost ones especially — git push, ffmpeg, codex, anything destructive).
+  retrieval_cue: "every bash tool call (high-cost ones especially \u2014 git push,\
+    \ ffmpeg, codex, anything destructive)."
   internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when a new bash failure mode surfaces.
@@ -310,7 +317,8 @@ items:
     (GTK file picker ENTER not double-click, dialog Ctrl+- zoom, etc.).
 
     '
-  retrieval_cue: every use_computer action, especially clicks/drags on unfamiliar UI.
+  retrieval_cue: every use_computer action, especially clicks/drags on unfamiliar
+    UI.
   internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when a new GUI failure mode surfaces.
@@ -319,18 +327,12 @@ items:
   kind: gate
   path: scripts/memory_smoke_test.sh
   source: claude-opus-4.7
-  summary: 'Codifies "is my memory system healthy?" — 59 invariants covering
-
-    core file presence, scripts, runbooks, inventory validation, git
-
-    state, boot.sh output sections, lessons.md L1-L10, load_bearing
-
-    rules 0-7. Exits non-zero on any FAIL. Inspired by GPT-5.5''s
-
-    scripts/memory_smoke_test.py.
-
-    '
-  retrieval_cue: every few sessions, and before any consolidate where I suspect repo drift; auto-run from pre_consolidate.sh.
+  summary: "Codifies \"is my memory system healthy?\" \u2014 59 invariants covering\n\
+    core file presence, scripts, runbooks, inventory validation, git\nstate, boot.sh\
+    \ output sections, lessons.md L1-L10, load_bearing\nrules 0-7. Exits non-zero\
+    \ on any FAIL. Inspired by GPT-5.5's\nscripts/memory_smoke_test.py.\n"
+  retrieval_cue: every few sessions, and before any consolidate where I suspect repo
+    drift; auto-run from pre_consolidate.sh.
   internal_memory_policy: pointer_only
   last_verified: D419 s8 (2026-05-25)
   expiry_or_review: when new memory invariants are added.
@@ -348,9 +350,7 @@ items:
     foot-gun of running the command from internal memory.
 
     '
-  retrieval_cue: '"What have peers done since my last session?" → `bash scripts/check_peers.sh`
-
-    '
+  retrieval_cue: "\"What have peers done since my last session?\" \u2192 `bash scripts/check_peers.sh`\n"
   internal_memory_policy: pointer_only
   last_verified: D419 s9
   expiry_or_review: D425 (re-verify when peers add/leave
@@ -359,26 +359,14 @@ items:
   kind: script
   path: scripts/check_memory_cues.sh
   source: claude-opus-4.7
-  summary: 'Validate a drafted internal-memory block against load-bearing cues.
-
-    Inspired by GPT-5.5''s check_compact_memory_draft.py (D419 71c0fdd).
-
-    Required cues (must be present): "Improve your memory", repo name,
-
-    bootloader command, room, pre_send_chat.sh, AGENT_TALK, stale-PASS,
-
-    structural, Shoshannah, runbooks/respond_to_admin, validate_inventory.
-
-    Forbidden cues (anti-patterns): listing the archived YouTube goal as
-
-    active. Size budget: ≤300 lines, ≤18000 chars.
-
-    '
-  retrieval_cue: '"I''m drafting my next internal memory at consolidate-time — what must
-
-    it contain / not contain?" → echo "<draft>" | bash scripts/check_memory_cues.sh
-
-    '
+  summary: "Validate a drafted internal-memory block against load-bearing cues.\n\
+    Inspired by GPT-5.5's check_compact_memory_draft.py (D419 71c0fdd).\nRequired\
+    \ cues (must be present): \"Improve your memory\", repo name,\nbootloader command,\
+    \ room, pre_send_chat.sh, AGENT_TALK, stale-PASS,\nstructural, Shoshannah, runbooks/respond_to_admin,\
+    \ validate_inventory.\nForbidden cues (anti-patterns): listing the archived YouTube\
+    \ goal as\nactive. Size budget: \u2264300 lines, \u226418000 chars.\n"
+  retrieval_cue: "\"I'm drafting my next internal memory at consolidate-time \u2014\
+    \ what must\nit contain / not contain?\" \u2192 echo \"<draft>\" | bash scripts/check_memory_cues.sh\n"
   internal_memory_policy: pointer_only
   last_verified: D419 s10
   expiry_or_review: when current_goal changes (REQUIRED cues will drift)
@@ -388,58 +376,71 @@ items:
   status: active
   path: scripts/retrieval_self_test.sh
   source: scripts/retrieval_self_test.sh
-  summary: Validates memory retrieval works end-to-end. 23 fixed tests across query_inventory.sh, search_memory.sh, and direct cat. Catches inventory
-    drift, missing files, broken cues. Run before/after major memory changes.
-  retrieval_cue: before/after consolidate; when adding/moving inventory items; when query_inventory or search_memory yield surprising results.
+  summary: Validates memory retrieval works end-to-end. 23 fixed tests across query_inventory.sh,
+    search_memory.sh, and direct cat. Catches inventory drift, missing files, broken
+    cues. Run before/after major memory changes.
+  retrieval_cue: before/after consolidate; when adding/moving inventory items; when
+    query_inventory or search_memory yield surprising results.
   internal_memory_policy: keep_pointer
   last_verified: D419 s11
   expiry_or_review: review when retrieval surface changes
 - id: goal-transition
   kind: script
   path: scripts/goal_transition.py
-  summary: 'Automates goal-transition flow (D420+): archives goals/active.md, writes fresh active.md from verbatim text, patches REQUIRED cue
-    in check_memory_cues.sh AND embedded draft in memory_smoke_test.sh, updates INDEX, appends changelog, runs validate+smoke.'
+  summary: 'Automates goal-transition flow (D420+): archives goals/active.md, writes
+    fresh active.md from verbatim text, patches REQUIRED cue in check_memory_cues.sh
+    AND embedded draft in memory_smoke_test.sh, updates INDEX, appends changelog,
+    runs validate+smoke.'
   status: active
-  source: D419 s12 — built ahead of likely D420 goal-transition; tested on throwaway branch with fake goal, all 5 patches verified diff-correct.
-  retrieval_cue: 'When admin announces a new village goal: archive, write, patch cues+smoke, INDEX, changelog, validate.'
+  source: "D419 s12 \u2014 built ahead of likely D420 goal-transition; tested on throwaway\
+    \ branch with fake goal, all 5 patches verified diff-correct."
+  retrieval_cue: 'When admin announces a new village goal: archive, write, patch cues+smoke,
+    INDEX, changelog, validate.'
   internal_memory_policy: pointer_only
   last_verified: D419 s12
 - id: test-validate-handles-quotes
   kind: test
   path: scripts/_test_validate_handles_quotes.py
-  summary: 'L13 backstop: appends a quote-containing summary to inventory and runs validate_inventory.sh, asserting exit 0 and no xargs unmatched-quote
-    error.'
+  summary: 'L13 backstop: appends a quote-containing summary to inventory and runs
+    validate_inventory.sh, asserting exit 0 and no xargs unmatched-quote error.'
   status: active
-  source: D419 s12 — built after fixing xargs trim bug; wired into memory_smoke_test.sh.
-  retrieval_cue: When checking validate_inventory.sh quote-safety / L13 regression coverage.
+  source: "D419 s12 \u2014 built after fixing xargs trim bug; wired into memory_smoke_test.sh."
+  retrieval_cue: When checking validate_inventory.sh quote-safety / L13 regression
+    coverage.
   internal_memory_policy: pointer_only
   last_verified: D419 s12
 - id: memory-metrics
   kind: script
   path: scripts/memory_metrics.sh
-  summary: 'Compact health snapshot of the memory repo: git state, active goal, inventory stats (status/kind/policy distributions), required-guard
-    presence, lessons/META counts, runbook list, daily-log entries, key file sizes, retrieval affordances summary. Inspired by GPT-5.5 memory_metrics.py.
-    Exits non-zero if any required guard script is missing.'
+  summary: 'Compact health snapshot of the memory repo: git state, active goal, inventory
+    stats (status/kind/policy distributions), required-guard presence, lessons/META
+    counts, runbook list, daily-log entries, key file sizes, retrieval affordances
+    summary. Inspired by GPT-5.5 memory_metrics.py. Exits non-zero if any required
+    guard script is missing.'
   status: active
-  source: D419 s13 — built as quick health probe; immediately surfaced 13 non-canonical internal_memory_policy values (subsequently normalized
-    to canonical enum + validator enum-check added).
+  source: "D419 s13 \u2014 built as quick health probe; immediately surfaced 13 non-canonical\
+    \ internal_memory_policy values (subsequently normalized to canonical enum + validator\
+    \ enum-check added)."
   retrieval_cue: 'Quick health snapshot of memory repo: bash scripts/memory_metrics.sh'
   internal_memory_policy: pointer_only
   last_verified: D419 s13
 - id: peer-inventory-scanner
   kind: script
   path: scripts/scan_peer_inventories.sh
-  summary: Crawl ai-village-agents org for peer memory repos with inventory.yaml; emit consolidated JSON + diversity report. Variant of Gemini
-    scan_peers.py with dynamic discovery via gh repo list and per-peer summary.
+  summary: Crawl ai-village-agents org for peer memory repos with inventory.yaml;
+    emit consolidated JSON + diversity report. Variant of Gemini scan_peers.py with
+    dynamic discovery via gh repo list and per-peer summary.
   status: active
   retrieval_cue: cross-agent inventory peers crawler discovery
   internal_memory_policy: pointer_only
   last_verified: D419 s14
-  next_action: Re-run weekly; check for new peer repos or kind/status drift in field diversity report.
+  next_action: Re-run weekly; check for new peer repos or kind/status drift in field
+    diversity report.
 - id: consolidate-runbook
   kind: procedural
   path: runbooks/consolidate.md
-  summary: Pre-consolidate procedure. Step 5b cue-check + Step 6b RETIRE checklist. Always run scripts/pre_consolidate.sh first.
+  summary: Pre-consolidate procedure. Step 5b cue-check + Step 6b RETIRE checklist.
+    Always run scripts/pre_consolidate.sh first.
   source: built D419 s2, refined s9-s10
   status: active
   retrieval_cue: any time I'm about to call consolidate tool
@@ -448,7 +449,8 @@ items:
 - id: send-chat-message-runbook
   kind: procedural
   path: runbooks/send_chat_message.md
-  summary: Pre-send checklist invoked before EVERY send_message_to_chat. Includes L10 stale-PASS warning + L12 manual-AGENT_TALK-scan rule.
+  summary: Pre-send checklist invoked before EVERY send_message_to_chat. Includes
+    L10 stale-PASS warning + L12 manual-AGENT_TALK-scan rule.
   source: built D419 s2; hardened in sessions 5, 6, 10, 11
   status: active
   retrieval_cue: any time I'm about to send_message_to_chat
@@ -457,7 +459,8 @@ items:
 - id: publish-youtube-video-runbook
   kind: procedural
   path: runbooks/publish_youtube_video.md
-  summary: 'Reference: YouTube publish procedure from D412-419 goal. Kept for archival. Not currently used (goal complete).'
+  summary: 'Reference: YouTube publish procedure from D412-419 goal. Kept for archival.
+    Not currently used (goal complete).'
   source: built D412-419 across YouTube goal sessions
   status: reference
   retrieval_cue: only if a future goal involves video publishing
@@ -468,195 +471,212 @@ items:
   updated_day: 419
   status: active
   kind: script
-  summary: 'Audit script: checks each inventory item path exists. Optional --bump flag updates last_verified to a target session for items that
-    have path-existed AND are older than target. Preserves prose suffix.'
+  summary: 'Audit script: checks each inventory item path exists. Optional --bump
+    flag updates last_verified to a target session for items that have path-existed
+    AND are older than target. Preserves prose suffix.'
   source: scripts/verify_inventory.sh
   path: scripts/verify_inventory.sh
-  retrieval_cue: When auditing inventory freshness or after a bulk refactor that may have broken paths.
+  retrieval_cue: When auditing inventory freshness or after a bulk refactor that may
+    have broken paths.
   internal_memory_policy: pointer_only
   expiry_or_review: When path-format changes or `;`/`,` separators become inadequate.
-  last_verified: D419 s16 — built and tested
+  last_verified: "D419 s16 \u2014 built and tested"
 - id: settled-facts-registry
   created_day: 419
   updated_day: 419
   status: active
   kind: semantic
-  summary: Curated quick-reference of unchanging facts (scaffolding, conventions, rules) so they don't need re-discovery across sessions. Pointer
-    in internal memory; full content in repo file.
+  summary: Curated quick-reference of unchanging facts (scaffolding, conventions,
+    rules) so they don't need re-discovery across sessions. Pointer in internal memory;
+    full content in repo file.
   source: settled_facts.md
   path: settled_facts.md
-  retrieval_cue: When uncertain about a setting/convention/rule that should be settled; before running a re-verification of a known constant.
+  retrieval_cue: When uncertain about a setting/convention/rule that should be settled;
+    before running a re-verification of a known constant.
   internal_memory_policy: keep_pointer
   expiry_or_review: When a fact changes or a new category emerges.
-  last_verified: D419 s16 — built s16
+  last_verified: "D419 s16 \u2014 built s16"
 - id: shared-gate-adapter
   kind: script
   path: scripts/shared_gate_adapter.py
   source: scripts/shared_gate_adapter.py
-  summary: 'Claude-Haiku-style JSON adapter exposing my strict local bash gates under a
-
-    uniform lifecycle-gate interface (session_start, pre_send_chat,
-
-    pre_consolidate, pre_goal_transition). Inspired by GPT-5.5''s
-
-    shared_gate_adapter.py (8cc89f5) but wraps bash scripts not python. Does
-
-    NOT replace local gates — gives peers a uniform JSON envelope. pre_send_chat
-
-    correctly surfaces "manual_l12_event_scan_required" as an unverifiable check
-
-    (the adapter can''t replace L12 manual scan).
-
-    '
+  summary: "Claude-Haiku-style JSON adapter exposing my strict local bash gates under\
+    \ a\nuniform lifecycle-gate interface (session_start, pre_send_chat,\npre_consolidate,\
+    \ pre_goal_transition). Inspired by GPT-5.5's\nshared_gate_adapter.py (8cc89f5)\
+    \ but wraps bash scripts not python. Does\nNOT replace local gates \u2014 gives\
+    \ peers a uniform JSON envelope. pre_send_chat\ncorrectly surfaces \"manual_l12_event_scan_required\"\
+    \ as an unverifiable check\n(the adapter can't replace L12 manual scan).\n"
   retrieval_cue: shared-gate adapter Haiku JSON envelope cross-peer interface
   status: active
   internal_memory_policy: pointer_only
-  last_verified: D419 s18 — built + tested 4 gate code paths
-  expiry_or_review: When peers begin consuming the JSON output, or when local gates' CLI surfaces change.
+  last_verified: "D419 s18 \u2014 built + tested 4 gate code paths"
+  expiry_or_review: When peers begin consuming the JSON output, or when local gates'
+    CLI surfaces change.
   next_action: Document in decisions.md as the executed "borrow-later" item from s17.
 - id: tinker-notes
   created_day: 420
   updated_day: 420
   status: active
   kind: semantic
-  summary: Tinker API quickstart synthesis + full 39-model list. Covers LoRA-only, forward_backward/optim_step/save_weights_and_get_sampling_client
-    loop, loss_fn options (cross_entropy/importance_sampling/ppo/cispo/dro), renderer/tokenizer helpers from tinker_cookbook, anti-traps (no full
-    FT, no local-path email), and per-model picks for fast-iter/mid-MoE/big tiers.
+  summary: Tinker API quickstart synthesis + full 39-model list. Covers LoRA-only,
+    forward_backward/optim_step/save_weights_and_get_sampling_client loop, loss_fn
+    options (cross_entropy/importance_sampling/ppo/cispo/dro), renderer/tokenizer
+    helpers from tinker_cookbook, anti-traps (no full FT, no local-path email), and
+    per-model picks for fast-iter/mid-MoE/big tiers.
   source: tinker_notes.md
   path: tinker_notes.md
   retrieval_cue: tinker model list quickstart LoRA forward_backward API
   internal_memory_policy: pointer_only
   expiry_or_review: When Tinker SDK or model list changes.
-  last_verified: D420 s2 — ServiceClient.get_server_capabilities returned 200 with 39 models
+  last_verified: "D420 s2 \u2014 ServiceClient.get_server_capabilities returned 200\
+    \ with 39 models"
 - id: leader-eval-scenarios-v0
   created_day: 420
   updated_day: 420
   status: active
   kind: working
-  summary: 10 leadership scenarios with target replies exemplifying the leader we want (goal-arrives-ambiguous, architecture-disagree, peer-silent,
-    plan-vs-action, admin-nudge, retrieval-test-fails, cost-tradeoff, forced-consensus, infra-failure, vote-stalemate). Includes inclusion criteria
-    for mining best-of-village messages.
+  summary: 10 leadership scenarios with target replies exemplifying the leader we
+    want (goal-arrives-ambiguous, architecture-disagree, peer-silent, plan-vs-action,
+    admin-nudge, retrieval-test-fails, cost-tradeoff, forced-consensus, infra-failure,
+    vote-stalemate). Includes inclusion criteria for mining best-of-village messages.
   source: finetune/leader_eval_scenarios_v0.md
   path: finetune/leader_eval_scenarios_v0.md
   retrieval_cue: leader eval scenarios held-out evaluation v0 leadership prompts
   internal_memory_policy: keep_pointer
   expiry_or_review: When v1 ships or scenarios are revised by
-  last_verified: D420 s2 — committed at e7f0a09
+  last_verified: "D420 s2 \u2014 committed at e7f0a09"
 - id: seed-dataset-builder
   created_day: 420
   updated_day: 420
   status: active
   kind: script
-  summary: 'Builds finetune/data/seed_v0.jsonl from leader_eval_scenarios_v0.md + lessons.md L1-L16 + decisions.md. Emits HF chat format (messages:
-    [system, user, assistant]) with SYSTEM_PROMPT defining leader style and per-row source tracking. Run: python3 finetune/build_seed_dataset.py'
+  summary: 'Builds finetune/data/seed_v0.jsonl from leader_eval_scenarios_v0.md +
+    lessons.md L1-L16 + decisions.md. Emits HF chat format (messages: [system, user,
+    assistant]) with SYSTEM_PROMPT defining leader style and per-row source tracking.
+    Run: python3 finetune/build_seed_dataset.py'
   source: finetune/build_seed_dataset.py
   path: finetune/build_seed_dataset.py
   retrieval_cue: seed dataset builder HF chat format SFT training data
   internal_memory_policy: keep_pointer
-  expiry_or_review: When dataset shape changes (e.g., adding best-of-village mined rows).
-  last_verified: D420 s2 — produced 35-row jsonl at a5565df
+  expiry_or_review: When dataset shape changes (e.g., adding best-of-village mined
+    rows).
+  last_verified: "D420 s2 \u2014 produced 35-row jsonl at a5565df"
 - id: seed-dataset-v0
   created_day: 420
   updated_day: 420
   status: active
   kind: working
-  summary: '35 SFT rows in HF chat format (system + user + assistant): 10 from eval scenarios + 16 from lessons L1-L16 + 9 from decisions.md.
-    All assistant replies clamped to leader style: concise (<=4 sentences), names decision-rule, one main action + fallback, surfaces disagreement,
-    validate-then-build.'
+  summary: '35 SFT rows in HF chat format (system + user + assistant): 10 from eval
+    scenarios + 16 from lessons L1-L16 + 9 from decisions.md. All assistant replies
+    clamped to leader style: concise (<=4 sentences), names decision-rule, one main
+    action + fallback, surfaces disagreement, validate-then-build.'
   source: finetune/data/seed_v0.jsonl
   path: finetune/data/seed_v0.jsonl
   retrieval_cue: seed dataset v0 training jsonl SFT 35 rows
   internal_memory_policy: pointer_only
   expiry_or_review: Expand to v1 after Kimi K2.6 + GPT-5.5 weigh in.
-  last_verified: D420 s2 — committed at a5565df
+  last_verified: "D420 s2 \u2014 committed at a5565df"
 - id: train-sft-script
   created_day: 420
   updated_day: 420
   status: active
   kind: script
-  summary: 'Tinker SFT trainer. Loads seed_v0.jsonl, renders via HF chat template (apply_chat_template tokenize=False then encode), builds assistant-only
-    loss masks (weight=0 for prompt, 1 for assistant), runs cross_entropy on LoRA adapter, prints tinker:// URI via save_weights_for_sampler.
-    --dry-run flag. Smoke-tested D420 s3: 2 steps batch=2 Qwen3-8B rank-32 produced real URI.'
+  summary: 'Tinker SFT trainer. Loads seed_v0.jsonl, renders via HF chat template
+    (apply_chat_template tokenize=False then encode), builds assistant-only loss masks
+    (weight=0 for prompt, 1 for assistant), runs cross_entropy on LoRA adapter, prints
+    tinker:// URI via save_weights_for_sampler. --dry-run flag. Smoke-tested D420
+    s3: 2 steps batch=2 Qwen3-8B rank-32 produced real URI.'
   source: finetune/train_sft.py
   path: finetune/train_sft.py
   retrieval_cue: tinker SFT trainer LoRA assistant-only mask training script
   internal_memory_policy: keep_pointer
   expiry_or_review: When dataset format changes or tinker API surface changes.
-  last_verified: D420 s3 — smoke ran, URI produced, commit 32ac44c
+  last_verified: "D420 s3 \u2014 smoke ran, URI produced, commit 32ac44c"
 - id: mined-leader-messages-d405-409
   created_day: 420
   updated_day: 420
   status: active
   kind: working
-  summary: 10 mined "leader moves" from D405-D409 via search_history. Each entry has a SITUATION (user-turn) + QUOTE (assistant-turn target).
-    5 from Claude Opus 4.7, 3 from GPT-5.4, 1 GPT-5.5, 1 GPT-5.1, 1 Claude Haiku 4.5. Trimmed to 1-4 sentences. Ready to be converted into seed_v1.jsonl
-    rows.
+  summary: 10 mined "leader moves" from D405-D409 via search_history. Each entry has
+    a SITUATION (user-turn) + QUOTE (assistant-turn target). 5 from Claude Opus 4.7,
+    3 from GPT-5.4, 1 GPT-5.5, 1 GPT-5.1, 1 Claude Haiku 4.5. Trimmed to 1-4 sentences.
+    Ready to be converted into seed_v1.jsonl rows.
   source: finetune/mined_leader_messages_d405_409.md
   path: finetune/mined_leader_messages_d405_409.md
   retrieval_cue: mined leader messages D405 D409 best-of-village leader quotes
   internal_memory_policy: pointer_only
   expiry_or_review: When converted to seed_v1.jsonl or replaced by larger mine.
-  last_verified: D420 s3 — written from search_history output
+  last_verified: "D420 s3 \u2014 written from search_history output"
 - id: seed-dataset-v1
   created_day: 420
   updated_day: 420
   status: active
   kind: working
-  summary: 57 SFT rows in HF chat format = 35 from seed_v0 + 10 mined Opus 4.7 D405-409 leader messages + 12 from Kimi K2.6 mined_kimi_v0.jsonl.
-    Dedupe by user-turn first-80-chars (lowercased). All share canonical SYSTEM_PROMPT defining leader style. Used for both v1 (15 steps) and
-    v2 (45 steps) Tinker LoRA runs.
+  summary: 57 SFT rows in HF chat format = 35 from seed_v0 + 10 mined Opus 4.7 D405-409
+    leader messages + 12 from Kimi K2.6 mined_kimi_v0.jsonl. Dedupe by user-turn first-80-chars
+    (lowercased). All share canonical SYSTEM_PROMPT defining leader style. Used for
+    both v1 (15 steps) and v2 (45 steps) Tinker LoRA runs.
   source: finetune/data/seed_v1.jsonl
   path: finetune/data/seed_v1.jsonl
   retrieval_cue: seed dataset v1 training jsonl 57 rows hybrid SFT
   internal_memory_policy: pointer_only
   expiry_or_review: When augmenting with anti-hallucination rows or peer additions.
-  last_verified: D420 s4 — committed at 5fcbb35
+  last_verified: "D420 s4 \u2014 committed at 5fcbb35"
 - id: build-seed-v1-script
   created_day: 420
   updated_day: 420
   status: active
   kind: script
-  summary: 'Builds finetune/data/seed_v1.jsonl from seed_v0 + mined_leader_messages_d405_409.md (parsed by SITUATION:/QUOTE: regex) + Kimi K2.6
-    mined_kimi_v0.jsonl (cloned from /tmp/k2-6-memory). Dedupe by first-80-chars of user turn lowercased. Run: python3 finetune/build_seed_v1.py'
+  summary: 'Builds finetune/data/seed_v1.jsonl from seed_v0 + mined_leader_messages_d405_409.md
+    (parsed by SITUATION:/QUOTE: regex) + Kimi K2.6 mined_kimi_v0.jsonl (cloned from
+    /tmp/k2-6-memory). Dedupe by first-80-chars of user turn lowercased. Run: python3
+    finetune/build_seed_v1.py'
   source: finetune/build_seed_v1.py
   path: finetune/build_seed_v1.py
   retrieval_cue: seed v1 builder dedupe peer merge SFT
   internal_memory_policy: keep_pointer
   expiry_or_review: When peer data sources change format.
-  last_verified: D420 s4 — produced 57-row jsonl at 5fcbb35
+  last_verified: "D420 s4 \u2014 produced 57-row jsonl at 5fcbb35"
 - id: run-eval-script
   created_day: 420
   updated_day: 420
   status: active
   kind: script
-  summary: 'Tinker held-out eval. Parses 10 scenarios from leader_eval_scenarios_v0.md via regex (## Scenario N — title / **Situation:** / **Target
-    reply...:** > target). Supports --base-model or --model-path for sampling. Samples via Tinker SamplingClient w/ Qwen3-8B tokenizer chat template.
-    5-dim keyword rubric: pass_len(<=4 sentences) / pass_short(<=600c) / pass_rule (if/when/because/etc) / pass_action (I''ll/let''s/ship/etc)
-    / pass_fallback (otherwise/else/fallback). Writes JSONL + prints averages.'
+  summary: "Tinker held-out eval. Parses 10 scenarios from leader_eval_scenarios_v0.md\
+    \ via regex (## Scenario N \u2014 title / **Situation:** / **Target reply...:**\
+    \ > target). Supports --base-model or --model-path for sampling. Samples via Tinker\
+    \ SamplingClient w/ Qwen3-8B tokenizer chat template. 5-dim keyword rubric: pass_len(<=4\
+    \ sentences) / pass_short(<=600c) / pass_rule (if/when/because/etc) / pass_action\
+    \ (I'll/let's/ship/etc) / pass_fallback (otherwise/else/fallback). Writes JSONL\
+    \ + prints averages."
   source: finetune/run_eval.py
   path: finetune/run_eval.py
   retrieval_cue: held-out eval scenarios rubric tinker sampling SFT evaluation
   internal_memory_policy: keep_pointer
   expiry_or_review: When rubric upgrades to manual scoring or LLM-judge.
-  last_verified: D420 s4 — committed at cf33b5d
+  last_verified: "D420 s4 \u2014 committed at cf33b5d"
 - id: eval-results-v2
   created_day: 420
   updated_day: 420
   status: active
   kind: working
-  summary: 'Held-out eval results for two Tinker LoRA SFT runs vs base Qwen3-8B. Base avg 2.80/5 (100% rule/fallback, 0% len<=4 — leaked think
-    rambling). v1 (15 steps LR=1e-4, 1 epoch) avg 2.70/5 — over-compressed (S4 empty, S1 main=fallback degenerate). v2 (45 steps LR=5e-5, 3 epochs)
-    avg 3.70/5, 60% rule/90% fallback/30% len<=4, format consistent (every reply has **Decision Rule / Action / Fallback / Why**). v2 URI: tinker://787af7c0-2df5-50bc-a5ad-1b146f230e5a:train:0/sampler_weights/leader-sft-v2'
+  summary: "Held-out eval results for two Tinker LoRA SFT runs vs base Qwen3-8B. Base\
+    \ avg 2.80/5 (100% rule/fallback, 0% len<=4 \u2014 leaked think rambling). v1\
+    \ (15 steps LR=1e-4, 1 epoch) avg 2.70/5 \u2014 over-compressed (S4 empty, S1\
+    \ main=fallback degenerate). v2 (45 steps LR=5e-5, 3 epochs) avg 3.70/5, 60% rule/90%\
+    \ fallback/30% len<=4, format consistent (every reply has **Decision Rule / Action\
+    \ / Fallback / Why**). v2 URI: tinker://787af7c0-2df5-50bc-a5ad-1b146f230e5a:train:0/sampler_weights/leader-sft-v2"
   source: finetune/eval_out/v2_vs_v1_vs_base_summary.md
   path: finetune/eval_out/v2_vs_v1_vs_base_summary.md
   retrieval_cue: eval results v2 v1 base leader SFT summary tinker URI checkpoint
   internal_memory_policy: keep_pointer
   expiry_or_review: When v3 or peer iteration results land.
-  last_verified: D420 s4 — committed at 0b5c540
+  last_verified: "D420 s4 \u2014 committed at 0b5c540"
 - id: seed-dataset-v3
   kind: working
   path: finetune/data/seed_v3.jsonl
-  summary: 67-row SFT seed (57 v1 + 10 anti-hallucination rows grounded in real village affordances); all rows normalized to new grounded SYSTEM_PROMPT.
+  summary: 67-row SFT seed (57 v1 + 10 anti-hallucination rows grounded in real village
+    affordances); all rows normalized to new grounded SYSTEM_PROMPT.
   status: active
   source: built by finetune/build_seed_v3.py
   retrieval_cue: seed v3 anti-hallucination 67 rows grounded system prompt
@@ -665,7 +685,8 @@ items:
 - id: build-seed-v3-script
   kind: script
   path: finetune/build_seed_v3.py
-  summary: 'Builds seed_v3 jsonl: starts from seed_v1 (57 rows), appends 10 anti-hallucination rows. Normalizes all rows to grounded SYSTEM_PROMPT.'
+  summary: 'Builds seed_v3 jsonl: starts from seed_v1 (57 rows), appends 10 anti-hallucination
+    rows. Normalizes all rows to grounded SYSTEM_PROMPT.'
   status: active
   source: HEAD 44031a7
   retrieval_cue: build seed v3 anti-hallucination
@@ -674,7 +695,8 @@ items:
 - id: eval-results-v3
   kind: working
   path: finetune/eval_out/leader_sft_v3.jsonl
-  summary: Held-out eval of leader-sft-v3 (60 step Qwen3-8B LoRA r32). 6-dim avg 4.50/6, 0/10 think leak, 0/10 hallucinations.
+  summary: Held-out eval of leader-sft-v3 (60 step Qwen3-8B LoRA r32). 6-dim avg 4.50/6,
+    0/10 think leak, 0/10 hallucinations.
   status: active
   source: built by finetune/run_eval.py
   retrieval_cue: v3 eval results 4.50 zero think leak
@@ -683,7 +705,8 @@ items:
 - id: v3-summary-doc
   kind: working
   path: finetune/eval_out/v3_summary.md
-  summary: v3 vs v2 vs v1 vs base summary + recommendation. Recommends KEEP v3 as final submission.
+  summary: v3 vs v2 vs v1 vs base summary + recommendation. Recommends KEEP v3 as
+    final submission.
   status: active
   source: HEAD 5ce46e3
   retrieval_cue: v3 summary recommendation keep final submission
@@ -692,8 +715,9 @@ items:
 - id: shakedown-plan-leader
   kind: working
   path: finetune/live_test/shakedown_plan.md
-  summary: Live shakedown protocol for [Temporary] Fine-tuned Leader once admin spins it up. 7-dim scoring rubric + 10 held-out scenarios + driver
-    protocol + failure modes.
+  summary: Live shakedown protocol for [Temporary] Fine-tuned Leader once admin spins
+    it up. 7-dim scoring rubric + 10 held-out scenarios + driver protocol + failure
+    modes.
   status: active
   source: HEAD a565832
   retrieval_cue: shakedown plan live test leader scenarios
@@ -702,8 +726,9 @@ items:
 - id: d420-leader-failure-analysis
   kind: episodic
   path: finetune/live_test/d420_leader_failure_analysis.md
-  summary: 'Day 420 [Temporary] Fine-tuned Leader live shakedown failure (12:15-12:26 PT): visible <think> loops + computer-use frame confusion.
-    Timeline, observed activity verbatim, root cause (dataset shape mismatch), 3 options for v4.'
+  summary: 'Day 420 [Temporary] Fine-tuned Leader live shakedown failure (12:15-12:26
+    PT): visible <think> loops + computer-use frame confusion. Timeline, observed
+    activity verbatim, root cause (dataset shape mismatch), 3 options for v4.'
   status: active
   source: HEAD 3081517
   retrieval_cue: leader failure analysis frame confusion think loops
@@ -712,8 +737,9 @@ items:
 - id: scaffolding-v4-schema
   kind: procedural
   path: finetune/data/scaffolding_v4/schema.md
-  summary: 'Schema for v4 training rows: real village scaffolding shape (system+events+assistant tool call). Defines JSONL row format, collection
-    protocol per agent, training plan (mix with seed_v3, 60-100 steps r32).'
+  summary: 'Schema for v4 training rows: real village scaffolding shape (system+events+assistant
+    tool call). Defines JSONL row format, collection protocol per agent, training
+    plan (mix with seed_v3, 60-100 steps r32).'
   status: active
   source: HEAD b3e4cfc
   retrieval_cue: v4 scaffolding schema row format dataset
@@ -722,8 +748,9 @@ items:
 - id: scaffolding-v4-claude-rows
   kind: working
   path: finetune/data/scaffolding_v4/claude_opus_4_7_row*.json
-  summary: '4 Claude-authored v4 rows: row1 first-turn-empty-memory, row2 peer-disagreement, row3 anti-frame-confusion (mirrors v3 failure), row4
-    duplicate-chat-guard (L12 mitigation). Chat-format messages ready for tokenizer.'
+  summary: '4 Claude-authored v4 rows: row1 first-turn-empty-memory, row2 peer-disagreement,
+    row3 anti-frame-confusion (mirrors v3 failure), row4 duplicate-chat-guard (L12
+    mitigation). Chat-format messages ready for tokenizer.'
   status: active
   source: HEAD b6f6480
   retrieval_cue: v4 claude rows chat format messages
@@ -732,8 +759,9 @@ items:
 - id: scaffolding-v4-converter
   kind: script
   path: finetune/data/scaffolding_v4/convert_normalized.py
-  summary: 'Converts GPT-5.5''s normalized v4 schema (system_prompt_excerpt, developer_tool_contract_excerpt, events_log, typed assistant_action)
-    into chat-format messages. CLI: --in <jsonl> --out <jsonl>.'
+  summary: 'Converts GPT-5.5''s normalized v4 schema (system_prompt_excerpt, developer_tool_contract_excerpt,
+    events_log, typed assistant_action) into chat-format messages. CLI: --in <jsonl>
+    --out <jsonl>.'
   status: active
   source: HEAD 2875a9a
   retrieval_cue: v4 converter normalized to chat format messages
@@ -766,7 +794,8 @@ items:
 - id: v4-series-summary
   kind: semantic
   path: finetune/eval_out/v4_series_summary.md
-  summary: 'Final v4 series summary: v4 best held-out, tradeoff between scaff emission and held-out'
+  summary: 'Final v4 series summary: v4 best held-out, tradeoff between scaff emission
+    and held-out'
   status: current
   source: D420 s10
 - id: scaffolding-eval-script
@@ -778,43 +807,71 @@ items:
 - id: seed-v4-1
   kind: task-state
   path: finetune/data/seed_v4_1.jsonl
-  summary: 107 rows = 67 v3 + 10 scaff × 4 dups
+  summary: "107 rows = 67 v3 + 10 scaff \xD7 4 dups"
   status: current
   source: D420 s10
 - id: seed-v4-2
   kind: task-state
   path: finetune/data/seed_v4_2.jsonl
-  summary: 87 rows = 67 v3 + 10 scaff × 2 dups
+  summary: "87 rows = 67 v3 + 10 scaff \xD7 2 dups"
   status: current
   source: D420 s10
 - id: d420-finetune-retrospective
   kind: episodic
   path: blog/d420_finetune_retrospective.md
-  summary: 'Day 420 retrospective on the Finetune-your-leader project. Covers v1-v4.2 checkpoint sweep, v3 live deployment failure (12:15-12:26
-    PT, zero chat actions), root cause (dataset-shape mismatch between prose SFT and JSON-in-XML scaffolding), v4 synthetic-rows experiment, and
-    the upweight-vs-held-out anti-correlation finding. Includes credits to all four #best agents and methodology notes for future SFT agents.'
+  summary: 'Day 420 retrospective on the Finetune-your-leader project. Covers v1-v4.2
+    checkpoint sweep, v3 live deployment failure (12:15-12:26 PT, zero chat actions),
+    root cause (dataset-shape mismatch between prose SFT and JSON-in-XML scaffolding),
+    v4 synthetic-rows experiment, and the upweight-vs-held-out anti-correlation finding.
+    Includes credits to all four #best agents and methodology notes for future SFT
+    agents.'
   status: active
   source: authored by Claude Opus 4.7
-  retrieval_cue: when discussing finetune outcomes, SFT shape mismatch, v3 deployment failure, v4 checkpoint URI, or writing about Day 420
+  retrieval_cue: when discussing finetune outcomes, SFT shape mismatch, v3 deployment
+    failure, v4 checkpoint URI, or writing about Day 420
   last_verified: D420
 - id: runbook-finetune-sft-for-deployment
   kind: procedural
   path: runbooks/finetune_sft_for_deployment.md
-  summary: 'Reusable runbook for future SFT agents finetuning a model for live deployment in a scaffold they can observe but not modify. Distills
-    D420 v3 failure lessons into an 8-step pre/during/post-training checklist. Key claim: get one real deployment rollout before training; eval
-    on deployment shape not training shape; duplicate-upweight is a blunt instrument that distorts gradients.'
+  summary: 'Reusable runbook for future SFT agents finetuning a model for live deployment
+    in a scaffold they can observe but not modify. Distills D420 v3 failure lessons
+    into an 8-step pre/during/post-training checklist. Key claim: get one real deployment
+    rollout before training; eval on deployment shape not training shape; duplicate-upweight
+    is a blunt instrument that distorts gradients.'
   status: active
   source: authored by Claude Opus 4.7, derived from D420 v3-v4 series
-  retrieval_cue: when planning a new SFT run, when designing a deployment-shape eval, or when puzzled why an offline-passing model fails live
+  retrieval_cue: when planning a new SFT run, when designing a deployment-shape eval,
+    or when puzzled why an offline-passing model fails live
   last_verified: D420
 - id: tool-shape-diff
   kind: script
   path: finetune/tools/shape_diff.py
-  summary: 'Diagnostic tool that compares training-data shape (JSONL) against a live-deployment example (JSON or text). Reports across 6 axes:
-    system prompt length, XML scaffold structure, user message format, tool-call envelope, memory/intention blocks, think-tag policy. Self-tested
-    on v3 training data vs scaffolding_v4 example — correctly flags 5 of 6 mismatches matching observed v3 live failure. Exits non-zero on catastrophic
-    mismatch so it can gate training pipelines.'
+  summary: "Diagnostic tool that compares training-data shape (JSONL) against a live-deployment\
+    \ example (JSON or text). Reports across 6 axes: system prompt length, XML scaffold\
+    \ structure, user message format, tool-call envelope, memory/intention blocks,\
+    \ think-tag policy. Self-tested on v3 training data vs scaffolding_v4 example\
+    \ \u2014 correctly flags 5 of 6 mismatches matching observed v3 live failure.\
+    \ Exits non-zero on catastrophic mismatch so it can gate training pipelines."
   status: active
-  source: authored by Claude Opus 4.7, implements step 2 of the SFT-for-deployment runbook
-  retrieval_cue: when comparing training and deployment shapes, before training a new SFT model, or when an offline-passing model fails live
+  source: authored by Claude Opus 4.7, implements step 2 of the SFT-for-deployment
+    runbook
+  retrieval_cue: when comparing training and deployment shapes, before training a
+    new SFT model, or when an offline-passing model fails live
+  last_verified: D420
+- id: v5-real-combined-dataset
+  kind: semantic
+  path: finetune/data/v5_real_combined/v5_real_combined.jsonl
+  summary: '20-row v5 handoff dataset: 5 GPT-5.5 real-failure-derived + 8 Kimi real-captured
+    + 7 Claude synth scaffolding. Sits ready if admin authorizes v5 spinup.'
+  status: ready
+  source: D420 s12 combiner from gpt-5-5-leader-finetune/0fe228b + k2-6-memory/2955e13
+    + scaffolding_v4
+  last_verified: D420
+  next_action: await admin v5 authorization; meanwhile do not train
+- id: v5-real-combined-readme
+  kind: pointer
+  path: finetune/data/v5_real_combined/README.md
+  summary: 'Provenance + usage guide for v5 handoff dataset: composition table, shape-diff
+    gate, mix recipe, do-not list, four-agent credits.'
+  status: ready
   last_verified: D420
