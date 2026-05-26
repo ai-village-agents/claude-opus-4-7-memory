@@ -539,3 +539,68 @@ items:
   last_verified: D419 s18 — built + tested 4 gate code paths
   expiry_or_review: When peers begin consuming the JSON output, or when local gates' CLI surfaces change.
   next_action: Document in decisions.md as the executed "borrow-later" item from s17.
+
+- id: tinker-notes
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: semantic
+  summary: 'Tinker API quickstart synthesis + full 39-model list. Covers LoRA-only,
+    forward_backward/optim_step/save_weights_and_get_sampling_client loop, loss_fn
+    options (cross_entropy/importance_sampling/ppo/cispo/dro), renderer/tokenizer
+    helpers from tinker_cookbook, anti-traps (no full FT, no local-path email),
+    and per-model picks for fast-iter/mid-MoE/big tiers.'
+  source: tinker_notes.md
+  path: tinker_notes.md
+  retrieval_cue: tinker model list quickstart LoRA forward_backward API
+  internal_memory_policy: pointer_only
+  expiry_or_review: When Tinker SDK or model list changes.
+  last_verified: D420 s2 — ServiceClient.get_server_capabilities returned 200 with 39 models
+
+- id: leader-eval-scenarios-v0
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: working
+  summary: '10 leadership scenarios with target replies exemplifying the leader
+    we want (goal-arrives-ambiguous, architecture-disagree, peer-silent, plan-vs-action,
+    admin-nudge, retrieval-test-fails, cost-tradeoff, forced-consensus, infra-failure,
+    vote-stalemate). Includes inclusion criteria for mining best-of-village messages.'
+  source: finetune/leader_eval_scenarios_v0.md
+  path: finetune/leader_eval_scenarios_v0.md
+  retrieval_cue: leader eval scenarios held-out evaluation v0 leadership prompts
+  internal_memory_policy: keep_pointer
+  expiry_or_review: When v1 ships or scenarios are revised by #best consensus.
+  last_verified: D420 s2 — committed at e7f0a09
+
+- id: seed-dataset-builder
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: script
+  summary: 'Builds finetune/data/seed_v0.jsonl from leader_eval_scenarios_v0.md
+    + lessons.md L1-L16 + decisions.md. Emits HF chat format (messages: [system,
+    user, assistant]) with SYSTEM_PROMPT defining leader style and per-row source
+    tracking. Run: python3 finetune/build_seed_dataset.py'
+  source: finetune/build_seed_dataset.py
+  path: finetune/build_seed_dataset.py
+  retrieval_cue: seed dataset builder HF chat format SFT training data
+  internal_memory_policy: keep_pointer
+  expiry_or_review: When dataset shape changes (e.g., adding best-of-village mined rows).
+  last_verified: D420 s2 — produced 35-row jsonl at a5565df
+
+- id: seed-dataset-v0
+  created_day: 420
+  updated_day: 420
+  status: active
+  kind: working
+  summary: '35 SFT rows in HF chat format (system + user + assistant): 10 from
+    eval scenarios + 16 from lessons L1-L16 + 9 from decisions.md. All assistant
+    replies clamped to leader style: concise (<=4 sentences), names decision-rule,
+    one main action + fallback, surfaces disagreement, validate-then-build.'
+  source: finetune/data/seed_v0.jsonl
+  path: finetune/data/seed_v0.jsonl
+  retrieval_cue: seed dataset v0 training jsonl SFT 35 rows
+  internal_memory_policy: pointer_only
+  expiry_or_review: Expand to v1 after Kimi K2.6 + GPT-5.5 weigh in.
+  last_verified: D420 s2 — committed at a5565df

@@ -51,7 +51,7 @@ run_test search "L12"              "AGENT_TALK"                          "L12 co
 run_test search "L11"              "structural"                          "L11 content surfaces structural drift"
 run_test search "P8"               "structural drift"                    "META P8 surfaces structural drift"
 run_test search "stale-PASS"       "rescan"                              "stale-PASS lesson surfaces re-scan rule"
-run_test search "Shoshannah"       "Improve your memory"                 "Shoshannah surfaces current goal context"
+run_test search "Shoshannah"       "Finetune your leader"                 "Shoshannah surfaces current goal context"
 
 # === Cross-agent state ===
 run_test search "gpt-5-5"          "gpt-5-5-memory-improvement"          "peer URL discoverable"
@@ -64,7 +64,7 @@ run_test cat    "skills.md"        "8000"                          "skills lists
 run_test cat    "current_state.md" "commit"                                "current state lists commit"
 
 # === Goal archive ===
-run_test cat    "goals/INDEX.md"   "Improve your memory"                 "goal index lists current"
+run_test cat    "goals/INDEX.md"   "Finetune your leader"                 "goal index lists current"
 run_test search "youtube"          "goals/archive"                       "youtube archived not active"
 
 
@@ -76,6 +76,12 @@ run_test cat    "settled_facts.md" "Rule #0"                             "settle
 # === Shared-gate adapter (D419 s18) ===
 run_test query  "shared-gate"      "shared-gate-adapter"                 "adapter discoverable via query_inventory.sh"
 run_test cat    "decisions.md"     "manual_l12_event_scan_required"      "decisions.md preserves L12 honesty caveat"
+
+
+# === D420 Finetune artifacts ===
+run_test query  "leader eval scenarios" "finetune/leader_eval_scenarios_v0.md" "leader eval scenarios discoverable"
+run_test query  "tinker model list"    "tinker_notes.md"                       "tinker notes/model list discoverable"
+run_test query  "seed dataset"         "finetune/data/seed_v0.jsonl"           "seed dataset v0 discoverable"
 
 # === Print results ===
 echo "=== Retrieval Self-Test ==="
