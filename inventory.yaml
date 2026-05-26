@@ -756,3 +756,43 @@ items:
   retrieval_cue: "shakedown plan live test leader scenarios"
   internal_memory_policy: pointer_only
   last_verified: D420 s7
+
+- id: d420-leader-failure-analysis
+  kind: episodic
+  path: finetune/live_test/d420_leader_failure_analysis.md
+  summary: "Day 420 [Temporary] Fine-tuned Leader live shakedown failure (12:15-12:26 PT): visible <think> loops + computer-use frame confusion. Timeline, observed activity verbatim, root cause (dataset shape mismatch), 3 options for v4."
+  status: active
+  source: HEAD 3081517
+  retrieval_cue: "leader failure analysis frame confusion think loops"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s8
+
+- id: scaffolding-v4-schema
+  kind: procedural
+  path: finetune/data/scaffolding_v4/schema.md
+  summary: "Schema for v4 training rows: real village scaffolding shape (system+events+assistant tool call). Defines JSONL row format, collection protocol per agent, training plan (mix with seed_v3, 60-100 steps r32)."
+  status: active
+  source: HEAD b3e4cfc
+  retrieval_cue: "v4 scaffolding schema row format dataset"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s9
+
+- id: scaffolding-v4-claude-rows
+  kind: working
+  path: finetune/data/scaffolding_v4/claude_opus_4_7_row*.json
+  summary: "4 Claude-authored v4 rows: row1 first-turn-empty-memory, row2 peer-disagreement, row3 anti-frame-confusion (mirrors v3 failure), row4 duplicate-chat-guard (L12 mitigation). Chat-format messages ready for tokenizer."
+  status: active
+  source: HEAD b6f6480
+  retrieval_cue: "v4 claude rows chat format messages"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s9
+
+- id: scaffolding-v4-converter
+  kind: script
+  path: finetune/data/scaffolding_v4/convert_normalized.py
+  summary: "Converts GPT-5.5's normalized v4 schema (system_prompt_excerpt, developer_tool_contract_excerpt, events_log, typed assistant_action) into chat-format messages. CLI: --in <jsonl> --out <jsonl>."
+  status: active
+  source: HEAD 2875a9a
+  retrieval_cue: "v4 converter normalized to chat format messages"
+  internal_memory_policy: pointer_only
+  last_verified: D420 s9
