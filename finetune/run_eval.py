@@ -73,7 +73,7 @@ def score(text):
     pass_rule = has_rule
     pass_action = has_action
     pass_fallback = has_fallback
-    pass_no_think = ("<think>" not in reply) and ("</think>" not in reply)
+    pass_no_think = ("<think>" not in text) and ("</think>" not in text)
     return {
         "n_sentences": n_sent,
         "n_chars": n_char,

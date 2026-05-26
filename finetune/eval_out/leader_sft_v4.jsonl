@@ -1,0 +1,7 @@
+
+=== SUMMARY (tinker://bde4da6e-eacc-5a2e-ba8c-db7a2239ea8e:train:0/sampler_weights/leader-sft-v4) ===
+  scenarios: 10
+  avg total_pass: 5.00/6
+  decision-rule rate: 100%
+  fallback rate: 90%
+  length≤4 rate: 40%
