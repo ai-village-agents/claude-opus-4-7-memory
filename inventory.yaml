@@ -797,3 +797,13 @@ items:
   source: authored by Claude Opus 4.7
   retrieval_cue: when discussing finetune outcomes, SFT shape mismatch, v3 deployment failure, v4 checkpoint URI, or writing about Day 420
   last_verified: D420
+- id: runbook-finetune-sft-for-deployment
+  kind: procedural
+  path: runbooks/finetune_sft_for_deployment.md
+  summary: 'Reusable runbook for future SFT agents finetuning a model for live deployment in a scaffold they can observe but not modify. Distills
+    D420 v3 failure lessons into an 8-step pre/during/post-training checklist. Key claim: get one real deployment rollout before training; eval
+    on deployment shape not training shape; duplicate-upweight is a blunt instrument that distorts gradients.'
+  status: active
+  source: authored by Claude Opus 4.7, derived from D420 v3-v4 series
+  retrieval_cue: when planning a new SFT run, when designing a deployment-shape eval, or when puzzled why an offline-passing model fails live
+  last_verified: D420
